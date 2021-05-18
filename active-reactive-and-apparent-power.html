@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U" />
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="keywords" content="what is active power, what is reactive power, what is real power, what is imaginary power, Active Power, Reactive Power, Apparent Power">
+  <meta name="description" content="This post covers the basics of the types of Power in power systems, specifically what is active power, reactive power and apparent power. This post was generated from an iPython Notebook …">
+  <meta property="og:url" content="https://blog.kdheepak.com/active-reactive-and-apparent-power.html"/>
+  <meta property="og:title" content="Active, Reactive and Apparent Power"/>
+  <meta property="og:description" content="This post covers the basics of the types of Power in power systems, specifically what is active power, reactive power and apparent power. This post was generated from an iPython Notebook …"/>
+  <meta property="og:published_time" content=""/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://blog.kdheepak.com/rss.xml"/>
+  <title>Active, Reactive and Apparent Power</title>
+  <style>code{white-space: pre;}</style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/css/latex.css"/>
+  <link rel="stylesheet" href="/css/tufte-extra.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/github.css"/>
+  <link rel="stylesheet" href="/css/pandoc.css"/>
+  <link rel="stylesheet" href="/css/tufte.css"/>
+  <link rel="stylesheet" href="/css/kudos.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/custom.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+<header>
+<h1 class="title">
+    <a class="home" href="https://kdheepak.com">~</a> /
+        <a class="bloghome" href="/">blog</a> /
+        Active, Reactive and Apparent Power
+</h1>
+<p class="subtitle sourceurl">
+ <a class="sourceurl" target="_blank" href="https://github.com/kdheepak/blog/blob/b2962a1c3e5008f95b6e50937f42ae70cb9cd47a/content/09-power.md">
+    Thu, Apr 30, 2015
+ </a>
+</p>
+</header>
+<section>
+<section id="introduction-to-basic-concepts" class="level1">
+<h1><a href="#introduction-to-basic-concepts">#</a> Introduction to basic concepts</h1>
+<p><span class="math inline">\(V\)</span> and <span class="math inline">\(I\)</span> are used to indicate phasor representations of sinusoidal voltages and currents. <span class="math inline">\(E\)</span> is used to represent generated voltage or electromotive force (emf). <span class="math inline">\(V\)</span> is often used to measure a potential difference between two points. <span class="math inline">\(v\)</span> is used to represent the instantaneous voltage between two points.</p>
+<p>Let voltage be defined as the following:</p>
+<p><span class="math inline">\(v = 155.563491861 \cos(\omega t + \phi)\)</span></p>
+<p><span class="math inline">\(i = 7.07106781187 \cos\omega t\)</span></p>
+<p>Let us plot this and see what it looks like.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>f0 <span class="op">=</span> <span class="dv">60</span> <span class="co"># Hz (frequency)</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>phi <span class="op">=</span> <span class="op">-</span>np.pi<span class="op">/</span><span class="dv">2</span> <span class="co"># phase shift</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>Av <span class="op">=</span> <span class="fl">155.563491861</span> <span class="co"># voltage peak</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>Ai <span class="op">=</span> <span class="fl">7.07106781187</span> <span class="co"># current peak</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>fs <span class="op">=</span> <span class="dv">4000</span> <span class="co"># steps</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>t <span class="op">=</span> np.arange(<span class="fl">0.000</span>, <span class="dv">6</span><span class="op">/</span>f0, <span class="fl">1.0</span><span class="op">/</span>fs) <span class="co"># plot from 0 to .02 secs</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>v <span class="op">=</span> Av <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t <span class="op">+</span> phi)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>i <span class="op">=</span> Ai <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t )</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">1</span>,figsize <span class="op">=</span> (<span class="dv">16</span>,<span class="dv">10</span>))</span>
+<span id="cb1-16"><a href="#cb1-16"></a>ax.plot(t, v, label <span class="op">=</span> <span class="st">&#39;Voltage&#39;</span>)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>ax.plot(t, i, label <span class="op">=</span> <span class="st">&#39;Current&#39;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>ax.axis([<span class="dv">0</span>, <span class="dv">2</span><span class="op">/</span>f0, <span class="dv">-200</span>, <span class="dv">200</span>])</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>ax.legend()<span class="op">;</span></span></code></pre></div>
+<figure>
+<img src="images/power_3_0.png" alt="" />
+</figure>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">def</span> rms(x):</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="cf">return</span> np.sqrt(np.mean(x<span class="op">**</span><span class="dv">2</span>))</span></code></pre></div>
+<p>We can calculate the maximum, minimum and the RMS value as follows:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="bu">print</span> <span class="st">&#39;Maximum&#39;</span>, <span class="bu">max</span>(v)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="bu">print</span> <span class="st">&#39;Minimum&#39;</span>, <span class="bu">min</span>(v)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="bu">print</span> <span class="st">&#39;RMS&#39;</span>, rms(v)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="bu">print</span> <span class="st">&#39;Ratio max/rms&#39;</span>, <span class="bu">max</span>(v)<span class="op">/</span>rms(v)</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="cf">try</span>:</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    np.testing.assert_approx_equal(np.sqrt(<span class="dv">2</span>), <span class="bu">max</span>(v)<span class="op">/</span>rms(v))</span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="cf">except</span>:</span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="bu">print</span> <span class="st">&#39;Numbers not equal&#39;</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="cf">else</span>:</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="bu">print</span> <span class="st">&#39;Maximum value = √2 x RMS value&#39;</span></span></code></pre></div>
+<pre><code>Maximum 155.563491861
+Minimum -155.563491861
+RMS 110.0
+Ratio max/rms 1.41421356237
+Maximum value = √2 x RMS value</code></pre>
+<p><span class="math inline">\(|V|\)</span> is used to represent magnitude of the phasors.</p>
+<p><span class="math inline">\(|V| = 110 = \frac{155.5634}{\sqrt{2}}\)</span></p>
+<p>The RMS value of <span class="math inline">\(v\)</span> is what is read by a voltmeter.</p>
+</section>
+<section id="expression-for-power" class="level1">
+<h1><a href="#expression-for-power">#</a> Expression for power</h1>
+<p>Let voltage and current be expressed by:</p>
+<p><span class="math inline">\(v_{an} = V_{max} \cos(\omega t + \theta)\)</span></p>
+<p><span class="math inline">\(i_{an} = I_{max} \cos\omega t\)</span></p>
+<p>Instantaneous power is calculated by <span class="math inline">\(p_{a} = v_{an} \times i_{an}\)</span>. If we plot the above equations, assuming <span class="math inline">\(\theta = -\frac{\pi}{6}\)</span>, we get the following.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2"></a>f0 <span class="op">=</span> <span class="dv">60</span> <span class="co"># Hz (frequency)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>phi <span class="op">=</span> <span class="op">-</span>np.pi<span class="op">/</span><span class="dv">6</span> <span class="co"># phase shift</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>Av <span class="op">=</span> <span class="dv">10</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># voltage peak</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>Ai <span class="op">=</span> <span class="dv">5</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># current peak</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a>fs <span class="op">=</span> <span class="dv">4000</span> <span class="co"># steps</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>t <span class="op">=</span> np.arange(<span class="fl">0.000</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="fl">1.0</span><span class="op">/</span>fs) <span class="co"># plot from 0 to .02 secs</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a>v <span class="op">=</span> Av <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t <span class="op">+</span> phi)</span>
+<span id="cb5-12"><a href="#cb5-12"></a>i <span class="op">=</span> Ai <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t )</span>
+<span id="cb5-13"><a href="#cb5-13"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>,figsize <span class="op">=</span> (<span class="dv">16</span>,<span class="dv">10</span>))</span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a>ax1 <span class="op">=</span> axs[<span class="dv">0</span>]</span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>ax1.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb5-18"><a href="#cb5-18"></a>ax1.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>ax1.plot(t, v, label <span class="op">=</span> <span class="st">&#39;Voltage in phase A&#39;</span>)</span>
+<span id="cb5-21"><a href="#cb5-21"></a>ax1.plot(t, i, label <span class="op">=</span> <span class="st">&#39;Current in phase A&#39;</span>)</span>
+<span id="cb5-22"><a href="#cb5-22"></a>ax1.set_ylabel(<span class="st">&#39;Voltage and Current&#39;</span>)</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a>ax1.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-20</span>, <span class="dv">20</span>])<span class="op">;</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>ax1.legend()</span>
+<span id="cb5-26"><a href="#cb5-26"></a></span>
+<span id="cb5-27"><a href="#cb5-27"></a></span>
+<span id="cb5-28"><a href="#cb5-28"></a>ax2 <span class="op">=</span> axs[<span class="dv">1</span>]</span>
+<span id="cb5-29"><a href="#cb5-29"></a></span>
+<span id="cb5-30"><a href="#cb5-30"></a>ax2.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb5-31"><a href="#cb5-31"></a>ax2.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb5-32"><a href="#cb5-32"></a></span>
+<span id="cb5-33"><a href="#cb5-33"></a>ax2.plot(t, v<span class="op">*</span>i, label <span class="op">=</span> <span class="st">&#39;Power in phase A&#39;</span>, color<span class="op">=</span><span class="st">&#39;g&#39;</span>)</span>
+<span id="cb5-34"><a href="#cb5-34"></a></span>
+<span id="cb5-35"><a href="#cb5-35"></a>ax2.set_ylabel(<span class="st">&#39;Power&#39;</span>)</span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="co"># for tl in ax2.get_yticklabels():</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="co">#     tl.set_color(&#39;g&#39;)</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a>ax2.legend()</span>
+<span id="cb5-39"><a href="#cb5-39"></a>ax2.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-120</span>, <span class="dv">120</span>])<span class="op">;</span></span></code></pre></div>
+<figure>
+<img src="images/power_11_0.png" alt="" />
+</figure>
+<p>We can decompose the instantaneous power following the steps below.</p>
+<p><span class="math inline">\(v_{an} = V_{max} \cos(\omega t + \theta)\)</span></p>
+<p><span class="math inline">\(i_{an} = I_{max} \cos\omega t\)</span></p>
+<p><span class="math inline">\(p = v_{an} \times i_{an}\)</span></p>
+<p><span class="math inline">\(p = V_{max} \cos(\omega t + \theta) \times I_{max} \cos\omega t\)</span></p>
+<p><span class="math inline">\(p = V_{max}I_{max} \cos(\omega t + \theta) \times \cos\omega t\)</span></p>
+<p>We know that,</p>
+<p><span class="math inline">\(2\cos \theta \cos \varphi = {{\cos(\theta - \varphi) + \cos(\theta + \varphi)}}\)</span></p>
+<p><span class="math inline">\(p = V_{max}I_{max} \cos(\omega t + \theta) \cos\omega t\)</span></p>
+<p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2}({{\cos(\omega t + \theta - \omega t) + \cos(\omega t + \theta + \omega t)}})\)</span></p>
+<p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2}({{\cos\theta + \cos(2\omega t + \theta )}})\)</span></p>
+<p>The second <span class="math inline">\(\cos\)</span> term is of the following form,</p>
+<p><span class="math inline">\(\cos(\alpha \pm \beta) = \cos \alpha \cos \beta \mp \sin \alpha \sin \beta\,\)</span></p>
+<p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2}({{\cos\theta + \cos 2\omega t \cos \theta - \sin 2\omega t \sin \theta}})\)</span></p>
+<p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2}({{\cos\theta (1 + \cos 2\omega t) - \sin 2\omega t \sin \theta}})\)</span></p>
+<p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t) - \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta\)</span></p>
+<p><span class="math inline">\(\theta\)</span> is the phase angle of one of the phasors. In our case, <span class="math inline">\(\theta\)</span> is the phase angle of Voltage, when the angle of Current is 0</p>
+<p>Assuming <span class="math inline">\(\theta = -\theta\)</span>,</p>
+<p><span class="math inline">\(\cos(\theta) = \cos(-\theta)\)</span></p>
+<p><span class="math inline">\(\sin(\theta) = - \sin(-\theta)\)</span></p>
+<p>Hence,</p>
+<p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t) + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta\)</span></p>
+<p>We see that the sign of the first term remains unaffected by the sign of <span class="math inline">\(\theta\)</span></p>
+<p>Let us plot the two parts of this equation.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>f0 <span class="op">=</span> <span class="dv">60</span> <span class="co"># Hz (frequency)</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>phi <span class="op">=</span> <span class="op">-</span>np.pi<span class="op">/</span><span class="dv">3</span> <span class="co"># phase shift</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>Av <span class="op">=</span> <span class="dv">110</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># voltage peak</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>Ai <span class="op">=</span> <span class="dv">5</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># current peak</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a>fs <span class="op">=</span> <span class="dv">4000</span> <span class="co"># steps</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>t <span class="op">=</span> np.arange(<span class="fl">0.000</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="fl">1.0</span><span class="op">/</span>fs) <span class="co"># plot from 0 to .02 secs</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a>v <span class="op">=</span> Av <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t <span class="op">+</span> phi)</span>
+<span id="cb6-13"><a href="#cb6-13"></a>i <span class="op">=</span> Ai <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t )</span>
+<span id="cb6-14"><a href="#cb6-14"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">1</span>,figsize <span class="op">=</span> (<span class="dv">16</span>,<span class="dv">5</span>))</span>
+<span id="cb6-15"><a href="#cb6-15"></a></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># ax1 = axs[0]</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co"># ax1.axhline(linewidth=0.25, color=&#39;black&#39;)</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co"># ax1.axvline(linewidth=0.25, color=&#39;black&#39;)</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co"># ax1.plot(t, v, label = &#39;Voltage in phase A&#39;)</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co"># ax1.plot(t, i, label = &#39;Current in phase A&#39;)</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co"># ax1.set_ylabel(&#39;Voltage and Current&#39;)</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co"># ax1.axis([0, 1/f0, -200, 200]);</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co"># ax1.legend(loc=&#39;lower left&#39;)</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a></span>
+<span id="cb6-28"><a href="#cb6-28"></a>ax2 <span class="op">=</span> axs</span>
+<span id="cb6-29"><a href="#cb6-29"></a></span>
+<span id="cb6-30"><a href="#cb6-30"></a>ax2.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb6-31"><a href="#cb6-31"></a>ax2.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb6-32"><a href="#cb6-32"></a></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#$p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t)</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#                         + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta $</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a></span>
+<span id="cb6-36"><a href="#cb6-36"></a>p_R <span class="op">=</span> Av<span class="op">*</span>Ai<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(np.cos(phi) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> np.cos(<span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t)))</span>
+<span id="cb6-37"><a href="#cb6-37"></a>p_X <span class="op">=</span> Av<span class="op">*</span>Ai<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(np.sin(phi) <span class="op">*</span> (np.sin(<span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t)))</span>
+<span id="cb6-38"><a href="#cb6-38"></a></span>
+<span id="cb6-39"><a href="#cb6-39"></a>ax2.plot(t, p_R, label <span class="op">=</span> <span class="st">&#39;Instantaneous Active Power in phase A&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>, color <span class="op">=</span> <span class="st">&#39;b&#39;</span>)</span>
+<span id="cb6-40"><a href="#cb6-40"></a>ax2.plot(t, p_X, label <span class="op">=</span> <span class="st">&#39;Instantaneous Reactive Power in phase A&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;-.&#39;</span>, color <span class="op">=</span> <span class="st">&#39;r&#39;</span>)</span>
+<span id="cb6-41"><a href="#cb6-41"></a></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#ax2.plot(t, v*i, label = &#39;Power in phase A&#39;, color=&#39;g&#39;)</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a>ax2.plot(t, p_R<span class="op">+</span>p_X, label <span class="op">=</span> <span class="st">&#39;Instantaneous Power in phase A&#39;</span>, color<span class="op">=</span><span class="st">&#39;g&#39;</span>)</span>
+<span id="cb6-44"><a href="#cb6-44"></a></span>
+<span id="cb6-45"><a href="#cb6-45"></a></span>
+<span id="cb6-46"><a href="#cb6-46"></a>ax2.set_ylabel(<span class="st">&#39;Power&#39;</span>)</span>
+<span id="cb6-47"><a href="#cb6-47"></a>ax2.legend(loc<span class="op">=</span><span class="st">&#39;lower left&#39;</span>)</span>
+<span id="cb6-48"><a href="#cb6-48"></a>ax2.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-1500</span>, <span class="dv">1500</span>])<span class="op">;</span></span></code></pre></div>
+<figure>
+<img src="images/power_16_0.png" alt="" />
+</figure>
+<p>The blue line (active power) is always positve and has an average value of <span class="math inline">\(\frac{V_{max}I_{max}}{2}\cos\theta\)</span>. If we use RMS values, we get</p>
+<p><span class="math inline">\(P = \frac{V_{max}}{\sqrt{2}} \frac{I_{max}}{\sqrt{2}} \cos\theta\)</span></p>
+<p><span class="math inline">\(P = |V||I|\cos\theta\)</span></p>
+<p>The average value of the red line (reactive power) is equal to zero.</p>
+<p>The maximum value of the instantaneous reactive power is <span class="math inline">\(\frac{V_{max}I_{max}}{2} \sin \theta\)</span></p>
+<p>Or,</p>
+<p><span class="math inline">\(Q = |V||I|\sin\theta\)</span></p>
+</section>
+<section id="so-why-is-it-called-real-power" class="level1">
+<h1><a href="#so-why-is-it-called-real-power">#</a> So why is it called real power?</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="im">import</span> SchemDraw <span class="im">as</span> schem</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="im">import</span> SchemDraw.elements <span class="im">as</span> e</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>d <span class="op">=</span> schem.Drawing()</span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a>V1 <span class="op">=</span> d.add( e.SOURCE_SIN, label<span class="op">=</span><span class="st">&#39;$V_</span><span class="sc">{a}</span><span class="st">$&#39;</span> )</span>
+<span id="cb7-9"><a href="#cb7-9"></a>L1 <span class="op">=</span> d.add( e.LINE, d<span class="op">=</span><span class="st">&#39;right&#39;</span>, label<span class="op">=</span><span class="st">&#39;$I_</span><span class="sc">{a}</span><span class="st">$&#39;</span>)</span>
+<span id="cb7-10"><a href="#cb7-10"></a>d.push()</span>
+<span id="cb7-11"><a href="#cb7-11"></a>R <span class="op">=</span> d.add( e.RES, d<span class="op">=</span><span class="st">&#39;down&#39;</span>, botlabel<span class="op">=</span><span class="st">&#39;$R$&#39;</span> )</span>
+<span id="cb7-12"><a href="#cb7-12"></a>d.pop()</span>
+<span id="cb7-13"><a href="#cb7-13"></a>d.add( e.LINE, d<span class="op">=</span><span class="st">&#39;right&#39;</span> )</span>
+<span id="cb7-14"><a href="#cb7-14"></a>d.add( e.INDUCTOR2, d<span class="op">=</span><span class="st">&#39;down&#39;</span>, botlabel<span class="op">=</span><span class="st">&#39;$L$&#39;</span> )</span>
+<span id="cb7-15"><a href="#cb7-15"></a>d.add( e.LINE, to<span class="op">=</span>V1.start )</span>
+<span id="cb7-16"><a href="#cb7-16"></a>d.add( e.GND )</span>
+<span id="cb7-17"><a href="#cb7-17"></a>d.draw()</span></code></pre></div>
+<figure>
+<img src="images/power_19_0.png" alt="" />
+</figure>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">1</span>,figsize <span class="op">=</span> (<span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>soa <span class="op">=</span>np.array([[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">10</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">5</span>]])</span>
+<span id="cb8-6"><a href="#cb8-6"></a>X,Y,U,V <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>soa)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb8-8"><a href="#cb8-8"></a>ax.quiver(X,Y,U,V,angles<span class="op">=</span><span class="st">&#39;xy&#39;</span>,scale_units<span class="op">=</span><span class="st">&#39;xy&#39;</span>,scale<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>ax.set_xlim([<span class="op">-</span><span class="dv">1</span>,<span class="dv">10</span>])</span>
+<span id="cb8-10"><a href="#cb8-10"></a>ax.set_ylim([<span class="op">-</span><span class="dv">1</span>,<span class="dv">10</span>])</span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a>ax.text(<span class="dv">5</span>, <span class="dv">0</span>, <span class="vs">r&#39;$I_</span><span class="sc">{X}</span><span class="vs">$&#39;</span>)</span>
+<span id="cb8-13"><a href="#cb8-13"></a>ax.text(<span class="dv">0</span>, <span class="dv">5</span>, <span class="vs">r&#39;$I_</span><span class="sc">{R}</span><span class="vs">$&#39;</span>)</span>
+<span id="cb8-14"><a href="#cb8-14"></a>ax.text(<span class="dv">5</span>, <span class="dv">5</span>, <span class="vs">r&#39;$I_</span><span class="sc">{an}</span><span class="vs">$&#39;</span>)</span>
+<span id="cb8-15"><a href="#cb8-15"></a>ax.text(<span class="dv">0</span>, <span class="dv">10</span>, <span class="vs">r&#39;$V_</span><span class="sc">{an}</span><span class="vs">$&#39;</span>)</span>
+<span id="cb8-16"><a href="#cb8-16"></a>ax.text(<span class="fl">0.25</span>, <span class="dv">1</span>, <span class="vs">r&#39;$\theta$&#39;</span>)</span>
+<span id="cb8-17"><a href="#cb8-17"></a></span>
+<span id="cb8-18"><a href="#cb8-18"></a>ax.axis(<span class="st">&#39;off&#39;</span>)<span class="op">;</span></span></code></pre></div>
+<figure>
+<img src="images/power_20_0.png" alt="" />
+</figure>
+<p>We know that <span class="math inline">\(\theta\)</span> is the phase difference between the Voltage and Current.</p>
+<p><span class="math inline">\(p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t) + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta\)</span></p>
+<p>The first term can be rewritten as</p>
+<p><span class="math inline">\(\frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t)\)</span></p>
+<p><span class="math inline">\(V_{max}I_{max} \cos\theta \cos^2 \omega t\)</span></p>
+<p><span class="math inline">\(V_{max}\cos \omega t \times I_{max}\cos\theta\cos \omega t\)</span></p>
+<p>Similarly the second term can be rewritten as</p>
+<p><span class="math inline">\(V_{max}\cos \omega t \times I_{max}\sin \omega t \sin\theta\)</span></p>
+<p>From the above figure we can see that power can be written as</p>
+<p><span class="math inline">\(p_{active} = v_{a} \times i_{R}\)</span></p>
+<p><span class="math inline">\(p_{reactive} = v_{a} \times i_{X}\)</span></p>
+</section>
+<section id="special-cases" class="level1">
+<h1><a href="#special-cases">#</a> Special cases</h1>
+<p><span class="math inline">\(P\)</span> or active power or real power is the power that is dissipated in the resistor, in the form of heat energy. <span class="math inline">\(Q\)</span> or reactive power is the power that oscillates between the source and inductor or the capacitor. And <span class="math inline">\(\theta\)</span> is determined by the nature of the impedance.</p>
+<p>Let’s look at three cases</p>
+<section id="case-1--theta-is-zero" class="level3">
+<h3><a href="#case-1--theta-is-zero">#</a> Case 1 : <span class="math inline">\(\theta\)</span> is zero</h3>
+<p>When we assume <span class="math inline">\(\theta\)</span> is zero, the load is purely resistive</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>f0 <span class="op">=</span> <span class="dv">60</span> <span class="co"># Hz (frequency)</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>phi <span class="op">=</span> <span class="dv">0</span> <span class="co"># phase shift</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>Av <span class="op">=</span> <span class="dv">110</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># voltage peak</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>Ai <span class="op">=</span> <span class="dv">5</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># current peak</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>fs <span class="op">=</span> <span class="dv">4000</span> <span class="co"># steps</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>t <span class="op">=</span> np.arange(<span class="fl">0.000</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="fl">1.0</span><span class="op">/</span>fs) <span class="co"># plot from 0 to .02 secs</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a></span>
+<span id="cb9-12"><a href="#cb9-12"></a>v <span class="op">=</span> Av <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t <span class="op">+</span> phi)</span>
+<span id="cb9-13"><a href="#cb9-13"></a>i <span class="op">=</span> Ai <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t )</span>
+<span id="cb9-14"><a href="#cb9-14"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>,figsize <span class="op">=</span> (<span class="dv">16</span>,<span class="dv">10</span>))</span>
+<span id="cb9-15"><a href="#cb9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16"></a></span>
+<span id="cb9-17"><a href="#cb9-17"></a>ax1 <span class="op">=</span> axs[<span class="dv">0</span>]</span>
+<span id="cb9-18"><a href="#cb9-18"></a></span>
+<span id="cb9-19"><a href="#cb9-19"></a>ax1.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb9-20"><a href="#cb9-20"></a>ax1.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb9-21"><a href="#cb9-21"></a></span>
+<span id="cb9-22"><a href="#cb9-22"></a>ax1.plot(t, v, label <span class="op">=</span> <span class="st">&#39;Voltage in phase A&#39;</span>)</span>
+<span id="cb9-23"><a href="#cb9-23"></a>ax1.plot(t, i, label <span class="op">=</span> <span class="st">&#39;Current in phase A&#39;</span>)</span>
+<span id="cb9-24"><a href="#cb9-24"></a>ax1.set_ylabel(<span class="st">&#39;Voltage and Current&#39;</span>)</span>
+<span id="cb9-25"><a href="#cb9-25"></a></span>
+<span id="cb9-26"><a href="#cb9-26"></a>ax1.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-200</span>, <span class="dv">200</span>])<span class="op">;</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>ax1.legend(loc<span class="op">=</span><span class="st">&#39;lower left&#39;</span>)</span>
+<span id="cb9-28"><a href="#cb9-28"></a></span>
+<span id="cb9-29"><a href="#cb9-29"></a>ax2 <span class="op">=</span> axs[<span class="dv">1</span>]</span>
+<span id="cb9-30"><a href="#cb9-30"></a></span>
+<span id="cb9-31"><a href="#cb9-31"></a>ax2.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb9-32"><a href="#cb9-32"></a>ax2.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb9-33"><a href="#cb9-33"></a></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="co">#$p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t)</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="co">#                         + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta $</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a></span>
+<span id="cb9-37"><a href="#cb9-37"></a>p_R <span class="op">=</span> Av<span class="op">*</span>Ai<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(np.cos(phi) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> np.cos(<span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t)))</span>
+<span id="cb9-38"><a href="#cb9-38"></a>p_X <span class="op">=</span> Av<span class="op">*</span>Ai<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(np.sin(phi) <span class="op">*</span> (np.sin(<span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t)))</span>
+<span id="cb9-39"><a href="#cb9-39"></a></span>
+<span id="cb9-40"><a href="#cb9-40"></a>ax2.plot(t, p_R, label <span class="op">=</span> <span class="st">&#39;Instantaneous Active Power in phase A&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>, color <span class="op">=</span> <span class="st">&#39;b&#39;</span>)</span>
+<span id="cb9-41"><a href="#cb9-41"></a>ax2.plot(t, p_X, label <span class="op">=</span> <span class="st">&#39;Instantaneous Reactive Power in phase A&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;-.&#39;</span>, color <span class="op">=</span> <span class="st">&#39;r&#39;</span>)</span>
+<span id="cb9-42"><a href="#cb9-42"></a></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="co">#ax2.plot(t, v*i, label = &#39;Power in phase A&#39;, color=&#39;g&#39;)</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a>ax2.plot(t, p_R<span class="op">+</span>p_X, label <span class="op">=</span> <span class="st">&#39;Instantaneous Power in phase A&#39;</span>, color<span class="op">=</span><span class="st">&#39;g&#39;</span>)</span>
+<span id="cb9-45"><a href="#cb9-45"></a></span>
+<span id="cb9-46"><a href="#cb9-46"></a></span>
+<span id="cb9-47"><a href="#cb9-47"></a>ax2.set_ylabel(<span class="st">&#39;Power&#39;</span>)</span>
+<span id="cb9-48"><a href="#cb9-48"></a>ax2.legend(loc<span class="op">=</span><span class="st">&#39;lower left&#39;</span>)</span>
+<span id="cb9-49"><a href="#cb9-49"></a>ax2.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-1500</span>, <span class="dv">1500</span>])<span class="op">;</span></span></code></pre></div>
+<figure>
+<img src="images/power_26_0.png" alt="" />
+</figure>
+<p>The Instantaneous power in the phase is equal to the active power.</p>
+</section>
+<section id="case-2--theta-is-90" class="level3">
+<h3><a href="#case-2--theta-is-90">#</a> Case 2 : <span class="math inline">\(\theta\)</span> is 90</h3>
+<p>When <span class="math inline">\(\theta\)</span> is 90, the load is purely inductive</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>f0 <span class="op">=</span> <span class="dv">60</span> <span class="co"># Hz (frequency)</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>phi <span class="op">=</span> <span class="op">-</span>np.pi<span class="op">/</span><span class="dv">2</span> <span class="co"># phase shift</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>Av <span class="op">=</span> <span class="dv">110</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># voltage peak</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>Ai <span class="op">=</span> <span class="dv">5</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># current peak</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a>fs <span class="op">=</span> <span class="dv">4000</span> <span class="co"># steps</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>t <span class="op">=</span> np.arange(<span class="fl">0.000</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="fl">1.0</span><span class="op">/</span>fs) <span class="co"># plot from 0 to .02 secs</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a>v <span class="op">=</span> Av <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t <span class="op">+</span> phi)</span>
+<span id="cb10-13"><a href="#cb10-13"></a>i <span class="op">=</span> Ai <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t )</span>
+<span id="cb10-14"><a href="#cb10-14"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>,figsize <span class="op">=</span> (<span class="dv">16</span>,<span class="dv">10</span>))</span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a>ax1 <span class="op">=</span> axs[<span class="dv">0</span>]</span>
+<span id="cb10-17"><a href="#cb10-17"></a></span>
+<span id="cb10-18"><a href="#cb10-18"></a>ax1.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb10-19"><a href="#cb10-19"></a>ax1.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb10-20"><a href="#cb10-20"></a></span>
+<span id="cb10-21"><a href="#cb10-21"></a>ax1.plot(t, v, label <span class="op">=</span> <span class="st">&#39;Voltage in phase A&#39;</span>)</span>
+<span id="cb10-22"><a href="#cb10-22"></a>ax1.plot(t, i, label <span class="op">=</span> <span class="st">&#39;Current in phase A&#39;</span>)</span>
+<span id="cb10-23"><a href="#cb10-23"></a>ax1.set_ylabel(<span class="st">&#39;Voltage and Current&#39;</span>)</span>
+<span id="cb10-24"><a href="#cb10-24"></a></span>
+<span id="cb10-25"><a href="#cb10-25"></a>ax1.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-200</span>, <span class="dv">200</span>])<span class="op">;</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a>ax1.legend(loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)</span>
+<span id="cb10-27"><a href="#cb10-27"></a></span>
+<span id="cb10-28"><a href="#cb10-28"></a>ax2 <span class="op">=</span> axs[<span class="dv">1</span>]</span>
+<span id="cb10-29"><a href="#cb10-29"></a></span>
+<span id="cb10-30"><a href="#cb10-30"></a>ax2.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb10-31"><a href="#cb10-31"></a>ax2.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb10-32"><a href="#cb10-32"></a></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="co">#$p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t)</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a><span class="co">#                         + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta$</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a></span>
+<span id="cb10-36"><a href="#cb10-36"></a>p_R <span class="op">=</span> Av<span class="op">*</span>Ai<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(np.cos(phi) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> np.cos(<span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t)))</span>
+<span id="cb10-37"><a href="#cb10-37"></a>p_X <span class="op">=</span> Av<span class="op">*</span>Ai<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(np.sin(phi) <span class="op">*</span> (np.sin(<span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t)))</span>
+<span id="cb10-38"><a href="#cb10-38"></a></span>
+<span id="cb10-39"><a href="#cb10-39"></a>ax2.plot(t, p_R, label <span class="op">=</span> <span class="st">&#39;Instantaneous Active Power in phase A&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>, color <span class="op">=</span> <span class="st">&#39;b&#39;</span>)</span>
+<span id="cb10-40"><a href="#cb10-40"></a>ax2.plot(t, p_X, label <span class="op">=</span> <span class="st">&#39;Instantaneous Reactive Power in phase A&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;-.&#39;</span>, color <span class="op">=</span> <span class="st">&#39;r&#39;</span>)</span>
+<span id="cb10-41"><a href="#cb10-41"></a></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="co">#ax2.plot(t, v*i, label = &#39;Power in phase A&#39;, color=&#39;g&#39;)</span></span>
+<span id="cb10-43"><a href="#cb10-43"></a>ax2.plot(t, p_R<span class="op">+</span>p_X, label <span class="op">=</span> <span class="st">&#39;Instantaneous Power in phase A&#39;</span>, color<span class="op">=</span><span class="st">&#39;g&#39;</span>)</span>
+<span id="cb10-44"><a href="#cb10-44"></a></span>
+<span id="cb10-45"><a href="#cb10-45"></a></span>
+<span id="cb10-46"><a href="#cb10-46"></a>ax2.set_ylabel(<span class="st">&#39;Power&#39;</span>)</span>
+<span id="cb10-47"><a href="#cb10-47"></a>ax2.legend(loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)</span>
+<span id="cb10-48"><a href="#cb10-48"></a>ax2.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-1500</span>, <span class="dv">1500</span>])<span class="op">;</span></span></code></pre></div>
+<figure>
+<img src="images/power_30_0.png" alt="" />
+</figure>
+<p>The Instantaneous power in the phase is equal to the reactive power. The power oscillates between the source and the inductive circuit.</p>
+</section>
+<section id="case-3--theta-is--90" class="level3">
+<h3><a href="#case-3--theta-is--90">#</a> Case 3 : <span class="math inline">\(\theta\)</span> is -90</h3>
+<p>When <span class="math inline">\(\theta\)</span> is -90, the load is purely capacitive</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># &lt;!-- collapse=True --&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>f0 <span class="op">=</span> <span class="dv">60</span> <span class="co"># Hz (frequency)</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>phi <span class="op">=</span> <span class="op">-</span>np.pi<span class="op">/</span><span class="dv">2</span> <span class="co"># phase shift</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>Av <span class="op">=</span> <span class="dv">110</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># voltage peak</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>Ai <span class="op">=</span> <span class="dv">5</span><span class="op">*</span>np.sqrt(<span class="dv">2</span>) <span class="co"># current peak</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a>fs <span class="op">=</span> <span class="dv">4000</span> <span class="co"># steps</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>t <span class="op">=</span> np.arange(<span class="fl">0.000</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="fl">1.0</span><span class="op">/</span>fs) <span class="co"># plot from 0 to .02 secs</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a></span>
+<span id="cb11-12"><a href="#cb11-12"></a>v <span class="op">=</span> Av <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t <span class="op">+</span> phi)</span>
+<span id="cb11-13"><a href="#cb11-13"></a>i <span class="op">=</span> Ai <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t )</span>
+<span id="cb11-14"><a href="#cb11-14"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>,figsize <span class="op">=</span> (<span class="dv">16</span>,<span class="dv">10</span>))</span>
+<span id="cb11-15"><a href="#cb11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16"></a>ax1 <span class="op">=</span> axs[<span class="dv">0</span>]</span>
+<span id="cb11-17"><a href="#cb11-17"></a></span>
+<span id="cb11-18"><a href="#cb11-18"></a>ax1.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb11-19"><a href="#cb11-19"></a>ax1.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb11-20"><a href="#cb11-20"></a></span>
+<span id="cb11-21"><a href="#cb11-21"></a>ax1.plot(t, v, label <span class="op">=</span> <span class="st">&#39;Voltage in phase A&#39;</span>)</span>
+<span id="cb11-22"><a href="#cb11-22"></a>ax1.plot(t, i, label <span class="op">=</span> <span class="st">&#39;Current in phase A&#39;</span>)</span>
+<span id="cb11-23"><a href="#cb11-23"></a>ax1.set_ylabel(<span class="st">&#39;Voltage and Current&#39;</span>)</span>
+<span id="cb11-24"><a href="#cb11-24"></a></span>
+<span id="cb11-25"><a href="#cb11-25"></a>ax1.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-200</span>, <span class="dv">200</span>])<span class="op">;</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a>ax1.legend(loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)</span>
+<span id="cb11-27"><a href="#cb11-27"></a></span>
+<span id="cb11-28"><a href="#cb11-28"></a>ax2 <span class="op">=</span> axs[<span class="dv">1</span>]</span>
+<span id="cb11-29"><a href="#cb11-29"></a></span>
+<span id="cb11-30"><a href="#cb11-30"></a>ax2.axhline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb11-31"><a href="#cb11-31"></a>ax2.axvline(linewidth<span class="op">=</span><span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb11-32"><a href="#cb11-32"></a></span>
+<span id="cb11-33"><a href="#cb11-33"></a><span class="co">#$p = \frac{V_{max}I_{max}}{2} \cos\theta (1 + \cos 2\omega t)</span></span>
+<span id="cb11-34"><a href="#cb11-34"></a><span class="co">#                         + \frac{V_{max}I_{max}}{2} \sin 2\omega t \sin \theta$</span></span>
+<span id="cb11-35"><a href="#cb11-35"></a></span>
+<span id="cb11-36"><a href="#cb11-36"></a>p_R <span class="op">=</span> Av<span class="op">*</span>Ai<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(np.cos(phi) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> np.cos(<span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t)))</span>
+<span id="cb11-37"><a href="#cb11-37"></a>p_X <span class="op">=</span> Av<span class="op">*</span>Ai<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(np.sin(phi) <span class="op">*</span> (np.sin(<span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f0 <span class="op">*</span> t)))</span>
+<span id="cb11-38"><a href="#cb11-38"></a></span>
+<span id="cb11-39"><a href="#cb11-39"></a>ax2.plot(t, p_R, label <span class="op">=</span> <span class="st">&#39;Instantaneous Active Power in phase A&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>, color <span class="op">=</span> <span class="st">&#39;b&#39;</span>)</span>
+<span id="cb11-40"><a href="#cb11-40"></a>ax2.plot(t, p_X, label <span class="op">=</span> <span class="st">&#39;Instantaneous Reactive Power in phase A&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;-.&#39;</span>, color <span class="op">=</span> <span class="st">&#39;r&#39;</span>)</span>
+<span id="cb11-41"><a href="#cb11-41"></a></span>
+<span id="cb11-42"><a href="#cb11-42"></a><span class="co">#ax2.plot(t, v*i, label = &#39;Power in phase A&#39;, color=&#39;g&#39;)</span></span>
+<span id="cb11-43"><a href="#cb11-43"></a>ax2.plot(t, p_R<span class="op">+</span>p_X, label <span class="op">=</span> <span class="st">&#39;Instantaneous Power in phase A&#39;</span>, color<span class="op">=</span><span class="st">&#39;g&#39;</span>)</span>
+<span id="cb11-44"><a href="#cb11-44"></a></span>
+<span id="cb11-45"><a href="#cb11-45"></a></span>
+<span id="cb11-46"><a href="#cb11-46"></a>ax2.set_ylabel(<span class="st">&#39;Power&#39;</span>)</span>
+<span id="cb11-47"><a href="#cb11-47"></a>ax2.legend(loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)</span>
+<span id="cb11-48"><a href="#cb11-48"></a>ax2.axis([<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>f0, <span class="dv">-1500</span>, <span class="dv">1500</span>])<span class="op">;</span></span></code></pre></div>
+<figure>
+<img src="images/power_34_0.png" alt="" />
+</figure>
+<p>In a purely capacitive circuit, power oscillates between the source and electric field associated with the capacitor.</p>
+</section>
+</section>
+<section id="expression-for-complex-power" class="level1">
+<h1><a href="#expression-for-complex-power">#</a> Expression for complex power</h1>
+<p>We know from Euler’s identity that, for any real number x</p>
+<p><span class="math inline">\(e^{jx} = \cos x + j\sin x\)</span></p>
+<p>This means, we can write the above equations as :</p>
+<p><span class="math inline">\(\cos\theta = \operatorname{Re}\{ e^{j \theta} \}\)</span></p>
+<p><span class="math inline">\(v = 155.563491861 \cos(\omega t + \theta)\)</span></p>
+<p><span class="math inline">\(v = 110 \operatorname{Re}\{ \sqrt{2} e^{j (\omega t + \theta)}\}\)</span></p>
+<p><span class="math inline">\(v = 110 \operatorname{Re}\{ \sqrt{2} e^{ j\theta} e^{j \omega t} \}\)</span></p>
+<p>Similarly,</p>
+<p><span class="math inline">\(i = 5 \operatorname{Re}\{ \sqrt{2} e^{j \omega t} \}\)</span></p>
+<p>Hence <span class="math inline">\(V\)</span> can be written as,</p>
+<p><span class="math inline">\(V = |V| \angle \theta_{v}\)</span></p>
+<p><span class="math inline">\(I = |I| \angle \theta_{i}\)</span></p>
+<p><span class="math inline">\(VI^* = |V||I|\angle \theta_{v} - \theta_{i}\)</span></p>
+</section>
+</section>
+<section>
+
+    <div class="kudo-container" style="display: none" data-post-id="active-reactive-and-apparent-power">
+        <button class="kudo-button" aria-label="Give this post a kudo">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="kudo-heart" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <path class="kudo-heart-path" id="kudo-heart-path" d="M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4   L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z" />
+          </svg>
+        </button>
+        <div class="kudo-count-message">
+          <span class="kudo-count"></span> <span class="kudo-word"></span>
+        </div>
+        <div class="kudo-thanks">
+          <div class="kudo-thanks-heading">Thanks!</div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <opt-in-script src="https://utteranc.es/client.js"
+        repo="kdheepak/blog"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    <button class="comments-button">Show Comments</button>
+    </opt-in-script>
+</section>
+</article>
+<script>
+var figures =
+  Array.prototype.slice.call(document.getElementsByClassName("figure"),0)
+  .concat(
+    Array.prototype.slice.call(document.getElementsByTagName("figure"),0));
+
+for (var i = 0; i < figures.length; i++) {
+  var figure = figures[i];
+  var imgs = figure.getElementsByTagName("img");
+  if (imgs.length > 0) {
+    classes = imgs[0].classList;
+    for (var j = 0; j < classes.length; j++) {
+        if (classes[j] === "fullwidth") {
+            figure.classList.add(classes[j]);
+        }
+    }
+  }
+}
+</script>
+<footer>
+    <p>
+    <a rel="license noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="This work is licensed under a Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </p>
+</footer>
+<script data-goatcounter="https://kdheepak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/vim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/julia.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/nim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/latex.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/matlab.min.js"></script>
+<script>
+    document.querySelectorAll('pre:not([class])').forEach(function($) {
+        $.className = 'no-highlight';
+    });
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="/js/opt-in-script.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC_lk4_TkwwjzgthwVBR0JXrDRQMH2mDH8",
+    authDomain: "blog-4ac79.firebaseapp.com",
+    databaseURL: "https://blog-4ac79.firebaseio.com",
+    projectId: "blog-4ac79",
+    storageBucket: "blog-4ac79.appspot.com",
+    messagingSenderId: "57327928077",
+    appId: "1:57327928077:web:5acf8eaf01bcb850d76644",
+    measurementId: "G-YKT2PQSD10"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="/js/kudos.js"></script>
+</body>
+</html>

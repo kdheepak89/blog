@@ -1,0 +1,135 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+button, input, optgroup, select, textarea {
+	 color: inherit;
+	 font: inherit;
+	 margin: 0;
+}
+ button {
+	 overflow: visible;
+}
+ button, select {
+	 text-transform: none;
+}
+ button, html input[type="button"], input[type="reset"], input[type="submit"] {
+	 -webkit-appearance: button;
+	 cursor: pointer;
+}
+ button[disabled], html input[disabled] {
+	 cursor: default;
+}
+ button::-moz-focus-inner, input::-moz-focus-inner {
+	 border: 0;
+	 padding: 0;
+}
+ input {
+	 line-height: normal;
+}
+ input[type="checkbox"], input[type="radio"] {
+	 -webkit-box-sizing: border-box;
+	 -moz-box-sizing: border-box;
+	 box-sizing: border-box;
+	 padding: 0;
+}
+ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+	 height: auto;
+}
+ input[type="search"] {
+	 -webkit-appearance: textfield;
+	 -moz-box-sizing: content-box;
+	 -webkit-box-sizing: content-box;
+	 box-sizing: content-box;
+}
+ input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+	 -webkit-appearance: none;
+}
+ input, button, select, textarea {
+	 font-family: inherit;
+	 font-size: inherit;
+	 line-height: inherit;
+}
+
+.kudo-container .kudo-button {
+	 appearance: none;
+	 background: transparent;
+	 border: none;
+	 color: inherit;
+	 font: inherit;
+	 font-smoothing: inherit;
+	 line-height: normal;
+	 margin: 0;
+	 overflow: visible;
+	 padding: 0;
+	 width: auto;
+}
+ .kudo-container {
+	 display: flex;
+	 font-size: 1.4rem;
+	 justify-content: center;
+	 align-items: center;
+	 margin: 3em 0 2em;
+}
+ .kudo-container.kudoed .kudo-heart-path {
+	 fill: black;
+}
+ .kudo-container .kudo-heart {
+	 font-size: 2.5em;
+	 line-height: 1;
+	 max-width: 50px;
+	 max-height: 50px;
+	 text-align: center;
+}
+ .kudo-container .kudo-heart-path {
+	 fill: #fffff8;
+	 stroke-width: 20px;
+	 stroke: black;
+	 transition: stroke-width 150ms;
+}
+ .kudo-container .kudo-button:hover .kudo-heart-path {
+	 stroke-width: 30px;
+}
+ .kudo-container .kudo-thanks {
+	 display: none;
+	 margin-left: 1em;
+	 min-height: 50px;
+}
+ .kudo-container .kudo-thanks .kudo-thanks-heading {
+	 font-size: 1.1em;
+	 font-weight: 600;
+	 line-height: 50px;
+}
+ .kudo-container .kudo-thanks p {
+	 margin-bottom: 1em;
+	 margin-top: 0.1em;
+}
+ .kudo-container .kudo-thanks input[type="text"] {
+	 border: none;
+	 border-bottom: 2px solid #f0f0f0;
+	 font-size: 1.1em;
+	 font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+	 margin-bottom: 1.2em;
+	 margin-top: 0;
+	 outline: none;
+	 width: 100%;
+}
+ .kudo-container .kudo-thanks .kudo-thanks-form {
+	 display: none;
+}
+ .kudo-container .kudo-thanks .kudo-thanks-buttons .cancel-kudo-form {
+	 margin-left: 0.5em;
+}
+ .kudo-container .kudo-count-message {
+	 margin-left: 1em;
+}
+ .kudo-container .kudo-count {
+	 font-weight: 600;
+}

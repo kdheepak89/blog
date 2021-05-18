@@ -1,0 +1,98 @@
+h1.title {
+    font-size: 3.2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h1:not(.title) {
+    padding-top: 1em;
+    margin-top: 1em;
+    border-top: 1px dotted #111;
+}
+
+h4 {
+    font-size: large;
+}
+
+body > footer {
+    text-align: center;
+    color: #aaa;
+    margin-bottom: 1.4rem;
+}
+
+body > footer > p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.utterances {
+    margin-left: 0 !important;
+    width: 55%;
+}
+
+.tocwrapper > p {
+  display: grid;
+  grid-template-columns: 44.4444% 22.2222%;
+}
+
+.toclink {
+  margin-right: 1rem;
+}
+
+.tocdate {
+  margin-left: 1rem;
+  text-align: right;
+}
+
+.no-tufte-underline:link {
+    background: unset;
+    text-shadow: unset;
+}
+
+section > .kudo-container { width: 55%; }
+pre { width: 100%; }
+
+@media (max-width: 760px) {
+    section > .kudo-container { width: 100%; }
+
+    .utterances {
+        margin-left: 0 !important;
+        width: 100%;
+    }
+
+    div.cell.border-box-sizing.rendered p,img {
+        width: 100%;
+    }
+
+    footer img {
+        width: unset;
+    }
+
+    .tocwrapper > p {
+      display: grid;
+      grid-template-columns: 66.6666% 33.3333%;
+    }
+
+}
+
+.comments-button {
+    background-color: #111;
+    border: 1px solid #000;
+    color: #fffff8;
+    padding: 0 0 0 0;
+    margin-top: 5px;
+    text-align: center;
+    height: 50px;
+    width: 200px;
+    font-size: 1.4rem;
+    box-sizing: border-box;
+    font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+}
+
+.comments-button:hover {
+    background-color: #fffff8;
+    color: black;
+    cursor:pointer;
+}

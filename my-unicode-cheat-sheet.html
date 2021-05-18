@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U" />
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="keywords" content="python, julia, vim, rust, unicode">
+  <meta name="description" content="References for various things associated with unicode in Vim, Python, Julia and Rust">
+  <meta property="og:url" content="https://blog.kdheepak.com/my-unicode-cheat-sheet.html"/>
+  <meta property="og:title" content="My Unicode cheat sheet"/>
+  <meta property="og:description" content="References for various things associated with unicode in Vim, Python, Julia and Rust"/>
+  <meta property="og:published_time" content=""/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://blog.kdheepak.com/rss.xml"/>
+  <title>My Unicode cheat sheet</title>
+  <style>code{white-space: pre;}</style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/css/latex.css"/>
+  <link rel="stylesheet" href="/css/tufte-extra.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/github.css"/>
+  <link rel="stylesheet" href="/css/pandoc.css"/>
+  <link rel="stylesheet" href="/css/tufte.css"/>
+  <link rel="stylesheet" href="/css/kudos.css"/>
+  <link rel="stylesheet" href="/css/custom.css"/>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+<header>
+<h1 class="title">
+    <a class="home" href="https://kdheepak.com">~</a> /
+        <a class="bloghome" href="/">blog</a> /
+        My Unicode cheat sheet
+</h1>
+<p class="subtitle sourceurl">
+ <a class="sourceurl" target="_blank" href="https://github.com/kdheepak/blog/blob/b2962a1c3e5008f95b6e50937f42ae70cb9cd47a/content/36-unicode-cheat-sheet.md">
+    Sat, Sep 19, 2020
+ </a>
+</p>
+</header>
+<section>
+<p>I wanted to make a cheat sheet for myself containing a reference of things I use when it comes to Unicode and when using Unicode in Vim, Python, Julia and Rust.</p>
+<p>First some basics:</p>
+<ol type="1">
+<li><p>Unicode Code Points<span><label for="sn-1" class="sidenote-number margin-toggle"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote"><a href="https://unicode.org/glossary/#code_point" class="uri" target="_blank">https://unicode.org/glossary/#code_point</a></span></span> are unique mappings from hexadecimal integers to an abstract character, concept or graphical representation. These graphical representations may look visually similar but can represent different “ideas”. For example: A, Α, А, Ａ are all different Unicode code points.</p>
+<ul>
+<li>A : U+0041 LATIN CAPITAL LETTER A</li>
+<li>Α : U+0391 GREEK CAPITAL LETTER ALPHA</li>
+<li>А : U+0410 CYRILLIC CAPITAL LETTER A</li>
+<li>Ａ : U+FF21 FULLWIDTH LATIN CAPITAL LETTER A</li>
+</ul>
+<p>The Unicode consortium defines a Grapheme<span><label for="sn-2" class="sidenote-number margin-toggle"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote"><a href="https://unicode.org/glossary/#grapheme" class="uri" target="_blank">https://unicode.org/glossary/#grapheme</a></span></span> as a “What a user thinks of as a character”. Multiple code points may be used to represent a grapheme. For example, my name in Devangari and Tamil can be written as 3 graphemes, but it consists of 4 and 5 code points respectively in these languages:</p>
+<ul>
+<li>DEVANGARI: दीपक
+<ul>
+<li><span>द</span> : U+0926 DEVANAGARI LETTER DA</li>
+<li><span> ी</span> : U+0940 DEVANAGARI VOWEL SIGN II</li>
+<li><span>प</span> : U+092A DEVANAGARI LETTER PA</li>
+<li><span>क</span> : U+0915 Dec:2325 DEVANAGARI LETTER KA</li>
+</ul></li>
+<li>TAMIL: தீபக்
+<ul>
+<li><span>த</span> : U+0BA4 TAMIL LETTER TA</li>
+<li><span> ீ</span> : U+0BC0 TAMIL VOWEL SIGN II</li>
+<li><span>ப</span> : U+0BAA TAMIL LETTER PA</li>
+<li><span>க</span> : U+0B95 TAMIL LETTER KA</li>
+<li><span> ்</span> : U+0BCD TAMIL SIGN VIRAMA</li>
+</ul></li>
+</ul>
+<p>Additionally, multiple “ideas” may be defined as a single code point. For example, the following grapheme ﷺ translates to “peace be upon him” and is defined as the code point at U+FDFA:</p>
+<ul>
+<li>ﷺ : U+FDFA ARABIC LIGATURE SALLALLAHOU ALAYHE WASALLAM</li>
+</ul>
+<p>And to make matters more complicated, graphemes and visual representations of code points may not be a single column width wide, even in monospaced fonts. See the code point at U+FDFD:</p>
+<ul>
+<li>﷽ : U+FDFD ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM</li>
+</ul>
+<p>Code points can be of different categories, Normal, Pictographic, Spacer, Zero Width Joiners, Controls etc.</p></li>
+<li><p>The same “idea”, i.e. code point can be <em>encoded</em> into different bits when it is required to be represented on a machine. The bits used to represent the idea depend on the encoding chosen. An encoding is a map or transformation of a code point into bits or bytes. For example, the code point for a 🐉 can be encoded into UTF-8, UTF16, UTF32 in Python as follows.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>Python <span class="dv">3</span>.<span class="fl">7.6</span> (default, Jan  <span class="dv">8</span> <span class="dv">2020</span>, <span class="dv">13</span>:<span class="dv">42</span>:<span class="dv">34</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>Type <span class="st">&#39;copyright&#39;</span>, <span class="st">&#39;credits&#39;</span> <span class="kw">or</span> <span class="st">&#39;license&#39;</span> <span class="cf">for</span> more information</span>
+<span id="cb1-3"><a href="#cb1-3"></a>IPython <span class="dv">7</span>.<span class="fl">16.1</span> <span class="op">--</span> An enhanced Interactive Python. Type <span class="st">&#39;?&#39;</span> <span class="cf">for</span> <span class="bu">help</span>.</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>In [<span class="dv">1</span>]: s <span class="op">=</span> <span class="st">&#39;🐉&#39;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>In [<span class="dv">2</span>]: s.encode(<span class="st">&#39;utf-8&#39;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>Out[<span class="dv">2</span>]: b<span class="st">&#39;</span><span class="ch">\xf0\x9f\x90\x89</span><span class="st">&#39;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>In [<span class="dv">3</span>]: s.encode() <span class="co"># Python3 uses &#39;utf-8&#39; by default</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>Out[<span class="dv">3</span>]: b<span class="st">&#39;</span><span class="ch">\xf0\x9f\x90\x89</span><span class="st">&#39;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>In [<span class="dv">4</span>]: s.encode(<span class="st">&#39;utf-16&#39;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>Out[<span class="dv">4</span>]: b<span class="st">&#39;</span><span class="ch">\xff\xfe</span><span class="st">=</span><span class="ch">\xd8\t\xdc</span><span class="st">&#39;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>In [<span class="dv">5</span>]: s.encode(<span class="st">&#39;utf-32&#39;</span>)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>Out[<span class="dv">5</span>]: b<span class="st">&#39;</span><span class="ch">\xff\xfe\x00\x00\t\xf4\x01\x00</span><span class="st">&#39;</span></span></code></pre></div>
+<p>Python prints the bytes as human readable characters if they are valid ASCII characters. ASCII defines 128 characters, half of the 256 possible bytes in an 8-bit computer system. Valid ASCII byte strings are also valid UTF-8 byte strings.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>In [<span class="dv">7</span>]: s <span class="op">=</span> <span class="st">&#39;hello world&#39;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>In [<span class="dv">7</span>]: s.encode(<span class="st">&#39;ascii&#39;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>Out[<span class="dv">7</span>]: b<span class="st">&#39;hello world&#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>In [<span class="dv">8</span>]: s.encode(<span class="st">&#39;utf-8&#39;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>Out[<span class="dv">8</span>]: b<span class="st">&#39;hello world&#39;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a>In [<span class="dv">9</span>]: s.encode(<span class="st">&#39;utf-16&#39;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a>Out[<span class="dv">9</span>]: b<span class="st">&#39;</span><span class="ch">\xff\xfe</span><span class="st">h</span><span class="ch">\x00</span><span class="st">e</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">o</span><span class="ch">\x00</span><span class="st"> </span><span class="ch">\x00</span><span class="st">w</span><span class="ch">\x00</span><span class="st">o</span><span class="ch">\x00</span><span class="st">r</span><span class="ch">\x00</span><span class="st">l</span><span class="ch">\x00</span><span class="st">d</span><span class="ch">\x00</span><span class="st">&#39;</span></span></code></pre></div></li>
+<li><p>When receiving or reading data, we <strong>must</strong> know the encoding used to interpret it correctly. A Unicode encoding is not guaranteed to contain any information about the encoding. Different encodings exist for efficiency, performance and backward compatibility. UTF-8 is a good pick for an encoding in the general case.</p></li>
+</ol>
+<section id="vim" class="level1">
+<h1><a href="#vim">#</a> Vim</h1>
+<p>In vim in insert mode, we can type <code>Ctrl+V</code><span><label for="mn-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-1" class="margin-toggle"/><span class="marginnote">Check out <code>:help i_CTRL-V_digit</code> for more information.</span></span> followed by either:</p>
+<ul>
+<li>a decimal number [0-255]. <code>Ctrl-v255</code> will insert <code>ÿ</code>.</li>
+<li>the letter <code>o</code> and then an octal number [0-377]. <code>Ctrl-vo377</code> will insert <code>ÿ</code>.</li>
+<li>the letter <code>x</code> and then a hex number [00-ff]. <code>Ctrl-vxff</code> will insert <code>ÿ</code>.</li>
+<li>the letter <code>u</code> and then a 4-hexchar Unicode sequence. <code>Ctrl-vu03C0</code> will insert <code>π</code>.</li>
+<li>the letter <code>U</code> and then an 8-hexchar Unicode sequence. <code>Ctrl-vU0001F409</code> will insert <code>🐉</code>.</li>
+</ul>
+<p>Using <a href="https://github.com/chrisbra/unicode.vim" target="_blank"><code>unicode.vim</code></a>, we can use <code>:UnicodeName</code> to get the Unicode number of the code point under the cursor. With <code>unicode.vim</code> and <code>fzf</code> installed, you can even fuzzy find Unicode symbols.</p>
+</section>
+<section id="python" class="level1">
+<h1><a href="#python">#</a> Python</h1>
+<p>Since Python &gt;=3.3, the Unicode string type supports a <a href="https://www.python.org/dev/peps/pep-0393/" target="_blank">“flexible string representation”</a>. This means that any one of multiple internal representations may be used depending on the largest Unicode ordinal (1, 2, or 4 bytes) in a Unicode string.</p>
+<p>For the common case, a string used in the English speaking world may only use ASCII characters thereby using a Latin-1 encoding to store the data. If non Basic Multilingual Plane characters are used in a Python Unicode string, the internal representation may be stored as UCS2 or UCS4.</p>
+<p>In each of these cases, the internal representation uses the same number of bytes for each code point. This allows efficient indexing into a Python Unicode string, but indexing into a Python Unicode string will only return a valid code point and not a grapheme. The <code>length</code> of a Unicode string is defined as the number of code points in the string.</p>
+<p>As an example, let’s take this emoji: 🤦🏼‍♂️ <span class="citation" data-cites="hsivonen">[<a href="#ref-hsivonen" role="doc-biblioref">1</a>]</span>. This emoji actually consists of 5 code points<span><label for="mn-2" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-2" class="margin-toggle"/><span class="marginnote">We can view this breakdown using <a href="https://r12a.github.io/uniview/?charlist=%F0%9F%A4%A6%F0%9F%8F%BC%E2%80%8D%E2%99%82%EF%B8%8F" target="_blank">uniview</a>. In <code>vim</code>, we can use <code>:UnicodeName</code>.</span></span>:</p>
+<ul>
+<li>🤦 : U+1F926 FACE PALM</li>
+<li><span>🏼</span> : U+1F3FC EMOJI MODIFIER FITZPATRICK TYPE-3</li>
+<li><span>‍</span>: U+200D ZERO WIDTH JOINER</li>
+<li>♂ : U+2642 MALE SIGN (Ml)</li>
+<li><span> ️</span>: U+FE0F VARIATION SELECTOR-16</li>
+</ul>
+<p>In Python, a string that contains just this emoji has length equal to 5.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>Python <span class="dv">3</span>.<span class="fl">7.6</span> (default, Jan  <span class="dv">8</span> <span class="dv">2020</span>, <span class="dv">13</span>:<span class="dv">42</span>:<span class="dv">34</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>Type <span class="st">&#39;copyright&#39;</span>, <span class="st">&#39;credits&#39;</span> <span class="kw">or</span> <span class="st">&#39;license&#39;</span> <span class="cf">for</span> more information</span>
+<span id="cb3-3"><a href="#cb3-3"></a>IPython <span class="dv">7</span>.<span class="fl">16.1</span> <span class="op">--</span> An enhanced Interactive Python. Type <span class="st">&#39;?&#39;</span> <span class="cf">for</span> <span class="bu">help</span>.</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>In [<span class="dv">1</span>]: s <span class="op">=</span> <span class="st">&quot;🤦🏼‍♂️&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a>In [<span class="dv">2</span>]: s</span>
+<span id="cb3-8"><a href="#cb3-8"></a>Out[<span class="dv">2</span>]: <span class="st">&#39;🤦🏼</span><span class="ch">\u200d</span><span class="st">♂️&#39;</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>In [<span class="dv">3</span>]: <span class="bu">print</span>(s)</span>
+<span id="cb3-11"><a href="#cb3-11"></a>🤦🏼‍♂️</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>In [<span class="dv">4</span>]: <span class="bu">len</span>(s)</span>
+<span id="cb3-14"><a href="#cb3-14"></a>Out[<span class="dv">4</span>]: <span class="dv">5</span></span></code></pre></div>
+<p>If we want to keep a Python file pure ASCII but want to use Unicode in string literals, we can use the <code>\U</code> escape sequence.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>In [<span class="dv">5</span>]: s <span class="op">=</span> <span class="st">&#39;</span><span class="ch">\U0001F926\U0001F3FC\u200D\u2642\uFE0F</span><span class="st">&#39;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>In [<span class="dv">6</span>]: <span class="bu">print</span>(s)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>🤦🏼‍♂️</span></code></pre></div>
+<p>As mentioned earlier, indexing into a Python Unicode string gives us the code point at that location.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2"></a>In [<span class="dv">6</span>]: s[<span class="dv">0</span>]</span>
+<span id="cb5-3"><a href="#cb5-3"></a>Out[<span class="dv">6</span>]: <span class="st">&#39;🤦&#39;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>In [<span class="dv">7</span>]: s[<span class="dv">1</span>]</span>
+<span id="cb5-6"><a href="#cb5-6"></a>Out[<span class="dv">7</span>]: <span class="st">&#39;🏼&#39;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a>In [<span class="dv">8</span>]: s[<span class="dv">2</span>]</span>
+<span id="cb5-9"><a href="#cb5-9"></a>Out[<span class="dv">8</span>]: <span class="st">&#39;</span><span class="ch">\u200d</span><span class="st">&#39;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a>In [<span class="dv">9</span>]: s[<span class="dv">3</span>]</span>
+<span id="cb5-12"><a href="#cb5-12"></a>Out[<span class="dv">9</span>]: <span class="st">&#39;♂&#39;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a>In [<span class="dv">10</span>]: s[<span class="dv">4</span>] <span class="co"># this may look like an empty string but it is not.</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>Out[<span class="dv">10</span>]: <span class="st">&#39;️&#39;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>In [<span class="dv">11</span>]: <span class="bu">len</span>(s[<span class="dv">4</span>]), s[<span class="dv">4</span>].encode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb5-18"><a href="#cb5-18"></a>Out[<span class="dv">11</span>]: (<span class="dv">1</span>, b<span class="st">&#39;</span><span class="ch">\xef\xb8\x8f</span><span class="st">&#39;</span>)</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>In [<span class="dv">12</span>]: <span class="bu">len</span>(<span class="st">&#39;&#39;</span>), <span class="st">&#39;&#39;</span>.encode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb5-21"><a href="#cb5-21"></a>Out[<span class="dv">12</span>]: (<span class="dv">0</span>, b<span class="st">&#39;&#39;</span>)</span>
+<span id="cb5-22"><a href="#cb5-22"></a></span>
+<span id="cb5-23"><a href="#cb5-23"></a>In [<span class="dv">13</span>]: s[<span class="dv">5</span>]</span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="op">---------------------------------------------------------------------------</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="pp">IndexError</span>                                Traceback (most recent call last)</span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="op">&lt;</span>ipython<span class="op">-</span><span class="bu">input</span><span class="dv">-42</span><span class="op">-</span>b5dece75d686<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="op">----&gt;</span> <span class="dv">1</span> s[<span class="dv">5</span>]</span>
+<span id="cb5-28"><a href="#cb5-28"></a></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="pp">IndexError</span>: string index out of <span class="bu">range</span></span></code></pre></div>
+<p>Iterating over a Python string gives us the code points as well.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>In [<span class="dv">14</span>]: [c <span class="cf">for</span> c <span class="kw">in</span> s]</span>
+<span id="cb6-2"><a href="#cb6-2"></a>Out[<span class="dv">14</span>]: [<span class="st">&#39;🤦&#39;</span>, <span class="st">&#39;🏼&#39;</span>, <span class="st">&#39;</span><span class="ch">\u200d</span><span class="st">&#39;</span>, <span class="st">&#39;♂&#39;</span>, <span class="st">&#39;️&#39;</span>]</span></code></pre></div>
+<p>However, in practice, indexing into a string may not be what we want or may not be useful. More often, we are either interested in:</p>
+<ol type="1">
+<li>indexing into the byte string representation or</li>
+<li>indexing into the graphemes.</li>
+</ol>
+<p>We can use the <code>s.encode('utf-8')</code> function to get a Python byte string representation of the Python unicode string in <code>s</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>In [<span class="dv">15</span>]: s</span>
+<span id="cb7-2"><a href="#cb7-2"></a>Out[<span class="dv">15</span>]: <span class="st">&#39;🤦🏼</span><span class="ch">\u200d</span><span class="st">♂️&#39;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>In [<span class="dv">16</span>]: <span class="bu">len</span>(s)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>Out[<span class="dv">16</span>]: <span class="dv">5</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a>In [<span class="dv">17</span>]: <span class="bu">type</span>(s)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>Out[<span class="dv">17</span>]: <span class="bu">str</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a>In [<span class="dv">18</span>]: s.encode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb7-11"><a href="#cb7-11"></a>Out[<span class="dv">18</span>]: b<span class="st">&#39;</span><span class="ch">\xf0\x9f\xa4\xa6\xf0\x9f\x8f\xbc\xe2\x80\x8d\xe2\x99\x82\xef\xb8\x8f</span><span class="st">&#39;</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a>In [<span class="dv">19</span>]: <span class="bu">len</span>(s.encode(<span class="st">&quot;utf-8&quot;</span>))</span>
+<span id="cb7-14"><a href="#cb7-14"></a>Out[<span class="dv">19</span>]: <span class="dv">17</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a>In [<span class="dv">20</span>]: <span class="bu">type</span>(s.encode(<span class="st">&quot;utf-8&quot;</span>))</span>
+<span id="cb7-17"><a href="#cb7-17"></a>Out[<span class="dv">20</span>]: <span class="bu">bytes</span></span></code></pre></div>
+<p>If we are interested in the number of graphemes, we can use the <a href="https://pypi.org/project/grapheme/" target="_blank"><code>grapheme</code></a> package.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>In [<span class="dv">21</span>]: <span class="im">import</span> grapheme</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>In [<span class="dv">22</span>]: grapheme.length(s)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>Out[<span class="dv">22</span>]: <span class="dv">1</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a>In [<span class="dv">23</span>]: s <span class="op">=</span> s <span class="op">+</span> <span class="st">&quot; Why is Unicode so complicated?&quot;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>In [<span class="dv">24</span>]: grapheme.<span class="bu">slice</span>(s, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>Out[<span class="dv">24</span>]: <span class="st">&#39;🤦🏼</span><span class="ch">\u200d</span><span class="st">♂️&#39;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a>In [<span class="dv">25</span>]: grapheme.<span class="bu">slice</span>(s, <span class="dv">2</span>)</span>
+<span id="cb8-12"><a href="#cb8-12"></a>Out[<span class="dv">25</span>]: <span class="st">&#39;Why is Unicode so complicated?&#39;</span></span></code></pre></div>
+<p>For historical reasons, Unicode allows the same set of characters to be represented by different sequences of code points.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>In [<span class="dv">26</span>]: single_char <span class="op">=</span> <span class="st">&#39;ê&#39;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    ...: multiple_chars <span class="op">=</span> <span class="st">&#39;</span><span class="ch">\N{LATIN SMALL LETTER E}\N{COMBINING CIRCUMFLEX ACCENT}</span><span class="st">&#39;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>In [<span class="dv">27</span>]: single_char</span>
+<span id="cb9-5"><a href="#cb9-5"></a>Out[<span class="dv">27</span>]: <span class="st">&#39;ê&#39;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>In [<span class="dv">28</span>]: multiple_chars</span>
+<span id="cb9-8"><a href="#cb9-8"></a>Out[<span class="dv">28</span>]: <span class="st">&#39;ê&#39;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a>In [<span class="dv">29</span>]: <span class="bu">len</span>(single_char)</span>
+<span id="cb9-11"><a href="#cb9-11"></a>Out[<span class="dv">29</span>]: <span class="dv">1</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a></span>
+<span id="cb9-13"><a href="#cb9-13"></a>In [<span class="dv">30</span>]: <span class="bu">len</span>(multiple_chars)</span>
+<span id="cb9-14"><a href="#cb9-14"></a>Out[<span class="dv">30</span>]: <span class="dv">2</span></span></code></pre></div>
+<p>We can use the built in standard library <code>unicodedata</code> to normalize <a href="https://docs.python.org/3/howto/unicode.html#comparing-strings" target="_blank">Python Unicode strings</a>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>In [<span class="dv">31</span>]: <span class="im">import</span> unicodedata</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>In [<span class="dv">32</span>]: <span class="bu">len</span>(unicodedata.normalize(<span class="st">&quot;NFD&quot;</span>, single_char))</span>
+<span id="cb10-4"><a href="#cb10-4"></a>Out[<span class="dv">32</span>]: <span class="dv">2</span></span></code></pre></div>
+<p>It is best practice to add the following lines to the top of your Python file that you expect to run as scripts.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">#!/usr/bin/env/python</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># -*- coding: utf-8 -*-</span></span></code></pre></div>
+<p>If your Python files are part of a package, just adding the second line is sufficient. I recommend using <a href="using-pre-commit-hooks.html">pre-commit</a> hooks to ensure that <a href="https://github.com/pre-commit/pre-commit-hooks/blob/31d41ff29115a87808277ee0ec23999b17d5b583/pre_commit_hooks/fix_encoding_pragma.py" target="_blank">the encoding pragma of python files are fixed</a> before making a git commit.</p>
+</section>
+<section id="julia" class="level1">
+<h1><a href="#julia">#</a> Julia</h1>
+<p>Let’s take a look at how Julia handles strings.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a>               <span class="ex">_</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>   <span class="ex">_</span>       _ _(_)<span class="ex">_</span>     <span class="kw">|</span>  <span class="ex">Documentation</span>: https://docs.julialang.org</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span>     <span class="kw">|</span> <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span> <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span>    <span class="kw">|</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>   <span class="ex">_</span> _   _<span class="kw">|</span> <span class="kw">|</span><span class="ex">_</span>  __ _   <span class="kw">|</span>  <span class="ex">Type</span> <span class="st">&quot;?&quot;</span> for help, <span class="st">&quot;]?&quot;</span> for Pkg help.</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span><span class="ex">/</span> _<span class="kw">`</span> <span class="kw">|</span>  <span class="kw">|</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span><span class="ex">_</span><span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">(</span><span class="ex">_</span><span class="kw">|</span> <span class="kw">|</span>  <span class="kw">|</span>  <span class="ex">Version</span> 1.5.0 (2020-08-01<span class="kw">)</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a> <span class="ex">_/</span> <span class="kw">|</span>\<span class="ex">__</span><span class="st">&#39;_|_|_|\__&#39;</span>_<span class="kw">|</span>  <span class="kw">|</span>  <span class="ex">Official</span> https://julialang.org/ release</span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">|</span><span class="ex">__/</span>                   <span class="kw">|</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a>julia&gt; s = <span class="st">&quot;🤦🏼‍♂️&quot;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">&quot;🤦🏼\u200d♂️&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a>julia&gt; println(s)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>🤦🏼‍♂️</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>julia&gt; length(s)</span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="fl">5</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a></span>
+<span id="cb13-10"><a href="#cb13-10"></a>julia&gt; ncodeunits(s)</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="fl">17</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a></span>
+<span id="cb13-13"><a href="#cb13-13"></a>julia&gt; codeunit(s)</span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="dt">UInt8</span></span></code></pre></div>
+<p>Printing the length of the string in Julia returns <code>5</code>. As we saw earlier, this is the number of code points in the unicode string.</p>
+<p>Julia <code>String</code> literals are encoded using the UTF-8 encoding. In Python, the indexing into a string would return the code point at the string. In Julia, indexing into a string refers to code units<span><label for="sn-3" class="sidenote-number margin-toggle"></label><input type="checkbox" id="sn-3" class="margin-toggle"/><span class="sidenote"><a href="https://unicode.org/glossary/#code_unit" class="uri" target="_blank">https://unicode.org/glossary/#code_unit</a></span></span>, and for the default <code>String</code> this returns the byte as a <code>Char</code> type.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1"></a>julia&gt; s[<span class="fl">1</span>]</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ch">&#39;🤦&#39;</span>: Unicode U+<span class="fl">1</span>F926 (category So: <span class="dt">Symbol</span>, other)</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a>julia&gt; typeof(s[<span class="fl">1</span>])</span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="dt">Char</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a>julia&gt; s[<span class="fl">2</span>]</span>
+<span id="cb14-8"><a href="#cb14-8"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">2</span>)</span>
+<span id="cb14-9"><a href="#cb14-9"></a>Stacktrace:</span>
+<span id="cb14-10"><a href="#cb14-10"></a> [<span class="fl">1</span>] string_index_err(::<span class="dt">String</span>, ::<span class="dt">Int64</span>) at ./strings/string.jl:<span class="fl">12</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a> [<span class="fl">2</span>] getindex_continued(::<span class="dt">String</span>, ::<span class="dt">Int64</span>, ::<span class="dt">UInt32</span>) at ./strings/string.jl:<span class="fl">220</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a> [<span class="fl">3</span>] getindex(::<span class="dt">String</span>, ::<span class="dt">Int64</span>) at ./strings/string.jl:<span class="fl">213</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a> [<span class="fl">4</span>] top-level scope at REPL[<span class="fl">12</span>]:<span class="fl">1</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a></span>
+<span id="cb14-15"><a href="#cb14-15"></a>julia&gt; s[<span class="fl">3</span>]</span>
+<span id="cb14-16"><a href="#cb14-16"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">3</span>)</span>
+<span id="cb14-17"><a href="#cb14-17"></a>Stacktrace:</span>
+<span id="cb14-18"><a href="#cb14-18"></a>[...]</span>
+<span id="cb14-19"><a href="#cb14-19"></a></span>
+<span id="cb14-20"><a href="#cb14-20"></a>julia&gt; s[<span class="fl">4</span>]</span>
+<span id="cb14-21"><a href="#cb14-21"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">4</span>)</span>
+<span id="cb14-22"><a href="#cb14-22"></a>Stacktrace:</span>
+<span id="cb14-23"><a href="#cb14-23"></a>[...]</span>
+<span id="cb14-24"><a href="#cb14-24"></a></span>
+<span id="cb14-25"><a href="#cb14-25"></a>julia&gt; s[<span class="fl">5</span>]</span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="ch">&#39;🏼&#39;</span>: Unicode U+<span class="fl">1</span>F3FC (category Sk: <span class="dt">Symbol</span>, modifier)</span>
+<span id="cb14-27"><a href="#cb14-27"></a></span>
+<span id="cb14-28"><a href="#cb14-28"></a>julia&gt; s[<span class="fl">6</span>]</span>
+<span id="cb14-29"><a href="#cb14-29"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">6</span>)</span>
+<span id="cb14-30"><a href="#cb14-30"></a>Stacktrace:</span>
+<span id="cb14-31"><a href="#cb14-31"></a>[...]</span>
+<span id="cb14-32"><a href="#cb14-32"></a></span>
+<span id="cb14-33"><a href="#cb14-33"></a>julia&gt; s[<span class="fl">7</span>]</span>
+<span id="cb14-34"><a href="#cb14-34"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">7</span>)</span>
+<span id="cb14-35"><a href="#cb14-35"></a>Stacktrace:</span>
+<span id="cb14-36"><a href="#cb14-36"></a>[...]</span>
+<span id="cb14-37"><a href="#cb14-37"></a></span>
+<span id="cb14-38"><a href="#cb14-38"></a>julia&gt; s[<span class="fl">8</span>]</span>
+<span id="cb14-39"><a href="#cb14-39"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">8</span>)</span>
+<span id="cb14-40"><a href="#cb14-40"></a>Stacktrace:</span>
+<span id="cb14-41"><a href="#cb14-41"></a>[...]</span>
+<span id="cb14-42"><a href="#cb14-42"></a></span>
+<span id="cb14-43"><a href="#cb14-43"></a>julia&gt; s[<span class="fl">9</span>]</span>
+<span id="cb14-44"><a href="#cb14-44"></a><span class="ch">&#39;\u200d&#39;</span>: Unicode U+<span class="fl">200</span>D (category Cf: Other, format)</span>
+<span id="cb14-45"><a href="#cb14-45"></a></span>
+<span id="cb14-46"><a href="#cb14-46"></a>julia&gt; s[<span class="fl">10</span>]</span>
+<span id="cb14-47"><a href="#cb14-47"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">10</span>)</span>
+<span id="cb14-48"><a href="#cb14-48"></a>Stacktrace:</span>
+<span id="cb14-49"><a href="#cb14-49"></a>[...]</span>
+<span id="cb14-50"><a href="#cb14-50"></a></span>
+<span id="cb14-51"><a href="#cb14-51"></a>julia&gt; s[<span class="fl">11</span>]</span>
+<span id="cb14-52"><a href="#cb14-52"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">11</span>)</span>
+<span id="cb14-53"><a href="#cb14-53"></a>Stacktrace:</span>
+<span id="cb14-54"><a href="#cb14-54"></a>[...]</span>
+<span id="cb14-55"><a href="#cb14-55"></a></span>
+<span id="cb14-56"><a href="#cb14-56"></a>julia&gt; s[<span class="fl">12</span>]</span>
+<span id="cb14-57"><a href="#cb14-57"></a><span class="ch">&#39;♂&#39;</span>: Unicode U+<span class="fl">2642</span> (category So: <span class="dt">Symbol</span>, other)</span>
+<span id="cb14-58"><a href="#cb14-58"></a></span>
+<span id="cb14-59"><a href="#cb14-59"></a>julia&gt; s[<span class="fl">13</span>]</span>
+<span id="cb14-60"><a href="#cb14-60"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">13</span>)</span>
+<span id="cb14-61"><a href="#cb14-61"></a>Stacktrace:</span>
+<span id="cb14-62"><a href="#cb14-62"></a>[...]</span>
+<span id="cb14-63"><a href="#cb14-63"></a></span>
+<span id="cb14-64"><a href="#cb14-64"></a>julia&gt; s[<span class="fl">14</span>]</span>
+<span id="cb14-65"><a href="#cb14-65"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">14</span>)</span>
+<span id="cb14-66"><a href="#cb14-66"></a>Stacktrace:</span>
+<span id="cb14-67"><a href="#cb14-67"></a>[...]</span>
+<span id="cb14-68"><a href="#cb14-68"></a></span>
+<span id="cb14-69"><a href="#cb14-69"></a>julia&gt; s[<span class="fl">15</span>]</span>
+<span id="cb14-70"><a href="#cb14-70"></a><span class="ch">&#39;️&#39;</span>: Unicode U+FE0F (category Mn: Mark, nonspacing)</span>
+<span id="cb14-71"><a href="#cb14-71"></a></span>
+<span id="cb14-72"><a href="#cb14-72"></a>julia&gt; s[<span class="fl">16</span>]</span>
+<span id="cb14-73"><a href="#cb14-73"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">16</span>)</span>
+<span id="cb14-74"><a href="#cb14-74"></a>Stacktrace:</span>
+<span id="cb14-75"><a href="#cb14-75"></a>[...]</span>
+<span id="cb14-76"><a href="#cb14-76"></a></span>
+<span id="cb14-77"><a href="#cb14-77"></a>julia&gt; s[<span class="fl">17</span>]</span>
+<span id="cb14-78"><a href="#cb14-78"></a>ERROR: StringIndexError(<span class="st">&quot;🤦🏼\u200d♂️&quot;</span>, <span class="fl">17</span>)</span>
+<span id="cb14-79"><a href="#cb14-79"></a>Stacktrace:</span>
+<span id="cb14-80"><a href="#cb14-80"></a>[...]</span>
+<span id="cb14-81"><a href="#cb14-81"></a></span>
+<span id="cb14-82"><a href="#cb14-82"></a>julia&gt; s[<span class="fl">18</span>]</span>
+<span id="cb14-83"><a href="#cb14-83"></a>ERROR: BoundsError: attempt to access <span class="dt">String</span></span>
+<span id="cb14-84"><a href="#cb14-84"></a>  at index [<span class="fl">18</span>]</span>
+<span id="cb14-85"><a href="#cb14-85"></a>Stacktrace:</span>
+<span id="cb14-86"><a href="#cb14-86"></a>[...]</span></code></pre></div>
+<p>If we want each code point in a Julia <code>String</code>, we can use <code>eachindex</code><span><label for="mn-3" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-3" class="margin-toggle"/><span class="marginnote">See the Julia manual strings documentation for more information: <a href="https://docs.julialang.org/en/v1/manual/strings/" class="uri" target="_blank">https://docs.julialang.org/en/v1/manual/strings/</a></span></span>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a>julia&gt; [s[i] <span class="kw">for</span> i <span class="kw">in</span> eachindex(s)]</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fl">5</span>-element <span class="dt">Array</span>{<span class="dt">Char</span>,<span class="fl">1</span>}:</span>
+<span id="cb15-3"><a href="#cb15-3"></a> <span class="ch">&#39;🤦&#39;</span>: Unicode U+<span class="fl">1</span>F926 (category So: <span class="dt">Symbol</span>, other)</span>
+<span id="cb15-4"><a href="#cb15-4"></a> <span class="ch">&#39;🏼&#39;</span>: Unicode U+<span class="fl">1</span>F3FC (category Sk: <span class="dt">Symbol</span>, modifier)</span>
+<span id="cb15-5"><a href="#cb15-5"></a> <span class="ch">&#39;\u200d&#39;</span>: Unicode U+<span class="fl">200</span>D (category Cf: Other, format)</span>
+<span id="cb15-6"><a href="#cb15-6"></a> <span class="ch">&#39;♂&#39;</span>: Unicode U+<span class="fl">2642</span> (category So: <span class="dt">Symbol</span>, other)</span>
+<span id="cb15-7"><a href="#cb15-7"></a> <span class="ch">&#39;️&#39;</span>: Unicode U+FE0F (category Mn: Mark, nonspacing)</span></code></pre></div>
+<p>And finally, we can use the <code>Unicode</code> module that is built in to the standard library to get the number of graphemes.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2"></a>julia&gt; using Unicode</span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a>julia&gt; graphemes(s)</span>
+<span id="cb16-5"><a href="#cb16-5"></a>length-<span class="fl">1</span> GraphemeIterator{<span class="dt">String</span>} <span class="kw">for</span> <span class="st">&quot;🤦🏼‍♂️&quot;</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a>julia&gt; length(graphemes(s))</span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="fl">1</span></span></code></pre></div>
+<p>If we wish to encode a Julia string as UTF-8<span><label for="mn-4" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-4" class="margin-toggle"/><span class="marginnote">As of Julia v1.5.0, only conversion to/from UTF-8 is currently supported: <a href="https://docs.julialang.org/en/v1/base/strings/#Base.transcode" class="uri" target="_blank">https://docs.julialang.org/en/v1/base/strings/#Base.transcode</a></span></span>, we can use the following:</p>
+<pre><code>julia&gt; transcode(UInt8, s)
+17-element Base.CodeUnits{UInt8,String}:
+ 0xf0
+ 0x9f
+ 0xa4
+ 0xa6
+ 0xf0
+ 0x9f
+ 0x8f
+ 0xbc
+ 0xe2
+ 0x80
+ 0x8d
+ 0xe2
+ 0x99
+ 0x82
+ 0xef
+ 0xb8
+ 0x8f</code></pre>
+</section>
+<section id="rust" class="level1">
+<h1><a href="#rust">#</a> Rust</h1>
+<p>Let’s also take a look at rust. We can create a simple <code>main.rs</code> file:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">// main.rs</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="kw">let</span> s = <span class="st">&quot;🤦🏼‍♂️&quot;</span>;</span>
+<span id="cb18-6"><a href="#cb18-6"></a></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span>, s);</span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9"></a>    <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span>, s);</span>
+<span id="cb18-10"><a href="#cb18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a>    <span class="pp">dbg!</span>(s);</span>
+<span id="cb18-12"><a href="#cb18-12"></a></span>
+<span id="cb18-13"><a href="#cb18-13"></a>    <span class="pp">dbg!</span>(s.len());</span>
+<span id="cb18-14"><a href="#cb18-14"></a></span>
+<span id="cb18-15"><a href="#cb18-15"></a>    <span class="kw">for</span> (i, b) <span class="kw">in</span> s.bytes().enumerate() <span class="op">{</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a>        <span class="pp">println!</span>(<span class="st">&quot;s.bytes()[{}] = {:#x}&quot;</span>, i, b);</span>
+<span id="cb18-17"><a href="#cb18-17"></a>    <span class="op">}</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a></span>
+<span id="cb18-19"><a href="#cb18-19"></a>    <span class="pp">dbg!</span>(s.chars().count());</span>
+<span id="cb18-20"><a href="#cb18-20"></a></span>
+<span id="cb18-21"><a href="#cb18-21"></a>    <span class="kw">for</span> (i, c) <span class="kw">in</span> s.chars().enumerate() <span class="op">{</span></span>
+<span id="cb18-22"><a href="#cb18-22"></a>        <span class="pp">println!</span>(<span class="st">&quot;s.chars()[{}] = {:?}&quot;</span>, i, c);</span>
+<span id="cb18-23"><a href="#cb18-23"></a>    <span class="op">}</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a></span>
+<span id="cb18-25"><a href="#cb18-25"></a><span class="op">}</span></span></code></pre></div>
+<p>And compile and run it like so:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a>$ <span class="ex">rustc</span> main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>🤦🏼‍♂️</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="st">&quot;🤦🏼\u{200d}♂\u{fe0f}&quot;</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>[<span class="ex">main.rs</span>:11] s = <span class="st">&quot;🤦🏼\u{200d}♂\u{fe0f}&quot;</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>[<span class="ex">main.rs</span>:13] s.len() = <span class="ex">17</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="ex">s.bytes</span>()[<span class="ex">0</span>] = 0xf0</span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="ex">s.bytes</span>()[<span class="ex">1</span>] = 0x9f</span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="ex">s.bytes</span>()[<span class="ex">2</span>] = 0xa4</span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="ex">s.bytes</span>()[<span class="ex">3</span>] = 0xa6</span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="ex">s.bytes</span>()[<span class="ex">4</span>] = 0xf0</span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="ex">s.bytes</span>()[<span class="ex">5</span>] = 0x9f</span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="ex">s.bytes</span>()[<span class="ex">6</span>] = 0x8f</span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="ex">s.bytes</span>()[<span class="ex">7</span>] = 0xbc</span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="ex">s.bytes</span>()[<span class="ex">8</span>] = 0xe2</span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="ex">s.bytes</span>()[<span class="ex">9</span>] = 0x80</span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="ex">s.bytes</span>()[<span class="ex">10</span>] = 0x8d</span>
+<span id="cb19-17"><a href="#cb19-17"></a><span class="ex">s.bytes</span>()[<span class="ex">11</span>] = 0xe2</span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="ex">s.bytes</span>()[<span class="ex">12</span>] = 0x99</span>
+<span id="cb19-19"><a href="#cb19-19"></a><span class="ex">s.bytes</span>()[<span class="ex">13</span>] = 0x82</span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="ex">s.bytes</span>()[<span class="ex">14</span>] = 0xef</span>
+<span id="cb19-21"><a href="#cb19-21"></a><span class="ex">s.bytes</span>()[<span class="ex">15</span>] = 0xb8</span>
+<span id="cb19-22"><a href="#cb19-22"></a><span class="ex">s.bytes</span>()[<span class="ex">16</span>] = 0x8f</span>
+<span id="cb19-23"><a href="#cb19-23"></a>[<span class="ex">main.rs</span>:19] s.chars()<span class="ex">.count</span>() = <span class="ex">5</span></span>
+<span id="cb19-24"><a href="#cb19-24"></a><span class="ex">s.chars</span>()[<span class="ex">0</span>] = <span class="st">&#39;🤦&#39;</span></span>
+<span id="cb19-25"><a href="#cb19-25"></a><span class="ex">s.chars</span>()[<span class="ex">1</span>] = <span class="st">&#39;🏼&#39;</span></span>
+<span id="cb19-26"><a href="#cb19-26"></a><span class="ex">s.chars</span>()[<span class="ex">2</span>] = <span class="st">&#39;\u{200d}&#39;</span></span>
+<span id="cb19-27"><a href="#cb19-27"></a><span class="ex">s.chars</span>()[<span class="ex">3</span>] = <span class="st">&#39;♂&#39;</span></span>
+<span id="cb19-28"><a href="#cb19-28"></a><span class="ex">s.chars</span>()[<span class="ex">4</span>] = <span class="st">&#39;\u{fe0f}&#39;</span></span></code></pre></div>
+<p>There are also additional crates such as <a href="https://github.com/unicode-rs/unicode-width/" target="_blank"><code>unicode-width</code></a> and <a href="https://unicode-rs.github.io/unicode-segmentation/unicode_segmentation/index.html" target="_blank"><code>unicode-segmentation</code></a>.</p>
+<p><code>unicode-width</code> helps determine how many column widths a grapheme will occupy based on the <a href="http://www.unicode.org/reports/tr11/" target="_blank">Unicode Standard Annex #11 rules</a>. For example <code>abc</code> occupies 3 columns but <code>写作业</code> occupies 6 columns but they are both 3 codepoints and 3 graphemes each.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">// main.rs</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">use</span> <span class="pp">unicode_width::</span>UnicodeWidthStr;</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">use</span> <span class="pp">unicode_segmentation::</span>UnicodeSegmentation;</span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="kw">let</span> s = <span class="st">&quot;abc&quot;</span>;</span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="pp">dbg!</span>(s);</span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="pp">dbg!</span>(s.len());</span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="pp">dbg!</span>(s.graphemes(<span class="cn">true</span>).count());</span>
+<span id="cb20-10"><a href="#cb20-10"></a>  <span class="pp">dbg!</span>(s.width());</span>
+<span id="cb20-11"><a href="#cb20-11"></a></span>
+<span id="cb20-12"><a href="#cb20-12"></a>  <span class="pp">println!</span>(<span class="st">&quot;&quot;</span>);</span>
+<span id="cb20-13"><a href="#cb20-13"></a></span>
+<span id="cb20-14"><a href="#cb20-14"></a>  <span class="kw">let</span> s = <span class="st">&quot;写作业&quot;</span>;</span>
+<span id="cb20-15"><a href="#cb20-15"></a>  <span class="pp">dbg!</span>(s);</span>
+<span id="cb20-16"><a href="#cb20-16"></a>  <span class="pp">dbg!</span>(s.len());</span>
+<span id="cb20-17"><a href="#cb20-17"></a>  <span class="pp">dbg!</span>(s.graphemes(<span class="cn">true</span>).count());</span>
+<span id="cb20-18"><a href="#cb20-18"></a>  <span class="pp">dbg!</span>(s.width());</span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a>$ <span class="ex">rustc</span> main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>[<span class="ex">src</span>/main.rs:<span class="ex">7</span>] s = <span class="st">&quot;abc&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>[<span class="ex">src</span>/main.rs:<span class="ex">8</span>] s.len() = <span class="ex">3</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>[<span class="ex">src</span>/main.rs:<span class="ex">9</span>] s.graphemes(true)<span class="ex">.count</span>() = <span class="ex">3</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>[<span class="ex">src</span>/main.rs:<span class="ex">10</span>] s.width() = <span class="ex">3</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a></span>
+<span id="cb21-7"><a href="#cb21-7"></a>[<span class="ex">src</span>/main.rs:<span class="ex">15</span>] s = <span class="st">&quot;写作业&quot;</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>[<span class="ex">src</span>/main.rs:<span class="ex">16</span>] s.len() = <span class="ex">9</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>[<span class="ex">src</span>/main.rs:<span class="ex">17</span>] s.graphemes(true)<span class="ex">.count</span>() = <span class="ex">3</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>[<span class="ex">src</span>/main.rs:<span class="ex">18</span>] s.width() = <span class="ex">6</span></span></code></pre></div>
+<p><code>unicode-segmentation</code> helps with determining the number of graphemes in a string.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">// main.rs</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">use</span> <span class="pp">unicode_segmentation::</span>UnicodeSegmentation;</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a>    <span class="kw">let</span> s = <span class="st">&quot;🤦🏼‍♂️&quot;</span>;</span>
+<span id="cb22-7"><a href="#cb22-7"></a></span>
+<span id="cb22-8"><a href="#cb22-8"></a>    <span class="pp">dbg!</span>(s.len());</span>
+<span id="cb22-9"><a href="#cb22-9"></a>    <span class="pp">dbg!</span>(s.graphemes(<span class="cn">true</span>).count());</span>
+<span id="cb22-10"><a href="#cb22-10"></a></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a>$ <span class="ex">rustc</span> main.rs <span class="kw">&amp;&amp;</span> <span class="ex">./main</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>[<span class="ex">src</span>/main.rs:<span class="ex">8</span>] s.len() = <span class="ex">17</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>[<span class="ex">src</span>/main.rs:<span class="ex">9</span>] s.graphemes(true)<span class="ex">.count</span>() = <span class="ex">1</span></span></code></pre></div>
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"><a href="#bibliography">#</a> References</h1>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-hsivonen">
+<p>[1] “It’s Not Wrong that ‘🤦🏼‍♂️’.length == 7.” [Online]. Available: <a href="https://hsivonen.fi/string-length/" target="_blank">https://hsivonen.fi/string-length/</a>.</p>
+</div>
+<div id="ref-fasterthanlime">
+<p>[2] “Working with strings in Rust.” [Online]. Available: <a href="https://fasterthanli.me/articles/working-with-strings-in-rust" target="_blank">https://fasterthanli.me/articles/working-with-strings-in-rust</a>.</p>
+</div>
+<div id="ref-manishearth1">
+<p>[3] “Let’s Stop Ascribing Meaning to Code Points.” [Online]. Available: <a href="https://manishearth.github.io/blog/2017/01/14/stop-ascribing-meaning-to-unicode-code-points/" target="_blank">https://manishearth.github.io/blog/2017/01/14/stop-ascribing-meaning-to-unicode-code-points/</a>.</p>
+</div>
+<div id="ref-manishearth2">
+<p>[4] “Breaking Our Latin-1 Assumptions.” [Online]. Available: <a href="https://manishearth.github.io/blog/2017/01/15/breaking-our-latin-1-assumptions/" target="_blank">https://manishearth.github.io/blog/2017/01/15/breaking-our-latin-1-assumptions/</a>.</p>
+</div>
+<div id="ref-joelonsoftware">
+<p>[5] “The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!).” [Online]. Available: <a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/" target="_blank">https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/</a>.</p>
+</div>
+<div id="ref-eevee">
+<p>[6] “Dark corners of Unicode.” [Online]. Available: <a href="https://eev.ee/blog/2015/09/12/dark-corners-of-unicode/" target="_blank">https://eev.ee/blog/2015/09/12/dark-corners-of-unicode/</a>.</p>
+</div>
+<div id="ref-blist">
+<p>[7] “How Python does Unicode.” [Online]. Available: <a href="https://www.b-list.org/weblog/2017/sep/05/how-python-does-unicode/" target="_blank">https://www.b-list.org/weblog/2017/sep/05/how-python-does-unicode/</a>.</p>
+</div>
+</div>
+</section>
+</section>
+<section>
+
+    <div class="kudo-container" style="display: none" data-post-id="my-unicode-cheat-sheet">
+        <button class="kudo-button" aria-label="Give this post a kudo">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="kudo-heart" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <path class="kudo-heart-path" id="kudo-heart-path" d="M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4   L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z" />
+          </svg>
+        </button>
+        <div class="kudo-count-message">
+          <span class="kudo-count"></span> <span class="kudo-word"></span>
+        </div>
+        <div class="kudo-thanks">
+          <div class="kudo-thanks-heading">Thanks!</div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <opt-in-script src="https://utteranc.es/client.js"
+        repo="kdheepak/blog"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    <button class="comments-button">Show Comments</button>
+    </opt-in-script>
+</section>
+</article>
+<script>
+var figures =
+  Array.prototype.slice.call(document.getElementsByClassName("figure"),0)
+  .concat(
+    Array.prototype.slice.call(document.getElementsByTagName("figure"),0));
+
+for (var i = 0; i < figures.length; i++) {
+  var figure = figures[i];
+  var imgs = figure.getElementsByTagName("img");
+  if (imgs.length > 0) {
+    classes = imgs[0].classList;
+    for (var j = 0; j < classes.length; j++) {
+        if (classes[j] === "fullwidth") {
+            figure.classList.add(classes[j]);
+        }
+    }
+  }
+}
+</script>
+<footer>
+    <p>
+    <a rel="license noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="This work is licensed under a Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </p>
+</footer>
+<script data-goatcounter="https://kdheepak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/vim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/julia.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/nim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/latex.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/matlab.min.js"></script>
+<script>
+    document.querySelectorAll('pre:not([class])').forEach(function($) {
+        $.className = 'no-highlight';
+    });
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="/js/opt-in-script.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC_lk4_TkwwjzgthwVBR0JXrDRQMH2mDH8",
+    authDomain: "blog-4ac79.firebaseapp.com",
+    databaseURL: "https://blog-4ac79.firebaseio.com",
+    projectId: "blog-4ac79",
+    storageBucket: "blog-4ac79.appspot.com",
+    messagingSenderId: "57327928077",
+    appId: "1:57327928077:web:5acf8eaf01bcb850d76644",
+    measurementId: "G-YKT2PQSD10"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="/js/kudos.js"></script>
+</body>
+</html>

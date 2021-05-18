@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U" />
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Tasker in combination with Python with SL4A can be used to calculate information about events from Google Calendar. This is very similar to what Google Now does but more customizable …">
+  <meta property="og:url" content="https://blog.kdheepak.com/tasker-and-google-maps.html"/>
+  <meta property="og:title" content="Tasker and Google Maps"/>
+  <meta property="og:description" content="Tasker in combination with Python with SL4A can be used to calculate information about events from Google Calendar. This is very similar to what Google Now does but more customizable …"/>
+  <meta property="og:published_time" content=""/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://blog.kdheepak.com/rss.xml"/>
+  <title>Tasker and Google Maps</title>
+  <style>code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/css/latex.css"/>
+  <link rel="stylesheet" href="/css/tufte-extra.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/github.css"/>
+  <link rel="stylesheet" href="/css/pandoc.css"/>
+  <link rel="stylesheet" href="/css/tufte.css"/>
+  <link rel="stylesheet" href="/css/kudos.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/custom.css"/>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+<header>
+<h1 class="title">
+    <a class="home" href="https://kdheepak.com">~</a> /
+        <a class="bloghome" href="/">blog</a> /
+        Tasker and Google Maps
+</h1>
+<p class="subtitle sourceurl">
+ <a class="sourceurl" target="_blank" href="https://github.com/kdheepak/blog/blob/b2962a1c3e5008f95b6e50937f42ae70cb9cd47a/content/03-tasker-google-maps.md">
+    Sat, Dec 13, 2014
+ </a>
+</p>
+</header>
+<section>
+<section id="android-projects" class="level1">
+<h1><a href="#android-projects">#</a> Android Projects</h1>
+<p>I’ve shared this on <a href="https://unleashthephones.com/2013/06/03/tasker-tutorial-integrating-google-calendar-and-google-directions-using-transit/" target="_blank">UnleashThePhones</a> a while back as well. This is a small tutorial on how to use Python with SL4A.</p>
+<figure>
+<img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/5.png" class="aligncenter" width="270" height="480" alt="" />
+</figure>
+<p>When Google Now first came out, it would tell you which bus you could take at what time to get to your meeting or event on time based on the location and time information available in Google Calendar. It’s every student’s dream, especially in countries like the United States or Singapore, where transit navigation is very accurate.</p>
+<p>I loved the idea, but I wanted it to be ever so slightly better. For example, I wanted my phone to inform me well in advance at what time I should consider leaving home to get to the bus on time. I also wanted information on earlier and later buses, so I could have knowledge of my options, very similar to the way it shows in Google Directions.</p>
+<p>Enter Tasker. I have a profile set up, which responds to a Google Calendar event reminder. (Tasker requires accessibility access for this by the way.) All my events in Google Calendar have a reminder set to pop up one hour before the event. This triggers a python script that pulls the next event details from Google Calendar, strips and parses the necessary information. Using my current location, the directions to the location is fetched and parsed again for transit details. Tasker then displays this as a notification.</p>
+<figure>
+<img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/7.png" class="aligncenter" width="270" height="480" alt="" />
+</figure>
+<p>This is very similar to a thread found on XDA-Dev. The idea is based on the thread, but in the thread brandall decided to do everything in Tasker. While this is completely doable it made it a little complicated to debug. Also, the profiles attached in his thread require the calendar event to have the name ‘Meeting’ and also require a description to be entered. Again, not something you cannot do, but you will have to invest a significant amount of time in case you want to make any significant change.</p>
+<p>If you would like to setup something similar follow the steps below.</p>
+<ol type="1">
+<li><p>Install Tasker, SL4A and the Python intepreter.</p></li>
+<li><p>Paste the python script from the link here in the SL4A folder. This script has to be modified depending on what you want done. To use information from your Google Calendar, you need to add your private Google Calendar link to the script. I’ve written this to pull Transit details from a xml data, but you can theoretically do anything.</p></li>
+<li><p>Setup a tasker profile similar to what I have below.</p></li>
+</ol>
+<figure>
+<img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/1.png" class="aligncenter" width="270" height="480" alt="" />
+</figure>
+<ol start="4" type="1">
+<li>The Task that will be performed when this context is triggered is setup as below.</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/2.png" width="270" height="480" /><span style="text-align: center; line-height: 1.5em;"> </span><img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/3.png" width="270" height="480" /></p>
+<ol start="5" type="1">
+<li><p>The above task turns on GPS, finds your current location using GPS and NET, stores the location data in a file and runs the python script. The python script uses the location data written into the file along with your next calendar event information to find out transit details. This then calls the show route task.</p></li>
+<li><p>The show route is attached below.</p></li>
+</ol>
+<figure>
+<img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/4.png" class="aligncenter" width="270" height="480" alt="" />
+</figure>
+<ol start="7" type="1">
+<li>All you need to do now is create an event on your Calendar with location information and you are good to go!</li>
+</ol>
+<p>Here are some screenshots of what it looks like after you are done.</p>
+<p><img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/6.png" width="270" height="480" /> <img src="https://raw.githubusercontent.com/kdheepak/tasker_sl4a/master/Screenshots/7.png" width="270" height="480" /></p>
+<p>I’ve attached the xml from Tasker <a href="https://github.com/kdheepak/tasker_sl4a/blob/master/pyCode.py" target="_blank">here</a> so that it can be imported. Show Route and GetCalData. I’ve used Autonotification, a tasker plugin by joaomgcd to display the notification. You will need to use this if you want a button in the notification. This entire setup is currently in a primitive stage, I haven’t added any error handling or additional functionality but I intend to. I will update this post when I do that.</p>
+<p>BeautifulSoup is supported by SL4A in python, which can make it extremely easy to parse information. I haven’t used it in my script though, since mine was a very small program. But it is nice to know that is an option. Big shoutout to PocketTables for offering a world of useful information on Tasker. I found their posts to be extremely helpful. Tasker is an amazing application and is extremely powerful. It can allow for a world of customization.</p>
+<p>If you have any questions about this setup please do let me know.</p>
+</section>
+</section>
+<section>
+
+    <div class="kudo-container" style="display: none" data-post-id="tasker-and-google-maps">
+        <button class="kudo-button" aria-label="Give this post a kudo">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="kudo-heart" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <path class="kudo-heart-path" id="kudo-heart-path" d="M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4   L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z" />
+          </svg>
+        </button>
+        <div class="kudo-count-message">
+          <span class="kudo-count"></span> <span class="kudo-word"></span>
+        </div>
+        <div class="kudo-thanks">
+          <div class="kudo-thanks-heading">Thanks!</div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <opt-in-script src="https://utteranc.es/client.js"
+        repo="kdheepak/blog"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    <button class="comments-button">Show Comments</button>
+    </opt-in-script>
+</section>
+</article>
+<script>
+var figures =
+  Array.prototype.slice.call(document.getElementsByClassName("figure"),0)
+  .concat(
+    Array.prototype.slice.call(document.getElementsByTagName("figure"),0));
+
+for (var i = 0; i < figures.length; i++) {
+  var figure = figures[i];
+  var imgs = figure.getElementsByTagName("img");
+  if (imgs.length > 0) {
+    classes = imgs[0].classList;
+    for (var j = 0; j < classes.length; j++) {
+        if (classes[j] === "fullwidth") {
+            figure.classList.add(classes[j]);
+        }
+    }
+  }
+}
+</script>
+<footer>
+    <p>
+    <a rel="license noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="This work is licensed under a Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </p>
+</footer>
+<script data-goatcounter="https://kdheepak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/vim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/julia.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/nim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/latex.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/matlab.min.js"></script>
+<script>
+    document.querySelectorAll('pre:not([class])').forEach(function($) {
+        $.className = 'no-highlight';
+    });
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="/js/opt-in-script.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC_lk4_TkwwjzgthwVBR0JXrDRQMH2mDH8",
+    authDomain: "blog-4ac79.firebaseapp.com",
+    databaseURL: "https://blog-4ac79.firebaseio.com",
+    projectId: "blog-4ac79",
+    storageBucket: "blog-4ac79.appspot.com",
+    messagingSenderId: "57327928077",
+    appId: "1:57327928077:web:5acf8eaf01bcb850d76644",
+    measurementId: "G-YKT2PQSD10"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="/js/kudos.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U" />
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="keywords" content="python, python2, python3">
+  <meta name="description" content="Some of my thoughts on the current state of Python 2 vs 3">
+  <meta property="og:url" content="https://blog.kdheepak.com/python-2-vs-3.html"/>
+  <meta property="og:title" content="Python 2 vs 3"/>
+  <meta property="og:description" content="Some of my thoughts on the current state of Python 2 vs 3"/>
+  <meta property="og:published_time" content=""/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://blog.kdheepak.com/rss.xml"/>
+  <title>Python 2 vs 3</title>
+  <style>code{white-space: pre;}</style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/css/latex.css"/>
+  <link rel="stylesheet" href="/css/tufte-extra.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/github.css"/>
+  <link rel="stylesheet" href="/css/pandoc.css"/>
+  <link rel="stylesheet" href="/css/tufte.css"/>
+  <link rel="stylesheet" href="/css/kudos.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/custom.css"/>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+<header>
+<h1 class="title">
+    <a class="home" href="https://kdheepak.com">~</a> /
+        <a class="bloghome" href="/">blog</a> /
+        Python 2 vs 3
+</h1>
+<p class="subtitle sourceurl">
+ <a class="sourceurl" target="_blank" href="https://github.com/kdheepak/blog/blob/b2962a1c3e5008f95b6e50937f42ae70cb9cd47a/content/29-python-2-vs-3.md">
+    Fri, Dec 16, 2016
+ </a>
+</p>
+</header>
+<section>
+<p>This post is an account of my personal experience. I’m interested in hearing other people’s opinions and having an open discussion on best practices to develop in Python. For the rest of this post, when I mention Python2 / Python3 please infer that I am referring to Python 2.7 / Python 3.5 respectively.</p>
+<section id="python-2-vs-3" class="level1">
+<h1><a href="#python-2-vs-3">#</a> Python 2 vs 3</h1>
+<p>A lot of people talk about Python2 vs Python3, and having to make a choice between them. Some beginners venturing to learn Python may be posed with this question themselves. I’ve seen discussions claim that the main issue with picking Python3 is that most packages that were written for Python2 are not compatible with Python3. and I’ve also seen the counter arguments that show that the number of Python2 packages that don’t support Python3 is insignificant.</p>
+<p>It is true that a large number of PyPi packages are now compatible with both Python2 and Python3. If I had to list the biggest changes in Python3 from Python2 that made the jump between versions difficult, it would be the core updates to the CPython API and the implementation of Unicode everywhere.</p>
+<p>The changes to CPython API made it difficult to move packages across versions that heavily relied on C code. This has de-incentivised other tools that relied on packages to make the switch as well. Several of the scientific python stack faced this issue. Fortunately, thanks to the efforts of some incredibly smart and dedicated people, NumPy, SciPy, Pandas, Matplotlib now all support Python 3.5.</p>
+<p>In arguably one of the more contentious decisions, Python3 also changed strings to handled as Unicode by default. This, as a result made thinking about unicode a more conscious decision<span><label for="sn-1" class="sidenote-number margin-toggle"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">I highly recommend checking out <a href="https://www.youtube.com/watch?v=sgHbC6udIqc" target="_blank">Ned Batchelder’s talk</a> titled “Pragmatic Unicode, or, How do I stop the pain?” for an excellent summary on how to deal with unicode issues.</span></span>.</p>
+<p>Python3 makes dealing with unicode a lot easier, by providing error messages during compilation time instead of run time. With this change however, packages that often dealt with bytes/text/strings required some serious retooling. Many programs in the web stack in the Python world have taken time to move to the latest versions of Python. There are multiple other changes in Python3, but these are most commonly attributed to as the reason for making the transistion difficult.</p>
+<p>Overall, Python3 introduced a lot of niceties. The latest version of Python3 even introduces a more memory efficient dictionary, and since dictionaries are everywhere you can be sure to expect some improvements in your programs. In general, I sure I wouldn’t be alone in recommending anyone to use Python3 for their projects. Personally, I don’t think I’ve ever experienced an issue where a package that I wanted was written for Python2 alone.</p>
+<p>I have experienced another issue though.</p>
+<p>Multiple times now I’ve tried to install packages that have been built for Python3 that are completely incompatible with Python2. When I’ve experienced Python2 packages that are incompatible with Python3, it has been for reasons mentioned above. CPython changes require someone with an understanding of the C Python API ( or the willingness and patience to undertake the task ) to rewrite a significant portion of the library. Unicode issues are a little less demanding, and with a clear understanding of text interfaces one can update their code for Python3 compatibility. However, when a Python3 package is not compatible with Python2 the changes aren’t straightforward, and sometimes even impossible.</p>
+<p>For example, the use of asyncio in a package make it immediately incompatible with Python2. A more innocuous change is the use of keyword only arguments, introduced by PEP 3102.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> compare(a, b, <span class="op">*</span>ignore, key<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    ...</span></code></pre></div>
+<p>Personally, I like this feature a lot. It makes inheritance in Python very clean.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">class</span> Child(Parent):</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">*</span>args, child_keyword<span class="op">=</span>child_value, <span class="op">**</span>kwargs):</span>
+<span id="cb2-3"><a href="#cb2-3"></a>        <span class="co"># do something here with child_keyword</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span></code></pre></div>
+<p>Without keyword only arguments, i.e. in Python2, the above would look like this</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">class</span> Child(Parent):</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb3-3"><a href="#cb3-3"></a>        child_keyword <span class="op">=</span> kwargs.pop(<span class="st">&#39;child_keyword&#39;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>        <span class="co"># do something here with child_keyword</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span></code></pre></div>
+<p>However, this change, although syntactically cleaner and self documenting, is backward incompatible. More changes like this have been or are being introduced in Python3. For example, in Python3 you can merge two dictionaries with the following syntax</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>merged_dict <span class="op">=</span> {<span class="op">**</span>dict1, <span class="op">**</span>dict2}</span></code></pre></div>
+<p>This is so much cleaner and readable code that the different ways one would do it in Python2, however this implementation immediately alienates a large Python2 user base. The list of backward incompatible changes that Python3 introduced is a lot larger than this. And although almost all of these changes can be backported by using the excellent <code>six</code> and <code>future</code> modules, not every change is currently backported.</p>
+<p>The following is another really neat feature is that currently not available in Python2.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>value1, <span class="op">*</span>ignore, value2 <span class="op">=</span> function()</span></code></pre></div>
+<p>I’ve been a proponent of writing code that is cross compatible with Python2 and Python3, but I anticipate that I may not get much mileage out of that strategy, or at the very least not for too long. Python 3.0 has been out for almost 10 years now and Python 2.7 has an end date attached to it (2020 will be last year for official support for Python2), which means it is definitely not going to believe any bugfixes or improvements in the future.</p>
+<p>Maybe it is reasonable to expect Python3 packages to be compatible with Python2. But, many enterprise applications and solutions are still using Python2, which are currently not written to be Python3 compatible. In my experience of using Python, I’ve not encountered a case with a package was only Python2 compatible but have encountered multiple packages where it is only Python3 compatible.</p>
+<p>What are your thoughts on this subject? If you are reading this and have best practices to share, I would be very keen to hearing from you. Do you write packages that are only compatible with Python3, or strive to make them cross compatible? Are there other changes you can think of that make Python3 code incompatible with Python2? Do you have tips you recommend for writing cross version compatible code or do you think it is no longer worth the effort.</p>
+</section>
+</section>
+<section>
+
+    <div class="kudo-container" style="display: none" data-post-id="python-2-vs-3">
+        <button class="kudo-button" aria-label="Give this post a kudo">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="kudo-heart" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <path class="kudo-heart-path" id="kudo-heart-path" d="M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4   L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z" />
+          </svg>
+        </button>
+        <div class="kudo-count-message">
+          <span class="kudo-count"></span> <span class="kudo-word"></span>
+        </div>
+        <div class="kudo-thanks">
+          <div class="kudo-thanks-heading">Thanks!</div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <opt-in-script src="https://utteranc.es/client.js"
+        repo="kdheepak/blog"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    <button class="comments-button">Show Comments</button>
+    </opt-in-script>
+</section>
+</article>
+<script>
+var figures =
+  Array.prototype.slice.call(document.getElementsByClassName("figure"),0)
+  .concat(
+    Array.prototype.slice.call(document.getElementsByTagName("figure"),0));
+
+for (var i = 0; i < figures.length; i++) {
+  var figure = figures[i];
+  var imgs = figure.getElementsByTagName("img");
+  if (imgs.length > 0) {
+    classes = imgs[0].classList;
+    for (var j = 0; j < classes.length; j++) {
+        if (classes[j] === "fullwidth") {
+            figure.classList.add(classes[j]);
+        }
+    }
+  }
+}
+</script>
+<footer>
+    <p>
+    <a rel="license noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="This work is licensed under a Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </p>
+</footer>
+<script data-goatcounter="https://kdheepak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/vim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/julia.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/nim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/latex.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/matlab.min.js"></script>
+<script>
+    document.querySelectorAll('pre:not([class])').forEach(function($) {
+        $.className = 'no-highlight';
+    });
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="/js/opt-in-script.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC_lk4_TkwwjzgthwVBR0JXrDRQMH2mDH8",
+    authDomain: "blog-4ac79.firebaseapp.com",
+    databaseURL: "https://blog-4ac79.firebaseio.com",
+    projectId: "blog-4ac79",
+    storageBucket: "blog-4ac79.appspot.com",
+    messagingSenderId: "57327928077",
+    appId: "1:57327928077:web:5acf8eaf01bcb850d76644",
+    measurementId: "G-YKT2PQSD10"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="/js/kudos.js"></script>
+</body>
+</html>

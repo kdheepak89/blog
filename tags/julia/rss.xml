@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/styles/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dheepak Krishnamurthy on julia</title>
+    <description>My thoughts, notes and blogs</description>
+    <link>https://blog.kdheepak.com/</link>
+    <lastBuildDate>Tue, 18 May 2021 18:33:24 GMT</lastBuildDate>
+    <pubDate>Tue, 18 May 2021 18:33:24 GMT</pubDate>
+    <language>en-us</language>
+    <copyright>Copyright 2020, Dheepak Krishnamurthy</copyright>
+    <atom:link href="https://blog.kdheepak.com/tags/julia/rss.xml" rel="self" type="application/rss+xml"></atom:link>
+    <generator>website</generator>
+
+<item>
+  <title>Advent of Code 2020 Retrospective</title>
+  <link>https://blog.kdheepak.com/advent-of-code-2020-retrospective.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/advent-of-code-2020-retrospective.html</guid>
+  <atom:link href="https://blog.kdheepak.com/advent-of-code-2020-retrospective.html" rel="self"></atom:link>
+  <pubDate>Fri, 25 Dec 2020 07:00:00 GMT</pubDate>
+  <description>Solutions to all 25 days in the Julia programming language.</description>
+</item>
+  
+<item>
+  <title>My Unicode cheat sheet</title>
+  <link>https://blog.kdheepak.com/my-unicode-cheat-sheet.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/my-unicode-cheat-sheet.html</guid>
+  <atom:link href="https://blog.kdheepak.com/my-unicode-cheat-sheet.html" rel="self"></atom:link>
+  <pubDate>Sat, 19 Sep 2020 08:29:49 GMT</pubDate>
+  <description>References for various things associated with unicode in Vim, Python, Julia and Rust</description>
+</item>
+  
+<item>
+  <title>The egg tower puzzle</title>
+  <link>https://blog.kdheepak.com/the-egg-tower-puzzle.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/the-egg-tower-puzzle.html</guid>
+  <atom:link href="https://blog.kdheepak.com/the-egg-tower-puzzle.html" rel="self"></atom:link>
+  <pubDate>Sun, 07 Jun 2020 02:14:19 GMT</pubDate>
+  <description>Analytical solution to the two egg 100 storey tower puzzle</description>
+</item>
+  
+<item>
+  <title>Neovim + LanguageServer.jl</title>
+  <link>https://blog.kdheepak.com/neovim-languageserver-julia.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/neovim-languageserver-julia.html</guid>
+  <atom:link href="https://blog.kdheepak.com/neovim-languageserver-julia.html" rel="self"></atom:link>
+  <pubDate>Tue, 02 Jun 2020 07:28:44 GMT</pubDate>
+  <description>Showcasing Neovim and LanguageServer.jl</description>
+</item>
+  
+  </channel>
+</rss>
+  

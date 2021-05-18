@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U" />
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="keywords" content="math, analytical, closed form, riddle, puzzle, problem, egg, tower, building, marble, light bulb, julia,">
+  <meta name="description" content="Analytical solution to the two egg 100 storey tower puzzle">
+  <meta property="og:url" content="https://blog.kdheepak.com/the-egg-tower-puzzle.html"/>
+  <meta property="og:title" content="The egg tower puzzle"/>
+  <meta property="og:description" content="Analytical solution to the two egg 100 storey tower puzzle"/>
+  <meta property="og:published_time" content=""/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://blog.kdheepak.com/rss.xml"/>
+  <title>The egg tower puzzle</title>
+  <style>code{white-space: pre;}</style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/css/latex.css"/>
+  <link rel="stylesheet" href="/css/tufte-extra.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/github.css"/>
+  <link rel="stylesheet" href="/css/pandoc.css"/>
+  <link rel="stylesheet" href="/css/tufte.css"/>
+  <link rel="stylesheet" href="/css/kudos.css"/>
+  <link rel="stylesheet" href="/css/custom.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  
+  <!-- pandoc-eqnos: equation style -->
+  <style>
+    .eqnos { display: inline-block; position: relative; width: 100%; }
+    .eqnos br { display: none; }
+    .eqnos-number { position: absolute; right: 0em; top: 50%; line-height: 0; }
+  </style>
+</head>
+<body>
+<article>
+<header>
+<h1 class="title">
+    <a class="home" href="https://kdheepak.com">~</a> /
+        <a class="bloghome" href="/">blog</a> /
+        The egg tower puzzle
+</h1>
+<p class="subtitle sourceurl">
+ <a class="sourceurl" target="_blank" href="https://github.com/kdheepak/blog/blob/b2962a1c3e5008f95b6e50937f42ae70cb9cd47a/content/31-math-puzzles-with-analytical-solutions.md">
+    Sun, Jun 07, 2020
+ </a>
+</p>
+</header>
+<section>
+<p>Here is a fun puzzle:</p>
+<blockquote>
+<p>You are given two eggs, and access to a 100-storey tower. Both eggs are identical. The aim is to find out the highest floor from which an egg will not break when dropped out of a window from that floor. If an egg is dropped and does not break, it is undamaged and can be dropped again. However, once an egg is broken, that’s it for that egg.</p>
+<p>If an egg breaks when dropped from a floor, then it would also have broken from any floor above that. If an egg survives a fall, then it will survive any fall shorter than that.</p>
+<p>The question is: What strategy should you adopt to minimize the number egg drops it takes to find the solution? (And what is the worst case for the number of drops it will take?)</p>
+<p>Once you solved it for two eggs, can you solve it for three eggs? Can you find a generalized solution when you have a tower with <span class="math inline">\(x\)</span> floors and if you have <span class="math inline">\(N\)</span> eggs?</p>
+</blockquote>
+<p><strong><em>Spoiler warning</em></strong>: If you have not seen this problem before I urge you to give it a go before continuing further. I’m going to post the solution to this below, so this is your spoiler warning.</p>
+<p>If you are interested in an easy to understand intuitive explanation to the <span class="math inline">\(2\)</span> egg <span class="math inline">\(100\)</span> storey tower problem, check out the following video:</p>
+<figure class="iframe-wrapper">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NGtt7GJ1uiM?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</figure>
+<p>We will go through this problem for the <span class="math inline">\(2\)</span> eggs and <span class="math inline">\(3\)</span> eggs variant, and derive the solution mathematically. Then, we will generalize the problem with <span class="math inline">\(x\)</span> floors and <span class="math inline">\(N\)</span> eggs.</p>
+<section id="two-eggs" class="level1">
+<h1><a href="#two-eggs">#</a> Two eggs</h1>
+<p>We have <span class="math inline">\(2\)</span> eggs to start with and a <span class="math inline">\(100\)</span> storey tower to explore.</p>
+<p>Let’s consider what we would do if we had just one egg.</p>
+<p>With just one egg, we could drop the egg from floor <span class="math inline">\(1\)</span>. If it breaks, we stop and can definitively say that for any floor <span class="math inline">\(1\)</span> and above all eggs would break. If it doesn’t break, we can proceed to floor <span class="math inline">\(2\)</span> and repeat.</p>
+<p>This means that for a tower with <span class="math inline">\(100\)</span> floors we will need up to <span class="math inline">\(100\)</span> drops to definitively say at which floor the egg would break. The above strategy gives us the <em>minimum</em> number of drops to <em>guarantee</em> that we find at which floor the egg would break. Or in other words, we can search <span class="math inline">\(N\)</span> floors with <span class="math inline">\(N\)</span> drops. Let’s call the lowest floor in the tower at which a egg would break the <em>breaking floor</em>. Here, <span class="math inline">\(N\)</span> is the breaking floor and <span class="math inline">\(N-1\)</span> is the highest floor from which an egg will not break. Once we can find the breaking floor, we can find the solution to this puzzle. The aim of this puzzle is to minimize the worst case when trying to guarantee finding the breaking floor.</p>
+<p>What could we do differently with <span class="math inline">\(2\)</span> eggs?</p>
+<p>With <span class="math inline">\(2\)</span> eggs, in fact we can explore the search space more efficiently. We can use the first egg to partition the total number of floors, and once the first egg breaks we can use the second egg to search floors within the last partition.</p>
+<p>As an example, let’s say you decide to drop the first egg from every <span class="math inline">\(10^{th}\)</span> floor. If it doesn’t break at floor <span class="math inline">\(10\)</span>, <span class="math inline">\(20\)</span>, <span class="math inline">\(30\)</span>, <span class="math inline">\(40\)</span> or <span class="math inline">\(50\)</span> but breaks at floor <span class="math inline">\(60\)</span> you can use the second egg to explore floors <span class="math inline">\(51\)</span> - <span class="math inline">\(59\)</span>. If it finally breaks at floor <span class="math inline">\(59\)</span>, you would have used <span class="math inline">\(6\)</span> drops of the first egg and <span class="math inline">\(9\)</span> drops of the second egg to find the breaking floor.</p>
+<p>We can do even better though.</p>
+<p>Let’s assume that the minimum number of drops required to guarantee finding the breaking floor for a <span class="math inline">\(N\)</span> storey tower is <span class="math inline">\(x\)</span>. If when we drop the first egg and the egg breaks, we can use <span class="math inline">\(x - 1\)</span> drops of the second egg to find the breaking floor. We already know that we can search at most <span class="math inline">\(x - 1\)</span> floors with the <span class="math inline">\(1\)</span> egg using <span class="math inline">\(x - 1\)</span> drops. So if our first drop was from a floor greater than <span class="math inline">\(x\)</span>, we would not be able to guarantee finding the solution to this problem. This means that if we have <span class="math inline">\(2\)</span> eggs we would want to drop the first egg from floor <span class="math inline">\(x\)</span>, where <span class="math inline">\(x\)</span> is also the minimum number of drops that will guarantee finding the breaking floor in a <span class="math inline">\(N\)</span> storey tower.</p>
+<p>When we drop the first egg from floor <span class="math inline">\(x\)</span>, if the egg breaks, we can use the second egg to find which floor from <span class="math inline">\(1\)</span> to <span class="math inline">\(x - 1\)</span> is the solution. If the egg doesn’t break, now we have used <span class="math inline">\(1\)</span> drop. Let’s assume that the first egg breaks on the second drop. When this happens, we can use the remaining egg to explore <span class="math inline">\(x - 2\)</span> floors with <span class="math inline">\(x - 2\)</span> drops find the breaking floor. With <span class="math inline">\(x - 2\)</span> drops, we can search from floor <span class="math inline">\(x + 1\)</span> to floor <span class="math inline">\(x + (x - 2)\)</span>. This means that when we drop the first egg the second time, we should start from <span class="math inline">\(x + (x - 2) + 1\)</span>, i.e., <span class="math inline">\(x + (x - 1)\)</span>, to allow for finding the breaking floor.</p>
+<p>If the egg doesn’t break on the second drop, we have now used <span class="math inline">\(2\)</span> drops. If the egg is going to break on the third drop, we have to allow for searching <span class="math inline">\(x - 3\)</span> floors with the second egg. This means we should drop the first egg on our third attempt from floor number <span class="math inline">\(x + (x - 1) + (x - 3) + 1\)</span>, i.e., <span class="math inline">\(x + (x - 1) + (x - 2)\)</span>. We can also say that with <span class="math inline">\(3\)</span> drops and <span class="math inline">\(2\)</span> eggs we are guaranteed to find the floor if it is within the first <span class="math inline">\(3 + (3 - 1) + (3 - 2)\)</span> floors, i.e. <span class="math inline">\(6\)</span> floors.</p>
+<p>Seeing the pattern here?</p>
+<p>For a <span class="math inline">\(N\)</span> storey tower, we need to ensure that with <span class="math inline">\(x\)</span> drops we cover all the floors of the tower. That gives us this constraint.</p>
+<p><span class="math display">\[x + (x - 1) + (x - 2) + (x - 3) + \ldots + 1 &gt;= N\]</span></p>
+<p>Which can be rewritten as:</p>
+<p><span class="math display">\[\sum_{k=1}^{x} k &gt;= N\]</span></p>
+<p>Or, in closed form as:</p>
+<p><span class="math display">\[\frac{x \times (1 + x)}{2} &gt;= N\]</span></p>
+<p>We know <span class="math inline">\(N\)</span> is <span class="math inline">\(100\)</span> in this problem.</p>
+<p><span class="math display">\[\frac{x \times (1 + x)}{2} &gt;= 100\]</span></p>
+<p>This tells us that with <span class="math inline">\(14\)</span> drops we can guarantee finding the breaking floor in a tower with up to <span class="math inline">\(105\)</span> floors.</p>
+</section>
+<section id="three-eggs" class="level1">
+<h1><a href="#three-eggs">#</a> Three eggs</h1>
+<p>We have already previously established the best strategy for <span class="math inline">\(1\)</span> egg and <span class="math inline">\(2\)</span> eggs.</p>
+<p>Let’s define some terminology:</p>
+<p><span class="math display">\[f_1(x) = x\]</span> <span class="math display">\[f_2(x) = \frac{x \times (1 + x)}{2}\]</span></p>
+<p>where <span class="math inline">\(f_1(x)\)</span> and <span class="math inline">\(f_2(x)\)</span> are the number of floors that can be checked with <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span> eggs respectively with <span class="math inline">\(x\)</span> drops.</p>
+<p>And we know that <span class="math inline">\(f_2(x)\)</span> can be written as:</p>
+<p><span class="math display">\[f_2(x) = \sum_{k=1}^{x} k\]</span></p>
+<p>So if we have 3 eggs and if the first egg breaks on the first drop, we want to ensure that we can check <span class="math inline">\(f_2(x - 1)\)</span> floors with the remaining <span class="math inline">\(x - 1\)</span> drops. That means we should drop the first egg from floor:</p>
+<p><span class="math display">\[1 + f_2(x - 1)\]</span></p>
+<p>For the second drop, we can start from floor:</p>
+<p><span class="math display">\[1 + f_2(x - 1) + 1 + f_2(x - 2)\]</span></p>
+<p>For the third drop, we can start from floor:</p>
+<p><span class="math display">\[1 + f_2(x - 1) + 1 + f_2(x - 2) + 1 + f_2(x - 3)\]</span></p>
+<p>Seeing a pattern emerge again?</p>
+<p>Similar to before, the total number of floors we can check is constrained by <span class="math inline">\(N\)</span>:</p>
+<p><span class="math display">\[1 + f_2(x - 1) + 1 + f_2(x - 2) + 1 + f_2(x - 3) + \ldots + 1 &gt;= N\]</span></p>
+<p>This can be rewritten as:</p>
+<p><span class="math display">\[\sum_{k=1}^{x-1} \left( 1 + f_2(k) \right) + 1 &gt;= N\]</span></p>
+<p><span class="math display">\[1 + \sum_{j=1}^{x-1} \left( 1 + \sum_{k=1}^{j} k \right) &gt;= N\]</span></p>
+<p><span class="math display">\[x + \sum_{j=1}^{x-1}\sum_{k=1}^{j} k &gt;= N\]</span></p>
+<p>which results in:</p>
+<p><span class="math display">\[\frac{x^3 + 5x}{6} &gt;= N\]</span></p>
+<p>Solving this, we get <span class="math inline">\(9\)</span> drops for <span class="math inline">\(3\)</span> eggs. With just <span class="math inline">\(9\)</span> drops, we can guarantee finding the breaking floor in a <span class="math inline">\(129\)</span> storey tower.</p>
+</section>
+<section id="n-eggs" class="level1">
+<h1><a href="#n-eggs">#</a> <span class="math inline">\(N\)</span> eggs</h1>
+<p>Let’s see if we can generalize this for <span class="math inline">\(N\)</span> eggs.</p>
+<p>With <span class="math inline">\(1\)</span> egg and <span class="math inline">\(x\)</span> drops, we know we can check <span class="math inline">\(x\)</span> floors. Let’s define this as <span class="math inline">\(f(x, 1)\)</span>, i.e.:</p>
+<p><span id="eq:f_x_1" class="eqnos"><span class="math display">\[f(x, 1) = x\]</span><span class="eqnos-number">(1)</span></span> </p>
+<p>where <span class="math inline">\(f(x, n)\)</span> is the floors that can be checked with <span class="math inline">\(x\)</span> drops and <span class="math inline">\(n\)</span> eggs.</p>
+<p>We can safely say that with <span class="math inline">\(0\)</span> drops or <span class="math inline">\(0\)</span> eggs we can check <span class="math inline">\(0\)</span> floors.</p>
+<p><span class="math display">\[f(0, n) = f(x, 0) = 0\]</span></p>
+<p>So we can write equation <a href="#eq:f_x_1">1</a> as the following:</p>
+<p><span class="math display">\[f(x, 1) = 1 + f(x-1, 1) + f(x-1, 0)\]</span></p>
+<p>For <span class="math inline">\(2\)</span> eggs and <span class="math inline">\(x\)</span> drops, the number of floors we can check, i.e. <span class="math inline">\(f(x, 2)\)</span>, is:</p>
+<p><span id="eq:f_x_2" class="eqnos"><span class="math display">\[f(x, 2) = \sum_{k=1}^{x} k\]</span><span class="eqnos-number">(2)</span></span> </p>
+<p>We can expand this as the following:</p>
+<p><span class="math display">\[f(x, 2) = 1 + \sum_{k=1}^{x-1} k + x - 1\]</span></p>
+<p>and substitute in equation <a href="#eq:f_x_1">1</a> to get:</p>
+<p><span class="math display">\[f(x, 2) = 1 + f(x-1, 2) + f(x-1, 1)\]</span></p>
+<p>And, for <span class="math inline">\(3\)</span> eggs and <span class="math inline">\(x\)</span> drops, the number of floors we can check, i.e. <span class="math inline">\(f(x, 2)\)</span>, is:</p>
+<p><span class="math display">\[f(x, 3) = x + \sum_{j=1}^{x-1}\sum_{k=1}^{j} k\]</span></p>
+<p>Again, we can expand it and rearrange some terms:</p>
+<p><span class="math display">\[f(x, 3) = x + \sum_{j=1}^{x-2}\sum_{k=1}^{j} k + \sum_{k=1}^{x-1} k\]</span></p>
+<p><span class="math display">\[f(x, 3) = 1 + x - 1 + \sum_{j=1}^{x-2}\sum_{k=1}^{j} k + \sum_{k=1}^{x-1} k\]</span></p>
+<p>and substitute in equation <a href="#eq:f_x_2">2</a> to get:</p>
+<p><span class="math display">\[f(x, 3) = 1 + f(x - 1, 3) + f(x - 1, 2)\]</span></p>
+<p>We can see a pattern emerging here. The generalized equation can be written like so:</p>
+<p><span id="eq:f_x_n" class="eqnos"><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1)\]</span><span class="eqnos-number">(3)</span></span> </p>
+<p>This is also known as a recurrence relation.</p>
+<p>This result can be reasoned through intuition as well. To find the total floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x\)</span> drops, it will be <span class="math inline">\(1\)</span> (your first drop) plus the maximum number of floors you can check with <span class="math inline">\(n\)</span> eggs and <span class="math inline">\(x-1\)</span> eggs (if the first egg does not break) plus the maximum number of floors you can check with <span class="math inline">\(n-1\)</span> eggs with <span class="math inline">\(x-1\)</span> eggs (if the first egg does break).</p>
+<p>If we wanted to, we could expand this recurrence relation<span><label for="sn-1" class="sidenote-number margin-toggle"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">Thanks to <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft5qkkh/" target="_blank">/u/possiblywrong</a> for pointing this out <span class="citation" data-cites="possiblywrong">[<a href="#ref-possiblywrong" role="doc-biblioref">1</a>]</span>.</span></span>.</p>
+<p>Here is the expansion increasing the depth in the direction of number of drops:</p>
+<p><span class="math display">\[f(x, n) = 1 + f(x - 1, n) + f(x - 1, n - 1)\]</span></p>
+<p><span class="math display">\[f(x, n) = 3 + f(x - 2, n) + 2f(x - 2, n - 1) + f(x - 2, n - 2)\]</span></p>
+<p><span class="math display">\[f(x, n) = 7 + f(x - 3, n) + 3f(x - 3, n - 1) \\ + 3f(x - 3, n - 2) + f(x - 3, n - 3)\]</span></p>
+<p><span class="math display">\[f(x, n) = 15 + f(x - 4, n) + 4f(x - 4, n - 1) \\ + 6f(x - 4, n - 2) + 4f(x - 4, n - 3) + f(x - 4, n - 4)\]</span></p>
+<p><span class="math display">\[f(x, n) = 31 + f(x - 5, n) + 5f(x - 5, n - 1) \\ + 10f(x - 5, n - 2) + 10f(x - 5, n - 3) + 5f(x - 5, n - 4) \\ + f(x - 5, n - 5)\]</span></p>
+<p><span class="math display">\[f(x, n) = 63 + f(x - 6, n) + 6f(x - 6, n - 1) \\ + 15f(x - 6, n - 2) + 20f(x - 6, n - 3) + 15f(x - 6, n - 4) \\ + 6f(x - 6, n - 5) + f(x - 6, n - 6)\]</span></p>
+<p>Eagle eye readers will notice a pattern.</p>
+<figure>
+<img src="images/pascaltriangle.svg" class="fullwidth" alt="" /><figcaption>Binomial coefficients in Pascal’s triangle</figcaption>
+</figure>
+<p>It turns out that this expansion is related to the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient" target="_blank">binomial coefficients</a>.</p>
+<p>If we had infinite number of eggs, you’d see that the first element is the only term that contributes to <span class="math inline">\(f(x, n)\)</span>, since the others will be <span class="math inline">\(0\)</span> for <span class="math inline">\(x - d\)</span> where <span class="math inline">\(d\)</span> is the depth in the triangle. That is to say, if we had infinite eggs, with 6 drops we can guarantee checking 63 floors.</p>
+<p>Using this, we can say that, with <span class="math inline">\(x\)</span> drops we can guarantee checking <span class="math inline">\(2^x - 1\)</span> floors if we had infinite eggs<span><label for="sn-2" class="sidenote-number margin-toggle"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote">If we had a finite number of eggs, an approximation of this recurrence can be made. See <a href="https://old.reddit.com/r/mathriddles/comments/gxnihd/the_two_egg_tower_puzzle/ft6gi6k/?context=1" target="_blank">/u/mark_ovchain’s insightful comment on this thread</a> for more information.</span></span>.</p>
+</section>
+<section id="implementation" class="level1">
+<h1><a href="#implementation">#</a> Implementation</h1>
+<p>Let’s implement this problem.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>julia&gt; println(VERSION)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fl">1.4.0</span></span></code></pre></div>
+<p>We can implement equation <a href="#eq:f_x_n">3</a> as a function:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a>julia&gt; f(x, n) = x == <span class="fl">0</span> || n == <span class="fl">0</span> ? <span class="fl">0</span> : <span class="fl">1</span> + f(x - <span class="fl">1</span>, n) + f(x - <span class="fl">1</span>, n - <span class="fl">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>f (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span></code></pre></div>
+<p>For <span class="math inline">\(1\)</span> egg, the number of floors you can check is the number of drops you make.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>julia&gt; arr = <span class="fl">1</span>:<span class="fl">100</span>;</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>julia&gt; @test f.(arr, <span class="fl">1</span>) == arr</span>
+<span id="cb3-4"><a href="#cb3-4"></a>Test Passed</span></code></pre></div>
+<p>And, we can verify that it works for <span class="math inline">\(2\)</span> eggs as well.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>julia&gt; @test f(<span class="fl">14</span>, <span class="fl">2</span>) &gt;= <span class="fl">100</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>Test Passed</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>julia&gt; @test f(<span class="fl">14</span>, <span class="fl">2</span>) == <span class="fl">105</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>Test Passed</span></code></pre></div>
+<p>We can implement this generally like so:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>julia&gt; <span class="kw">function</span> starting_floor(floors, n)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>       <span class="kw">for</span> x <span class="kw">in</span> <span class="fl">1</span>:floors</span>
+<span id="cb5-3"><a href="#cb5-3"></a>           <span class="kw">if</span> f(x, n) &gt;= floors</span>
+<span id="cb5-4"><a href="#cb5-4"></a>               <span class="kw">return</span> x</span>
+<span id="cb5-5"><a href="#cb5-5"></a>           <span class="kw">end</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>       <span class="kw">end</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>       <span class="kw">end</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>starting_floor (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span></code></pre></div>
+<p>And get the answer to the problem programmatically.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>julia&gt; starting_floor(<span class="fl">100</span>, <span class="fl">2</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fl">14</span></span></code></pre></div>
+<p>Using the function <code>f</code>, we can also generate a table that explores what is the maximum number of floors that can be check for various number of drops and eggs.</p>
+<figure class="fullwidth">
+<table>
+<caption>Maximum number of floors that can be checked with <span class="math inline">\(x\)</span> drops and <span class="math inline">\(n\)</span> eggs</caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th>1 egg</th>
+<th>2 eggs</th>
+<th>3 eggs</th>
+<th>4 eggs</th>
+<th>5 eggs</th>
+<th>6 eggs</th>
+<th>7 eggs</th>
+<th>8 eggs</th>
+<th>9 eggs</th>
+<th>10 eggs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>1 drop</strong></td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2 drops</strong></td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>3 drops</strong></td>
+<td>3</td>
+<td>6</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>4 drops</strong></td>
+<td>4</td>
+<td>10</td>
+<td>14</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>5 drops</strong></td>
+<td>5</td>
+<td>15</td>
+<td>25</td>
+<td>30</td>
+<td>31</td>
+<td>31</td>
+<td>31</td>
+<td>31</td>
+<td>31</td>
+<td>31</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>6 drops</strong></td>
+<td>6</td>
+<td>21</td>
+<td>41</td>
+<td>56</td>
+<td>62</td>
+<td>63</td>
+<td>63</td>
+<td>63</td>
+<td>63</td>
+<td>63</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>7 drops</strong></td>
+<td>7</td>
+<td>28</td>
+<td>63</td>
+<td>98</td>
+<td>119</td>
+<td>126</td>
+<td>127</td>
+<td>127</td>
+<td>127</td>
+<td>127</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>8 drops</strong></td>
+<td>8</td>
+<td>36</td>
+<td>92</td>
+<td>162</td>
+<td>218</td>
+<td>246</td>
+<td>254</td>
+<td>255</td>
+<td>255</td>
+<td>255</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>9 drops</strong></td>
+<td>9</td>
+<td>45</td>
+<td>129</td>
+<td>255</td>
+<td>381</td>
+<td>465</td>
+<td>501</td>
+<td>510</td>
+<td>511</td>
+<td>511</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>10 drops</strong></td>
+<td>10</td>
+<td>55</td>
+<td>175</td>
+<td>385</td>
+<td>637</td>
+<td>847</td>
+<td>967</td>
+<td>1012</td>
+<td>1022</td>
+<td>1023</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>11 drops</strong></td>
+<td>11</td>
+<td>66</td>
+<td>231</td>
+<td>561</td>
+<td>1023</td>
+<td>1485</td>
+<td>1815</td>
+<td>1980</td>
+<td>2035</td>
+<td>2046</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>12 drops</strong></td>
+<td>12</td>
+<td>78</td>
+<td>298</td>
+<td>793</td>
+<td>1585</td>
+<td>2509</td>
+<td>3301</td>
+<td>3796</td>
+<td>4016</td>
+<td>4082</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>13 drops</strong></td>
+<td>13</td>
+<td>91</td>
+<td>377</td>
+<td>1092</td>
+<td>2379</td>
+<td>4095</td>
+<td>5811</td>
+<td>7098</td>
+<td>7813</td>
+<td>8099</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>14 drops</strong></td>
+<td>14</td>
+<td>105</td>
+<td>469</td>
+<td>1470</td>
+<td>3472</td>
+<td>6475</td>
+<td>9907</td>
+<td>12910</td>
+<td>14912</td>
+<td>15913</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>15 drops</strong></td>
+<td>15</td>
+<td>120</td>
+<td>575</td>
+<td>1940</td>
+<td>4943</td>
+<td>9948</td>
+<td>16383</td>
+<td>22818</td>
+<td>27823</td>
+<td>30826</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>You’ll notice that the upper right corner of the table stays the same if you increase the number of eggs you have at your disposal. You can see this even more clearly in this visualization.</p>
+<figure>
+<img src="./images/egg-puzzle.png" class="fullwidth" alt="" /><figcaption>The relationship between the number of floors that can be checked, the number of drops and number of eggs.</figcaption>
+</figure>
+<p>There’s a minimal number of drops required to guarantee that you will find the breaking floor, even if you have unlimited eggs.</p>
+<p>If you want to check <span class="math inline">\(7\)</span> floors, as long as you have more than <span class="math inline">\(3\)</span> eggs, you can have to use a minimum of 3 drops to guarantee finding the breaking floor.</p>
+<p>For 100 floors, it is <span class="math inline">\(7\)</span> drops. If you had unlimited eggs, you would use the largest partition possible. That means dividing the total floors by <span class="math inline">\(2\)</span>.</p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="240" height="736">
+    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        /* This fix the spacing bug in svg text*/
+                        white-space: pre;
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: transparent;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: transparent;
+                        }
+                        .nofill{
+                            fill: transparent;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+    <defs>
+        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+        </marker>
+        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+        </marker>
+        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="2" class="filled"></circle>
+        </marker>
+        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+        </marker>
+        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+        </marker>
+    </defs>
+    <rect class="backdrop" x="0" y="0" width="240" height="736"></rect>
+    <text x="162" y="28" >100</text>
+    <line x1="172" y1="48" x2="172" y2="96" class="solid end_marked_arrow"></line>
+    <text x="162" y="124" >50</text>
+    <line x1="172" y1="144" x2="172" y2="192" class="solid end_marked_arrow"></line>
+    <text x="162" y="220" >25</text>
+    <line x1="168" y1="240" x2="144" y2="288" class="solid end_marked_arrow"></line>
+    <line x1="184" y1="240" x2="208" y2="288" class="solid end_marked_arrow"></line>
+    <text x="130" y="316" >13</text>
+    <text x="202" y="316" >12</text>
+    <line x1="136" y1="336" x2="112" y2="384" class="solid end_marked_arrow"></line>
+    <line x1="152" y1="336" x2="176" y2="384" class="solid end_marked_arrow"></line>
+    <line x1="208" y1="336" x2="184" y2="384" class="solid end_marked_arrow"></line>
+    <text x="106" y="412" >7</text>
+    <text x="178" y="412" >6</text>
+    <line x1="96" y1="432" x2="72" y2="480" class="solid end_marked_arrow"></line>
+    <line x1="120" y1="432" x2="144" y2="480" class="solid end_marked_arrow"></line>
+    <line x1="176" y1="432" x2="152" y2="480" class="solid end_marked_arrow"></line>
+    <text x="66" y="508" >4</text>
+    <text x="146" y="508" >3</text>
+    <line x1="80" y1="528" x2="104" y2="576" class="solid end_marked_arrow"></line>
+    <line x1="144" y1="528" x2="120" y2="576" class="solid end_marked_arrow"></line>
+    <line x1="160" y1="528" x2="184" y2="576" class="solid end_marked_arrow"></line>
+    <text x="114" y="604" >2</text>
+    <text x="186" y="604" >1</text>
+    <line x1="120" y1="624" x2="144" y2="672" class="solid end_marked_arrow"></line>
+    <text x="146" y="700" >1</text>
+    <text x="2" y="124" >1</text>
+    <text x="2" y="220" >2</text>
+    <text x="2" y="316" >3</text>
+    <text x="2" y="412" >4</text>
+    <text x="2" y="508" >5</text>
+    <text x="2" y="604" >6</text>
+    <text x="2" y="700" >7</text>
+    <g>
+        <path d="M 168,8 A 8,8 0,0,0 162,12" class="nofill"></path>
+        <line x1="162" y1="12" x2="160" y2="16" class="solid"></line>
+        <line x1="168" y1="8" x2="176" y2="8" class="solid"></line>
+        <path d="M 176,8 A 8,8 0,0,1 182,12" class="nofill"></path>
+        <line x1="182" y1="12" x2="184" y2="16" class="solid"></line>
+        <path d="M 160,16 A 16,16 0,0,0 160,32" class="nofill"></path>
+        <path d="M 184,16 A 16,16 0,0,1 184,32" class="nofill"></path>
+        <line x1="160" y1="32" x2="162" y2="36" class="solid"></line>
+        <path d="M 162,36 A 8,8 0,0,0 168,40" class="nofill"></path>
+        <line x1="168" y1="40" x2="176" y2="40" class="solid"></line>
+        <line x1="184" y1="32" x2="182" y2="36" class="solid"></line>
+        <path d="M 182,36 A 8,8 0,0,1 176,40" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 168,104 A 8,8 0,0,0 162,108" class="nofill"></path>
+        <line x1="162" y1="108" x2="160" y2="112" class="solid"></line>
+        <line x1="168" y1="104" x2="176" y2="104" class="solid"></line>
+        <path d="M 176,104 A 8,8 0,0,1 182,108" class="nofill"></path>
+        <line x1="182" y1="108" x2="184" y2="112" class="solid"></line>
+        <path d="M 160,112 A 16,16 0,0,0 160,128" class="nofill"></path>
+        <path d="M 184,112 A 16,16 0,0,1 184,128" class="nofill"></path>
+        <line x1="160" y1="128" x2="162" y2="132" class="solid"></line>
+        <path d="M 162,132 A 8,8 0,0,0 168,136" class="nofill"></path>
+        <line x1="168" y1="136" x2="176" y2="136" class="solid"></line>
+        <line x1="184" y1="128" x2="182" y2="132" class="solid"></line>
+        <path d="M 182,132 A 8,8 0,0,1 176,136" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 168,200 A 8,8 0,0,0 162,204" class="nofill"></path>
+        <line x1="162" y1="204" x2="160" y2="208" class="solid"></line>
+        <line x1="168" y1="200" x2="176" y2="200" class="solid"></line>
+        <path d="M 176,200 A 8,8 0,0,1 182,204" class="nofill"></path>
+        <line x1="182" y1="204" x2="184" y2="208" class="solid"></line>
+        <path d="M 160,208 A 16,16 0,0,0 160,224" class="nofill"></path>
+        <path d="M 184,208 A 16,16 0,0,1 184,224" class="nofill"></path>
+        <line x1="160" y1="224" x2="162" y2="228" class="solid"></line>
+        <path d="M 162,228 A 8,8 0,0,0 168,232" class="nofill"></path>
+        <line x1="168" y1="232" x2="176" y2="232" class="solid"></line>
+        <line x1="184" y1="224" x2="182" y2="228" class="solid"></line>
+        <path d="M 182,228 A 8,8 0,0,1 176,232" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 136,296 A 8,8 0,0,0 130,300" class="nofill"></path>
+        <line x1="130" y1="300" x2="128" y2="304" class="solid"></line>
+        <line x1="136" y1="296" x2="144" y2="296" class="solid"></line>
+        <path d="M 144,296 A 8,8 0,0,1 150,300" class="nofill"></path>
+        <line x1="150" y1="300" x2="152" y2="304" class="solid"></line>
+        <path d="M 128,304 A 16,16 0,0,0 128,320" class="nofill"></path>
+        <path d="M 152,304 A 16,16 0,0,1 152,320" class="nofill"></path>
+        <line x1="128" y1="320" x2="130" y2="324" class="solid"></line>
+        <path d="M 130,324 A 8,8 0,0,0 136,328" class="nofill"></path>
+        <line x1="136" y1="328" x2="144" y2="328" class="solid"></line>
+        <line x1="152" y1="320" x2="150" y2="324" class="solid"></line>
+        <path d="M 150,324 A 8,8 0,0,1 144,328" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 208,296 A 8,8 0,0,0 202,300" class="nofill"></path>
+        <line x1="202" y1="300" x2="200" y2="304" class="solid"></line>
+        <line x1="208" y1="296" x2="216" y2="296" class="solid"></line>
+        <path d="M 216,296 A 8,8 0,0,1 222,300" class="nofill"></path>
+        <line x1="222" y1="300" x2="224" y2="304" class="solid"></line>
+        <path d="M 200,304 A 16,16 0,0,0 200,320" class="nofill"></path>
+        <path d="M 224,304 A 16,16 0,0,1 224,320" class="nofill"></path>
+        <line x1="200" y1="320" x2="202" y2="324" class="solid"></line>
+        <path d="M 202,324 A 8,8 0,0,0 208,328" class="nofill"></path>
+        <line x1="208" y1="328" x2="216" y2="328" class="solid"></line>
+        <line x1="224" y1="320" x2="222" y2="324" class="solid"></line>
+        <path d="M 222,324 A 8,8 0,0,1 216,328" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 104,392 A 8,8 0,0,0 98,396" class="nofill"></path>
+        <line x1="98" y1="396" x2="96" y2="400" class="solid"></line>
+        <line x1="104" y1="392" x2="112" y2="392" class="solid"></line>
+        <path d="M 112,392 A 8,8 0,0,1 118,396" class="nofill"></path>
+        <line x1="118" y1="396" x2="120" y2="400" class="solid"></line>
+        <path d="M 96,400 A 16,16 0,0,0 96,416" class="nofill"></path>
+        <path d="M 120,400 A 16,16 0,0,1 120,416" class="nofill"></path>
+        <line x1="96" y1="416" x2="98" y2="420" class="solid"></line>
+        <path d="M 98,420 A 8,8 0,0,0 104,424" class="nofill"></path>
+        <line x1="104" y1="424" x2="112" y2="424" class="solid"></line>
+        <line x1="120" y1="416" x2="118" y2="420" class="solid"></line>
+        <path d="M 118,420 A 8,8 0,0,1 112,424" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 176,392 A 8,8 0,0,0 170,396" class="nofill"></path>
+        <line x1="170" y1="396" x2="168" y2="400" class="solid"></line>
+        <line x1="176" y1="392" x2="184" y2="392" class="solid"></line>
+        <path d="M 184,392 A 8,8 0,0,1 190,396" class="nofill"></path>
+        <line x1="190" y1="396" x2="192" y2="400" class="solid"></line>
+        <path d="M 168,400 A 16,16 0,0,0 168,416" class="nofill"></path>
+        <path d="M 192,400 A 16,16 0,0,1 192,416" class="nofill"></path>
+        <line x1="168" y1="416" x2="170" y2="420" class="solid"></line>
+        <path d="M 170,420 A 8,8 0,0,0 176,424" class="nofill"></path>
+        <line x1="176" y1="424" x2="184" y2="424" class="solid"></line>
+        <line x1="192" y1="416" x2="190" y2="420" class="solid"></line>
+        <path d="M 190,420 A 8,8 0,0,1 184,424" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 64,488 A 8,8 0,0,0 58,492" class="nofill"></path>
+        <line x1="58" y1="492" x2="56" y2="496" class="solid"></line>
+        <line x1="64" y1="488" x2="72" y2="488" class="solid"></line>
+        <path d="M 72,488 A 8,8 0,0,1 78,492" class="nofill"></path>
+        <line x1="78" y1="492" x2="80" y2="496" class="solid"></line>
+        <path d="M 56,496 A 16,16 0,0,0 56,512" class="nofill"></path>
+        <path d="M 80,496 A 16,16 0,0,1 80,512" class="nofill"></path>
+        <line x1="56" y1="512" x2="58" y2="516" class="solid"></line>
+        <path d="M 58,516 A 8,8 0,0,0 64,520" class="nofill"></path>
+        <line x1="64" y1="520" x2="72" y2="520" class="solid"></line>
+        <line x1="80" y1="512" x2="78" y2="516" class="solid"></line>
+        <path d="M 78,516 A 8,8 0,0,1 72,520" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 144,488 A 8,8 0,0,0 138,492" class="nofill"></path>
+        <line x1="138" y1="492" x2="136" y2="496" class="solid"></line>
+        <line x1="144" y1="488" x2="152" y2="488" class="solid"></line>
+        <path d="M 152,488 A 8,8 0,0,1 158,492" class="nofill"></path>
+        <line x1="158" y1="492" x2="160" y2="496" class="solid"></line>
+        <path d="M 136,496 A 16,16 0,0,0 136,512" class="nofill"></path>
+        <path d="M 160,496 A 16,16 0,0,1 160,512" class="nofill"></path>
+        <line x1="136" y1="512" x2="138" y2="516" class="solid"></line>
+        <path d="M 138,516 A 8,8 0,0,0 144,520" class="nofill"></path>
+        <line x1="144" y1="520" x2="152" y2="520" class="solid"></line>
+        <line x1="160" y1="512" x2="158" y2="516" class="solid"></line>
+        <path d="M 158,516 A 8,8 0,0,1 152,520" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 112,584 A 8,8 0,0,0 106,588" class="nofill"></path>
+        <line x1="106" y1="588" x2="104" y2="592" class="solid"></line>
+        <line x1="112" y1="584" x2="120" y2="584" class="solid"></line>
+        <path d="M 120,584 A 8,8 0,0,1 126,588" class="nofill"></path>
+        <line x1="126" y1="588" x2="128" y2="592" class="solid"></line>
+        <path d="M 104,592 A 16,16 0,0,0 104,608" class="nofill"></path>
+        <path d="M 128,592 A 16,16 0,0,1 128,608" class="nofill"></path>
+        <line x1="104" y1="608" x2="106" y2="612" class="solid"></line>
+        <path d="M 106,612 A 8,8 0,0,0 112,616" class="nofill"></path>
+        <line x1="112" y1="616" x2="120" y2="616" class="solid"></line>
+        <line x1="128" y1="608" x2="126" y2="612" class="solid"></line>
+        <path d="M 126,612 A 8,8 0,0,1 120,616" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 184,584 A 8,8 0,0,0 178,588" class="nofill"></path>
+        <line x1="178" y1="588" x2="176" y2="592" class="solid"></line>
+        <line x1="184" y1="584" x2="192" y2="584" class="solid"></line>
+        <path d="M 192,584 A 8,8 0,0,1 198,588" class="nofill"></path>
+        <line x1="198" y1="588" x2="200" y2="592" class="solid"></line>
+        <path d="M 176,592 A 16,16 0,0,0 176,608" class="nofill"></path>
+        <path d="M 200,592 A 16,16 0,0,1 200,608" class="nofill"></path>
+        <line x1="176" y1="608" x2="178" y2="612" class="solid"></line>
+        <path d="M 178,612 A 8,8 0,0,0 184,616" class="nofill"></path>
+        <line x1="184" y1="616" x2="192" y2="616" class="solid"></line>
+        <line x1="200" y1="608" x2="198" y2="612" class="solid"></line>
+        <path d="M 198,612 A 8,8 0,0,1 192,616" class="nofill"></path>
+    </g>
+    <g>
+        <path d="M 144,680 A 8,8 0,0,0 138,684" class="nofill"></path>
+        <line x1="138" y1="684" x2="136" y2="688" class="solid"></line>
+        <line x1="144" y1="680" x2="152" y2="680" class="solid"></line>
+        <path d="M 152,680 A 8,8 0,0,1 158,684" class="nofill"></path>
+        <line x1="158" y1="684" x2="160" y2="688" class="solid"></line>
+        <path d="M 136,688 A 16,16 0,0,0 136,704" class="nofill"></path>
+        <path d="M 160,688 A 16,16 0,0,1 160,704" class="nofill"></path>
+        <line x1="136" y1="704" x2="138" y2="708" class="solid"></line>
+        <path d="M 138,708 A 8,8 0,0,0 144,712" class="nofill"></path>
+        <line x1="144" y1="712" x2="152" y2="712" class="solid"></line>
+        <line x1="160" y1="704" x2="158" y2="708" class="solid"></line>
+        <path d="M 158,708 A 8,8 0,0,1 152,712" class="nofill"></path>
+    </g>
+</svg>
+</p>
+<p>Partitioning the floors equally or in other words bisecting the floors, and exploring the partition of interest using the same strategy is the most efficient way of finding the breaking floor.</p>
+<p>So there you go! We have solved the general case for the egg and tower puzzle.</p>
+<script>
+MathJax.Hub.Config({
+    jax: ["input/TeX","output/HTML-CSS"],
+    displayAlign: "left"
+});
+</script>
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"><a href="#bibliography">#</a> References</h1>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-possiblywrong">
+<p>[1] “Light Bulb Puzzle Solution.” [Online]. Available: <a href="https://possiblywrong.wordpress.com/2012/01/08/light-bulb-puzzle-solution/" target="_blank">https://possiblywrong.wordpress.com/2012/01/08/light-bulb-puzzle-solution/</a>.</p>
+</div>
+</div>
+</section>
+</section>
+<section>
+
+    <div class="kudo-container" style="display: none" data-post-id="the-egg-tower-puzzle">
+        <button class="kudo-button" aria-label="Give this post a kudo">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="kudo-heart" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <path class="kudo-heart-path" id="kudo-heart-path" d="M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4   L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z" />
+          </svg>
+        </button>
+        <div class="kudo-count-message">
+          <span class="kudo-count"></span> <span class="kudo-word"></span>
+        </div>
+        <div class="kudo-thanks">
+          <div class="kudo-thanks-heading">Thanks!</div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <opt-in-script src="https://utteranc.es/client.js"
+        repo="kdheepak/blog"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    <button class="comments-button">Show Comments</button>
+    </opt-in-script>
+</section>
+</article>
+<script>
+var figures =
+  Array.prototype.slice.call(document.getElementsByClassName("figure"),0)
+  .concat(
+    Array.prototype.slice.call(document.getElementsByTagName("figure"),0));
+
+for (var i = 0; i < figures.length; i++) {
+  var figure = figures[i];
+  var imgs = figure.getElementsByTagName("img");
+  if (imgs.length > 0) {
+    classes = imgs[0].classList;
+    for (var j = 0; j < classes.length; j++) {
+        if (classes[j] === "fullwidth") {
+            figure.classList.add(classes[j]);
+        }
+    }
+  }
+}
+</script>
+<footer>
+    <p>
+    <a rel="license noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="This work is licensed under a Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </p>
+</footer>
+<script data-goatcounter="https://kdheepak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/vim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/julia.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/nim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/latex.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/matlab.min.js"></script>
+<script>
+    document.querySelectorAll('pre:not([class])').forEach(function($) {
+        $.className = 'no-highlight';
+    });
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="/js/opt-in-script.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC_lk4_TkwwjzgthwVBR0JXrDRQMH2mDH8",
+    authDomain: "blog-4ac79.firebaseapp.com",
+    databaseURL: "https://blog-4ac79.firebaseio.com",
+    projectId: "blog-4ac79",
+    storageBucket: "blog-4ac79.appspot.com",
+    messagingSenderId: "57327928077",
+    appId: "1:57327928077:web:5acf8eaf01bcb850d76644",
+    measurementId: "G-YKT2PQSD10"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="/js/kudos.js"></script>
+</body>
+</html>

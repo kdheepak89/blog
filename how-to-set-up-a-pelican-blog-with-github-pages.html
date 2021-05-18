@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U" />
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="keywords" content="How to set up a Pelican blog with GitHub Pages">
+  <meta name="description" content="Here, I will show how to set up a working static blog on github pages using Pelican. Pelican is a static site generator, written in Python …">
+  <meta property="og:url" content="https://blog.kdheepak.com/how-to-set-up-a-pelican-blog-with-github-pages.html"/>
+  <meta property="og:title" content="How to set up a Pelican blog with Github pages"/>
+  <meta property="og:description" content="Here, I will show how to set up a working static blog on github pages using Pelican. Pelican is a static site generator, written in Python …"/>
+  <meta property="og:published_time" content=""/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://blog.kdheepak.com/rss.xml"/>
+  <title>How to set up a Pelican blog with Github pages</title>
+  <style>code{white-space: pre;}</style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/css/latex.css"/>
+  <link rel="stylesheet" href="/css/tufte-extra.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/github.css"/>
+  <link rel="stylesheet" href="/css/pandoc.css"/>
+  <link rel="stylesheet" href="/css/tufte.css"/>
+  <link rel="stylesheet" href="/css/kudos.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/custom.css"/>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+<header>
+<h1 class="title">
+    <a class="home" href="https://kdheepak.com">~</a> /
+        <a class="bloghome" href="/">blog</a> /
+        How to set up a Pelican blog with Github pages
+</h1>
+<p class="subtitle sourceurl">
+ <a class="sourceurl" target="_blank" href="https://github.com/kdheepak/blog/blob/b2962a1c3e5008f95b6e50937f42ae70cb9cd47a/content/08-github-pelican.md">
+    Sun, May 03, 2015
+ </a>
+</p>
+</header>
+<section>
+<p>I’ve been quite vocal about the benefits of blogging using Markdown, and using a static page generator instead of the conventional CMS. But a lot of people I’ve spoken to have expressed their doubts about the simplicity of the process. I figured if I could fit it in one blog post I could claim it were simple, right?</p>
+<section id="markdown" class="level1">
+<h1><a href="#markdown">#</a> Markdown</h1>
+<p>Advantages</p>
+<ul>
+<li>Easy to learn - It has almost no syntax. You can learn how to format like a pro in half an hour.</li>
+<li>Fast - You don’t have to deal with HTML tags or WYSIWYG editors.</li>
+<li>Platform independent - You can edit your blog posts from anywhere, be it on your PC, tablet or mobile device. You can even use your favourite text editor. (which is obviously VIM, right?)</li>
+<li>Markdown handles all of the following beautifully:
+<ul>
+<li>lists</li>
+<li>links</li>
+<li>headers</li>
+<li>blockquotes</li>
+<li>bold and emphasized text</li>
+<li>blockquotes</li>
+<li>code blocks</li>
+</ul></li>
+</ul>
+<p>This is what this post looks like in Markdown.</p>
+<figure>
+<img src="images/markdown-example.png" alt="" />
+</figure>
+<p>It really is that simple.</p>
+</section>
+<section id="static-pages" class="level1">
+<h1><a href="#static-pages">#</a> Static pages</h1>
+<p>Advantages</p>
+<ul>
+<li>Fast - It loads extremely quickly.</li>
+<li>Portable - You can easily move from a server space and deploy it elsewhere.</li>
+<li>Cheaper - It is cost effective for a small website / personal blogs.</li>
+</ul>
+<p>Disadvantages</p>
+<ul>
+<li>Typically required web development experience to make changes to website.</li>
+<li>Complicated and a lot of work when you have a lot of pages e.g. a personal blog.</li>
+</ul>
+</section>
+<section id="enter-github-pages-and-pelican" class="level1">
+<h1><a href="#enter-github-pages-and-pelican">#</a> Enter Github pages and Pelican</h1>
+<p>Github pages takes away from all the disadvantages of static pages, and adds a few pros as well. Version control was a big plus for me. And static site generators like Jekyll and Pelican make it extremely easy to create web content without any actual web development. I choose Pelican because it was Python based, and it seemed to have a good selection of themes.</p>
+</section>
+<section id="install-required-packages" class="level1">
+<h1><a href="#install-required-packages">#</a> Install required packages</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">pip</span> install pelican</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">pip</span> install markdown</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="ex">pip</span> install ghp-import</span></code></pre></div>
+<p>ghp-import is a cli that allows you to easily push your changes to your github repository</p>
+<p>These are optional packages to install that may come in handy later</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">pip</span> install Pillow beautifulsoup4 cssmin cssprefixer cssutils pretty six smartypants typogrify webassets</span></code></pre></div>
+</section>
+<section id="create-a-github-account-and-a-user-or-project-page" class="level1">
+<h1><a href="#create-a-github-account-and-a-user-or-project-page">#</a> Create a Github account and a User or Project page</h1>
+<p><a href="https://pages.github.com/" target="_blank">Github pages</a> has instructions on how to create a User or Project page, and will in fact walk you through the process. If you create a User page, your website will be live at <code>$GHUSERNAME</code>.github.io and a Project page will go up at <code>$GHUSERNAME</code>.github.io/<code>$PROJECTNAME</code>. The rest of this blog assumes you want to create a User page.</p>
+</section>
+<section id="create-a-directory-for-your-website" class="level1">
+<h1><a href="#create-a-directory-for-your-website">#</a> Create a directory for your website</h1>
+<p>Assuming <code>$GHUSERNAME</code> is your github username, run the following commands. You can rename the ‘website’ folder to anything you want.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">git</span> clone https://github.com/<span class="va">$GHUSERNAME</span>/<span class="va">$GHUSERNAME</span>.github.io/ website</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">cd</span> website</span></code></pre></div>
+</section>
+<section id="run-pelican-quickstart" class="level1">
+<h1><a href="#run-pelican-quickstart">#</a> Run Pelican quickstart</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">pelican-quickstart</span></span></code></pre></div>
+<p>This is what you might get. Answer all the questions</p>
+<pre><code>➜  website  pelican-quickstart
+
+Welcome to pelican-quickstart v3.5.0.
+
+This script will help you create a new Pelican-based website.
+
+Please answer the following questions so this script can generate the files
+needed by Pelican.
+
+
+&gt; Where do you want to create your new web site? [.]
+&gt; What will be the title of this web site? Dheepak Krishnamurthy
+&gt; Who will be the author of this web site? Dheepak Krishnamurthy
+&gt; What will be the default language of this web site? [en]
+&gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) Y
+&gt; What is your URL prefix? (see above example; no trailing slash) https://kdheepak.com
+&gt; Do you want to enable article pagination? (Y/n) Y
+&gt; How many articles per page do you want? [10]
+&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n) Y
+&gt; Do you want an auto-reload &amp; simpleHTTP script to assist with theme and site development? (Y/n) Y
+&gt; Do you want to upload your website using FTP? (y/N) N
+&gt; Do you want to upload your website using SSH? (y/N) N
+&gt; Do you want to upload your website using Dropbox? (y/N) N
+&gt; Do you want to upload your website using S3? (y/N) N
+&gt; Do you want to upload your website using Rackspace Cloud Files? (y/N) N
+&gt; Do you want to upload your website using GitHub Pages? (y/N) Y
+&gt; Is this your personal page (username.github.io)? (y/N) Y
+Done. Your new project is available at /path/to/website
+
+➜  website</code></pre>
+</section>
+<section id="content-of-your-blog" class="level1">
+<h1><a href="#content-of-your-blog">#</a> Content of your blog</h1>
+<p>Create an sample post.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">vim</span> content/example.md</span></code></pre></div>
+<p>Type in the following and save it.</p>
+<pre><code>Title: My First Post
+Date: 2015-11-23 10:20
+Category: Example
+
+Hello world.</code></pre>
+<p>Type the following to convert all your markdown or ReST posts to HTML.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">make</span> html</span></code></pre></div>
+<p>You can also type the following to serve a local version of your site to view the output of your hardwork</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">make</span> serve</span></code></pre></div>
+<p>This will be visible at localhost:8000 by default.</p>
+</section>
+<section id="push-your-content-to-github" class="level1">
+<h1><a href="#push-your-content-to-github">#</a> Push your content to Github</h1>
+<p>If you installed everything correctly, you can type the following to push your website to your Github repository. You need to have ghp-import installed for this to work.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">make</span> github</span></code></pre></div>
+<p>You are done! If you have any questions regarding any of this, you can shoot me questions in the comments below.</p>
+</section>
+</section>
+<section>
+
+    <div class="kudo-container" style="display: none" data-post-id="how-to-set-up-a-pelican-blog-with-github-pages">
+        <button class="kudo-button" aria-label="Give this post a kudo">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="kudo-heart" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <path class="kudo-heart-path" id="kudo-heart-path" d="M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4   L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z" />
+          </svg>
+        </button>
+        <div class="kudo-count-message">
+          <span class="kudo-count"></span> <span class="kudo-word"></span>
+        </div>
+        <div class="kudo-thanks">
+          <div class="kudo-thanks-heading">Thanks!</div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <opt-in-script src="https://utteranc.es/client.js"
+        repo="kdheepak/blog"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    <button class="comments-button">Show Comments</button>
+    </opt-in-script>
+</section>
+</article>
+<script>
+var figures =
+  Array.prototype.slice.call(document.getElementsByClassName("figure"),0)
+  .concat(
+    Array.prototype.slice.call(document.getElementsByTagName("figure"),0));
+
+for (var i = 0; i < figures.length; i++) {
+  var figure = figures[i];
+  var imgs = figure.getElementsByTagName("img");
+  if (imgs.length > 0) {
+    classes = imgs[0].classList;
+    for (var j = 0; j < classes.length; j++) {
+        if (classes[j] === "fullwidth") {
+            figure.classList.add(classes[j]);
+        }
+    }
+  }
+}
+</script>
+<footer>
+    <p>
+    <a rel="license noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="This work is licensed under a Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </p>
+</footer>
+<script data-goatcounter="https://kdheepak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/vim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/julia.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/nim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/latex.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/matlab.min.js"></script>
+<script>
+    document.querySelectorAll('pre:not([class])').forEach(function($) {
+        $.className = 'no-highlight';
+    });
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="/js/opt-in-script.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC_lk4_TkwwjzgthwVBR0JXrDRQMH2mDH8",
+    authDomain: "blog-4ac79.firebaseapp.com",
+    databaseURL: "https://blog-4ac79.firebaseio.com",
+    projectId: "blog-4ac79",
+    storageBucket: "blog-4ac79.appspot.com",
+    messagingSenderId: "57327928077",
+    appId: "1:57327928077:web:5acf8eaf01bcb850d76644",
+    measurementId: "G-YKT2PQSD10"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="/js/kudos.js"></script>
+</body>
+</html>

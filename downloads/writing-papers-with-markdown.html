@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="keywords" content="markdown, pandoc, papers, writing, academic, scholarly, technical, scientific" />
+  <title>Writing Technical Papers with Markdown and Pandoc</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/claymcleod/pandoc-academic-publication/ce07fa7a20af53cab8c8a50c5bad5ad15d726bba/assets/css/academic-pub.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  
+  <!-- pandoc-eqnos: equation style -->
+  <style>
+    .eqnos { display: inline-block; position: relative; width: 100%; }
+    .eqnos br { display: none; }
+    .eqnos-number { position: absolute; right: 0em; top: 50%; line-height: 0; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Writing Technical Papers with Markdown and Pandoc</h1>
+<p class="date">2015-12-20T00:00:00-06:00</p>
+</header>
+<p>You can view this post in the following formats, thanks to Pandoc!</p>
+<figure class="fullwidth">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Format</th>
+<th style="text-align: left;">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IEEE-PDF</td>
+<td style="text-align: left;"><a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.ieee.pdf">LINK</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IEEE-DOCX</td>
+<td style="text-align: left;"><a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.ieee.docx">LINK</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IEEE-HTML</td>
+<td style="text-align: left;"><a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.ieee.html">LINK</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PDF</td>
+<td style="text-align: left;"><a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.pdf">LINK</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DOCX</td>
+<td style="text-align: left;"><a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.docx">LINK</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HTML</td>
+<td style="text-align: left;"><a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.html">LINK</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SLIDES-PDF</td>
+<td style="text-align: left;"><a href="https://blog.kdheepak.com/downloads/writing-papers-with-markdown.slides.pdf">LINK</a></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<!-- BEGIN SLIDESNOHEADER -->
+<!-- END SLIDES -->
+<p>I’ve had several people ask me about Markdown for academic writing recently. I figured I’d use this post to write about my workflow and my resources on this topic.</p>
+<h1 id="why-markdown">Why Markdown</h1>
+<!-- BEGIN SLIDESNOHEADER -->
+<p>Academic writing involves:</p>
+<ul>
+<li>writing down ideas as they come along and documenting results (notetaking),</li>
+<li>experimenting with these ideas (simulations and data analysis),</li>
+<li>and finally presenting them effectively (scientific paper).</li>
+</ul>
+<!-- END SLIDES -->
+<p>There’s a lot to manage over the length of time this entire process spans. Academics require a set of tools that aid in making this process, i.e. the effective communication of ideas, as seamless as possible. There are currently two popular options for academics seeking to write technical papers - Microsoft Word or \LaTeX.</p>
+<h2 id="a-word-about-word">A word about Word</h2>
+<p>Microsoft Word is ubiquitous when it comes to writing reports. The great thing about Word is that there is almost no barrier to <em>begin</em> writing. You can incrementally build your skill in using this tool as and when you are using it. This is useful since it makes it immediately accessible, thereby decreasing the time and effort spent on learning how to use a software for writing and allowing you to concentrate on the writing itself.</p>
+<p>However, I’ve found a few fundamental problems with Microsoft Word. Having a WYSIWYG (What You See Is What You Get) editor is great (even Richard Stallman seems to think so <span class="citation" data-cites="stallman_emacs_nodate">[<a href="#ref-stallman_emacs_nodate" role="doc-biblioref">1</a>]</span>). However, products like Word fail miserably at separating content from formatting. These products impose on the writer their own concept of how a document should be formatted, which I’ve found greatly hinders the writing process. Have you ever experienced a sudden jump in spacing? Or mismatched formatting after a copy and paste from one part of the document to another? Or have indents and bullet points misbehave haphazardly? Word applies these formatting changes seemingly at random! These are all typesetting and formatting processes and these should be applied <strong><em>after</em></strong> the text is completed. These processes should not distract from the task at hand<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> - writing!</p>
+<p>There are other issues as well. Microsoft’s ecosystem comes at a price, literally. Word is proprietary, and Word’s format is a proprietary data format. When you use Word, by storing your work in this proprietary software’s proprietary data format, you tie yourself down to this particular licensed software for the forseeable future. You also make the implicit assumption that everyone you work with has the same software on their computer. Word also does not play well with its counterparts on OSX. With the same content, the document is presented differently depending on which machine you open it on. As far as I know there isn’t even a version for Linux machines. Heck, Microsoft Word does not even play well with previous versions of Microsoft Word. I understand why this issue occurs, considering the complexity in operating systems and software. Backward incompatible software or cross incompatibility are probably inevitable, but as an user, I shouldn’t have to be concerned about this. I shouldn’t have to think about what software or what version of a software my reviewers are using when I’m sending them a document. And speaking of sharing documents, did you know you can end up transferring malware through a Word document? Just think about that for a second. Opening what should be essentially a text file is a security risk for your machine. And some of these viruses (as of the time of this writing) do not even have patches yet <span class="citation" data-cites="beaumont_bypass_2015">[<a href="#ref-beaumont_bypass_2015" role="doc-biblioref">2</a>]</span>. Loads of people have already talked about this and similar issues at some length <span class="citation" data-cites="steingold_proprietary_nodate cottrell_word_nodate">[<a href="#ref-steingold_proprietary_nodate" role="doc-biblioref">3</a>], [<a href="#ref-cottrell_word_nodate" role="doc-biblioref">4</a>]</span>, and have probably done more justice to this topic that I possibly could. With all these issues, it is hard to believe Word is so widely accepted as a standard.</p>
+<p>I think there is a strong case to be made about why you should consider dropping Word for your next paper. In addition to what has been discussed above:</p>
+<!-- BEGIN SLIDES -->
+<ul>
+<li>Word is slow, and consumes sometimes up to a gig of virtual memory. For what is basically a word processor, that is unnecessary.</li>
+<li>there is no clean way to permanently save comments or notes, that persist in the final version without affecting how final document looks.</li>
+<li>collaborating with other people requires foresight and planning.</li>
+<li>the equation editor is painful to use.</li>
+<li>Word does not work in the workflow for <strong>scientific research papers or reports</strong>.</li>
+</ul>
+<!-- END SLIDES -->
+<p>Let us assume that scientific research papers consists of only 3 steps (if only!) - notetaking, analysis and presentation. Word fails at delivering at all these tasks. Word doesn’t quite work for notetaking. Org mode, Evernote or Onenote are most people’s preferred solution. Word doesn’t fit data analysis requirements as well, with Python, R or Excel being the go-to tools. I personally use Emacs / Vim for notetaking and store them in a git repository and all of my data analysis is done in Jupyter Notebooks. After collecting the required data from an experiment and post-processing it, I can save plots into an image or the data into a table in a particular format programmatically using scripts. Word however, does not allow me to import these images or tables programmatically. If I did somehow manage to contort my workflow and store my data and information in this software, I have absolutely no way of retrieving it. The final presentation/report/paper, information and data will exist confined in this closed source proprietary software. Word just does not fit into an analysis or research workflow. To quote Raymond Hettinger:</p>
+<!-- BEGIN SLIDES -->
+<figure>
+<img src="/images/raymondhettinger.jpg" alt="" /><figcaption>Raymond Hettinger</figcaption>
+</figure>
+<!-- END SLIDES -->
+<h2 id="latex---lah-tekh-lah-tek-or-lay-tek">\LaTeX - lah-tekh, lah-tek or lay-tek</h2>
+<!-- BEGIN SLIDES -->
+<p>Enter \LaTeX.</p>
+<blockquote>
+<p>\LaTeX is to a book what a set of blueprints is to a building. <span class="citation" data-cites="noauthor_stackoverflow_nodate">[<a href="#ref-noauthor_stackoverflow_nodate" role="doc-biblioref">5</a>]</span></p>
+</blockquote>
+<!-- END SLIDES -->
+<p>\LaTeX is a typesetting system and is frequently used in scientific, technical and mathematical papers. It is infamous for displaying equations in a manner that looks great. Math is beautiful, and it deserves to be presented beautifully.</p>
+<p><span class="math display">\[\begin{align}
+  \hskip6em \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \hskip6em \\
+  \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
+  \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
+  \nabla \cdot \vec{\mathbf{B}} &amp; = 0
+\end{align}\]</span></p>
+<!-- BEGIN SLIDES -->
+<p>Essentially, \LaTeX is a markup language. Content is written in plain text and can be annotated with commands that describe how certain elements should be displayed.</p>
+<!-- END SLIDES -->
+<!-- BEGIN SLIDES -->
+<p>For example, take a look at the following commands.</p>
+<pre><code>\textbf{bold}
+\textit{italic}</code></pre>
+<p>This markup will format the words passed into these “functions” as <strong>bold</strong> and <em>italic</em> respectively.</p>
+<!-- END SLIDES -->
+<p>There are numerous similar functions for different aspects of formatting. This allows you to concentrate on writing, without worrying about the typesetting until later.</p>
+<p>The source document that contains the content is a plain text file. This means you can use <code>git</code> to version control the paper. This allows you to track changes and collaborate with others without any additional effort. This also lets you work with your favourite text editor - Vim, Emacs, Atom. There are even TeX specific ones, such as TeXShop and Lyx.</p>
+<p>\LaTeX is free. Free as in beer and free as in freedom. You can have the confidence that your code and documents can survive possibly forever in its current format. The \LaTeX community is great and are very helpful towards beginners. There are hundreds of packages that improve upon the functionality that \LaTeX provides. There are packages like <em>TikZ</em> that let you to create high resolution print quality detailed diagrams, which I’ve seen used even outside a \LaTeX environment.</p>
+<p>However, there is a barrier to entry which one must overcome in order to begin using \LaTeX. Unlike Word, you have to know which commands are used for what markup functionality, not only to know when to use them, but also when not to use them. The biggest problem with \LaTeX is probably the error messages. Most of the time they are near useless, and sometimes they are even borderline cryptic.</p>
+<p>Personally, I found learning how to work with \LaTeX extremely useful. It challenged me to think about the structure of a document, and how I could convey information effectively not just through the final document, but also in the source material<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. I also didn’t think it was difficult. Solutions to my initial problems were only a quick Google search away. Tables were frustrating at first, but you get the hang of them over time. Equations are a joy to type in \LaTeX. And the final product looks great!</p>
+<p>That said, the markup language is a bit too heavy for notetaking, and not particularly readable. For example, take a look at the syntax for a creating a section, a subsection and list of items with some bold and italic elements.</p>
+<!-- BEGIN SLIDES -->
+<pre><code>\section{Section Name}
+This is text in the section
+\subsection{Sub Section Name}
+The following is a list in this subsection
+\begin{enumerate}
+  \item The first \textbf{bold} item
+  \begin{enumerate}
+    \item Nested item 1
+    \item Nested item 2
+  \end{enumerate}
+  \item The second \textit{italicized} item
+  \item The third etc \ldots
+\end{enumerate}</code></pre>
+<!-- END SLIDES -->
+<p>With good IDEs for \LaTeX this isn’t as bad as it looks, although they still hinder the writer’s flow. Over time and with experience, one can become proficient in \LaTeX. And once you invest the time to learn \LaTeX I can’t think of any reason why you would go back to Word. But it is likely that beginners will have a hard time getting started. So, if you cannot afford to experiment with \LaTeX, are you resigned to Word? I don’t think so. Markdown to the rescue!</p>
+<h2 id="markdown">Markdown</h2>
+<!-- BEGIN SLIDES -->
+<p>Markdown is a very lightweight easy-to-read easy-to-write plain text markup language. The same example as before looks like this in Markdown.</p>
+<pre><code># Section Name
+
+This is text in the section
+
+## Sub Section Name
+
+The following is a list in this subsection
+
+* The first **bold** item
+    - Nested item 1
+    - Nested item 2
+* The second *italicized* item
+* The third etc ...</code></pre>
+<!-- END SLIDES -->
+<p>Much better! It’s a lot easier to read and a lot easier to write than \LaTeX. Markdown, developed by John Gruber, was principally written for the web, to avoid the heavy markup of HTML. Tools have been developed to convert Markdown to HTML, PDF and even DOCX.</p>
+<p>The main advantages of Markdown:</p>
+<!-- BEGIN SLIDES -->
+<ul>
+<li>Easy: the syntax is simple</li>
+<li>Fast: the simple formatting saves time and speeds up workflows of writers</li>
+<li>Portable: documents are cross-platform by nature</li>
+<li>Flexible: HTML, PDF, DOCX, TEX are all supported output formats</li>
+</ul>
+<!-- END SLIDES -->
+<p>Markdown is awesome at a set of things, and a much better alternative than Word or \LaTeX for those specific set of things. Take for example this table <a href="#tbl:table">1</a>.</p>
+<!-- BEGIN SLIDES -->
+<pre><code>  Right     Left     Center     Default
+-------     ------ ----------   -------
+     12     12        12            12
+    123     123       123          123
+      1     1          1             1
+
+Table:  Demonstration of simple table syntax.</code></pre>
+<!-- END SLIDES -->
+<!-- BEGIN SLIDES -->
+<p>This is what the same table looks like in \LaTeX.</p>
+<pre><code>\begin{longtable}[c]{@{}rlcl@{}}
+\caption{Demonstration of simple table syntax.}
+\tabularnewline
+\toprule
+Right &amp; Left &amp; Center &amp; Default\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Right &amp; Left &amp; Center &amp; Default\tabularnewline
+\midrule
+\endhead
+12 &amp; 12 &amp; 12 &amp; 12\tabularnewline
+123 &amp; 123 &amp; 123 &amp; 123\tabularnewline
+1 &amp; 1 &amp; 1 &amp; 1\tabularnewline
+\bottomrule
+\end{longtable}</code></pre>
+<!-- END SLIDES -->
+<!-- BEGIN SLIDES -->
+<p>However, Markdown does not allow for the level of detailed customization that you can achieve using \LaTeX. Even a moderately complex table such as the one below is not supported (currently) by any form of Markdown.</p>
+<figure>
+<img src="/images/table.png" alt="" /><figcaption>Tabular \LaTeX example <span class="citation" data-cites="noauthor_wikibooks_nodate">[<a href="#ref-noauthor_wikibooks_nodate" role="doc-biblioref">6</a>]</span></figcaption>
+</figure>
+<!-- END SLIDES -->
+<!-- BEGIN SLIDES -->
+<p>Markdown may not be as powerful as \LaTeX, but its easy to write easy to read syntax, open standard format and a strong backing from the community make it a ideal candidate for writing. It has the advantages of Word (ease of use) and \LaTeX (excellent typesetting) for output formats. Also there is the added advantage of only having to write in Markdown once, and have documents generated in a multitude of formats later - PDF, DOCX, slides, HTML etc.</p>
+<!-- END SLIDES -->
+<p>I hope that by now you are convinced that Markdown is a great tool for writing. In the following sections we will look at how to convert a Markdown file to other formats, and what are some potential limitations and how you might overcome them.</p>
+<!-- BEGIN SLIDESNOHEADER -->
+<h1 id="pandoc---a-swiss-army-knife">Pandoc - A “swiss army knife”</h1>
+<p>Pandoc is a software tool by <a href="https://johnmacfarlane.net/">John Macfarlane</a> written in Haskell that can convert a document from just about any format to just about any other format. And works really well.</p>
+<!-- END SLIDES -->
+<p>Input formats:</p>
+<ul>
+<li>native (native Haskell)</li>
+<li>json (JSON version of native AST)</li>
+<li>markdown (pandoc’s extended Markdown)</li>
+<li>markdown_strict (original unextended Markdown)</li>
+<li>markdown_phpextra (PHP Markdown Extra)</li>
+<li>markdown_github (GitHub-Flavored Markdown)</li>
+<li>commonmark (CommonMark Markdown)</li>
+<li>textile (Textile)</li>
+<li>rst (reStructuredText)</li>
+<li>html (HTML)</li>
+<li>docbook (DocBook)</li>
+<li>t2t (txt2tags)</li>
+<li>docx (docx)</li>
+<li>odt (ODT)</li>
+<li>epub (EPUB)</li>
+<li>opml (OPML)</li>
+<li>org (Emacs Org mode)</li>
+<li>mediawiki (MediaWiki markup)</li>
+<li>twiki (TWiki markup)</li>
+<li>haddock (Haddock markup)</li>
+<li>or latex (\LaTeX)</li>
+</ul>
+<p>Output formats:</p>
+<ul>
+<li>native (native Haskell)</li>
+<li>json (JSON version of native AST)</li>
+<li>plain (plain text)</li>
+<li>markdown (pandoc’s extended Markdown)</li>
+<li>markdown_strict (original unextended Markdown)</li>
+<li>markdown_phpextra (PHP Markdown Extra)</li>
+<li>markdown_github (GitHub-Flavored Markdown)</li>
+<li>commonmark (CommonMark Markdown)</li>
+<li>rst (reStructuredText)</li>
+<li>html (XHTML)</li>
+<li>html5 (HTML5)</li>
+<li>latex (\LaTeX)</li>
+<li>beamer (\LaTeX beamer slide show)</li>
+<li>context (ConTeXt)</li>
+<li>man (groff man)</li>
+<li>mediawiki (MediaWiki markup)</li>
+<li>dokuwiki (DokuWiki markup)</li>
+<li>textile (Textile)</li>
+<li>org (Emacs Org mode)</li>
+<li>texinfo (GNU Texinfo)</li>
+<li>opml (OPML)</li>
+<li>docbook (DocBook)</li>
+<li>opendocument (OpenDocument)</li>
+<li>odt (OpenOffice text document)</li>
+<li>docx (Word docx)</li>
+<li>haddock (Haddock markup)</li>
+<li>rtf (rich text format)</li>
+<li>epub (EPUB v2 book)</li>
+<li>epub3 (EPUB v3)</li>
+<li>fb2 (FictionBook2 e-book)</li>
+<li>asciidoc (AsciiDoc)</li>
+<li>icml (InDesign ICML)</li>
+<li>slidy (Slidy HTML and javascript slide show)</li>
+<li>slideous (Slideous HTML and javascript slide show)</li>
+<li>dzslides (DZSlides HTML5 + javascript slide show)</li>
+<li>revealjs (reveal.js HTML5 + javascript slide show)</li>
+<li>s5 (S5 HTML and javascript slide show)</li>
+</ul>
+<p>With 21 input formats and 37 output formats, it doesn’t take long to guess that there’s no way they implemented a converter for each input to output format. Pandoc employs a Abstract Syntax Tree (AST) structure as an intermediate stage to convert one format to another<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This is the reason Pandoc is great at converting from and to a wide variety of formats, and why it is potentially easy to support new formats as well. Pandoc is also constantly under development. We can use Pandoc to convert a markdown file, to a PDF, HTML or DOCX file for a technical paper.</p>
+<p>First off, you will need <code>pandoc</code>. You can get the latest version from their GitHub page <span class="citation" data-cites="noauthor_github_nodate">[<a href="#ref-noauthor_github_nodate" role="doc-biblioref">7</a>]</span>. You may want <code>pandoc-citeproc</code> as well<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. You will also need \LaTeX. I’ve found that the following python packages are useful too.</p>
+<ul>
+<li><code>pandoc-attributes</code></li>
+<li><code>pandoc-eqnos</code></li>
+<li><code>pandoc-fignos</code></li>
+<li><code>pandoc-tablenos</code></li>
+<li><code>pandocfilters</code></li>
+</ul>
+<p>You can run <code>pip install &lt;package-name&gt;</code>. Alternatively you can create a virtual environment using <code>conda</code> with a suitable environment file <span class="citation" data-cites="krishnamurthy_github_nodate">[<a href="#ref-krishnamurthy_github_nodate" role="doc-biblioref">8</a>]</span>, which is the approach I recommend <span class="citation" data-cites="krishnamurthy_using_nodate">[<a href="#ref-krishnamurthy_using_nodate" role="doc-biblioref">9</a>]</span>.</p>
+<p>There are several people that have shared their complete workflow along with all their resources <span class="citation" data-cites="healy_plain_nodate noauthor_writing_nodate noauthor_writing_nodate-1 noauthor_academic_nodate">[<a href="#ref-healy_plain_nodate" role="doc-biblioref">10</a>]–[<a href="#ref-noauthor_academic_nodate" role="doc-biblioref">13</a>]</span>. Mine is available on GitHub <span class="citation" data-cites="krishnamurthy_github_nodate-1">[<a href="#ref-krishnamurthy_github_nodate-1" role="doc-biblioref">14</a>]</span> as well. While someone else’s workflow will work for you, I encourage you to start from scratch and craft your own. That way you will figure out why each item has been added into a workflow, and if that works for you. You will also know what to do if (when?) it breaks, and how to fix it. Feel free to go through other people’s Makefiles to see what they have done, and how you can improve your own.</p>
+<h2 id="syntax">Syntax</h2>
+<h3 id="headings"><strong><em>Headings</em></strong></h3>
+<pre><code># Section
+## Sub Section
+### Sub Sub Section</code></pre>
+<p><strong>Example</strong></p>
+<p>I’ve not provided an example here to avoid messing with this document’s headings.</p>
+<h3 id="text"><strong><em>Text</em></strong></h3>
+<pre><code>This text is in *italic*.
+This text is in **bold**.
+And this text is in ***bold-italic***</code></pre>
+<p><strong>Example</strong></p>
+<p>This text is in <em>italic</em>. This text is in <strong>bold</strong>. And this text is in <strong><em>bold-italic</em></strong>.</p>
+<h3 id="link"><strong><em>Link</em></strong></h3>
+<pre><code>[Text](https://google.com)</code></pre>
+<p><strong>Example</strong></p>
+<p><a href="https://google.com">Text</a></p>
+<h3 id="images"><strong><em>Images</em></strong></h3>
+<pre><code>![Caption](/images/markdown.png)</code></pre>
+<p><strong>Example</strong></p>
+<figure>
+<img src="/images/markdown.png" alt="" /><figcaption>Caption</figcaption>
+</figure>
+<h3 id="lists"><strong><em>Lists</em></strong></h3>
+<pre><code>* item
+* item
+    * item
+* item
+
+1. item
+1. item
+    1. item
+1. item</code></pre>
+<p><strong>Example</strong></p>
+<ul>
+<li>item</li>
+<li>item
+<ul>
+<li>item</li>
+</ul></li>
+<li>item</li>
+</ul>
+<ol type="1">
+<li>item</li>
+<li>item
+<ol type="1">
+<li>item</li>
+</ol></li>
+<li>item</li>
+</ol>
+<h3 id="quotes"><strong><em>Quotes</em></strong></h3>
+<pre><code>&gt; Research is what I&#39;m doing
+when I don&#39;t know what I&#39;m doing.
+- Wernher von Braun</code></pre>
+<p><strong>Example</strong></p>
+<blockquote>
+<p>Research is what I’m doing when I don’t know what I’m doing. - Wernher von Braun</p>
+</blockquote>
+<h3 id="code"><strong><em>Code</em></strong></h3>
+<pre><code>`inline code`
+
+    Tab space
+    for code block</code></pre>
+<p><strong>Example</strong></p>
+<p><code>inline code</code></p>
+<pre><code>Tab space
+for code block</code></pre>
+<h3 id="tables"><strong><em>Tables</em></strong></h3>
+<pre><code>  Right     Left     Center     Default
+-------     ------ ----------   -------
+     12     12        12            12
+    123     123       123          123
+      1     1          1             1
+
+Table:  Demonstration of simple table syntax.
+{#tbl:table}</code></pre>
+<p><strong>Example</strong></p>
+<div id="tbl:table" class="tablenos">
+<table>
+<caption><span>Table 1:</span> Demonstration of simple table syntax. </caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Right</th>
+<th style="text-align: left;">Left</th>
+<th style="text-align: center;">Center</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: center;">12</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">123</td>
+<td style="text-align: left;">123</td>
+<td style="text-align: center;">123</td>
+<td>123</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: center;">1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="footnotes"><strong><em>Footnotes</em></strong></h3>
+<pre><code>Example of a footnote [^0]</code></pre>
+<p><strong>Example</strong></p>
+<p>Example of a footnote [^0]</p>
+<h3 id="citations"><strong><em>Citations</em></strong></h3>
+<pre><code>This is a very important fact [@citation_example]</code></pre>
+<p><strong>Example</strong></p>
+<p>This is a very important fact <span class="citation" data-cites="citation_example">[<a href="#ref-citation_example" role="doc-biblioref">15</a>]</span></p>
+<h3 id="strikethrough"><strong><em>Strikethrough</em></strong></h3>
+<pre><code>~~Strikethrough text~~</code></pre>
+<p><strong>Example</strong></p>
+<p><del>Strikethrough text</del></p>
+<h3 id="equations"><strong><em>Equations</em></strong></h3>
+<pre><code>Inline equations $\pi$
+
+Block equations
+
+$$
+\pi
+$$ {#eq:pi}</code></pre>
+<p><strong>Example</strong></p>
+<p>Inline equations <span class="math inline">\(\pi\)</span></p>
+<p>Block equations</p>
+<p><span id="eq:pi" class="eqnos"><span class="math display">\[
+\pi
+\]</span><span class="eqnos-number">(1)</span></span> </p>
+<h2 id="pandoc-conversion">Pandoc conversion</h2>
+<p>Once you have typed all the content, you can use the <code>pandoc</code> command to convert the document into the format you want. Pandoc uses the output filename extension to figure out what the output file format should be. Btw, Pandoc is a command line tool only. You will have to use the command line for any conversion.</p>
+<!-- BEGIN SLIDES -->
+<p>To generate a PDF file:</p>
+<pre><code>pandoc document.md -o document.pdf</code></pre>
+<p>It is as simple as that! To generate a HTML file:</p>
+<pre><code>pandoc document.md -o document.html</code></pre>
+<!-- END SLIDES -->
+<p>Check out pandoc’s README <span class="citation" data-cites="noauthor_pandoc_nodate">[<a href="#ref-noauthor_pandoc_nodate" role="doc-biblioref">16</a>]</span>. It has loads of examples and you might be able to find what you are looking for by straight up picking an example or by making a minor tweak to it.</p>
+<!-- BEGIN SLIDES -->
+<p>With PDF files, you can specify the following additional arguments:</p>
+<ul>
+<li><code>--latex-engine=pdflatex</code>: latex engine</li>
+<li><code>--latex-template=latex.template</code>: latex template file</li>
+</ul>
+<!-- END SLIDES -->
+<p>This allows you to define a \LaTeX template to use. By default, <code>pandoc</code> uses a built in template.</p>
+<!-- BEGIN SLIDES -->
+<p>With html files, you can specify the following arguments:</p>
+<ul>
+<li><code>--template=html.template</code>: html template file</li>
+<li><code>--css=cssfile.css</code>: css file</li>
+</ul>
+<!-- END SLIDES -->
+<!-- BEGIN SLIDES -->
+<p>With docx files unfortunately, you cannot specify a template (at least not at the time of writing this post) <span class="citation" data-cites="noauthor_googlegroups_nodate">[<a href="#ref-noauthor_googlegroups_nodate" role="doc-biblioref">17</a>]</span>. You can however, specify a reference-docx:</p>
+<ul>
+<li><code>--reference-docx=reference.docx</code>: docx for reference styles</li>
+</ul>
+<!-- END SLIDES -->
+<!-- BEGIN SLIDES -->
+<p>These following arguments allow you to use citations when writing academic papers.</p>
+<ul>
+<li><code>--filter pandoc-citeproc</code>: filter to parse citations</li>
+<li><code>--csl=CSLFILE</code>: define a citation style sheet e.g. ieee.csl</li>
+<li><code>--bibliography=BIBFILE</code>: look for citations from a bibliography</li>
+</ul>
+<!-- END SLIDES -->
+<p>Pandoc will find the appropriate citation from a .bib file and add it to your Bibliography according to the style sheet you specify. It works great and I’ve had no issues with it so far.</p>
+<!-- BEGIN SLIDES -->
+<p>Also, I’ve found the following filters useful.</p>
+<ul>
+<li><code>--filter pandoc-eqnos</code>: equation numbers</li>
+<li><code>--filter pandoc-fignos</code>: figure numbers</li>
+<li><code>--filter pandoc-tablenos</code>: table numbers</li>
+</ul>
+<!-- END SLIDES -->
+<p>They allow you reference a figure, equation or table. For example, Equation <a href="#eq:pi">1</a> is an example of a block equation in Markdown.</p>
+<p>A paper may be generated using a command as shown below:</p>
+<pre><code>pandoc -s -S --latex-engine=pdflatex \
+--template=./templates/ieee-latex.template \
+--filter pandoc-fignos \
+--filter pandoc-eqnos \
+--filter pandoc-tablenos \
+--filter pandoc-citeproc \
+--csl=./styles/ieee.csl \
+--bibliography=./bib/research.bib \
+-o ieee-paper.pdf paper.md</code></pre>
+<p>As you can see, there are a lot of arguments that can be passed to Pandoc. I’ve found using Makefiles for recording your past commands and documenting these instructions extremely useful. I’ve barely scratched the surface with what you can do with Pandoc. I’ll update this post with more features if I think they are relevant to writing a paper using Markdown.</p>
+<!-- BEGIN SLIDESNOHEADER -->
+<h1 id="downside-to-using-markdown">Downside to using Markdown?</h1>
+<!-- END SLIDES -->
+<p>Pandoc allows you to define \LaTeX blocks in a markdown file, which are passed straight through to \LaTeX without any change. \LaTeX then processes it and renders it correctly. Which means if you want to generate a PDF, you are in luck! You have the entire arsenal of \LaTeX commands at your disposal.</p>
+<p>However, when converting to html or docx files, pandoc will choose to remove \LaTeX blocks. There is a workaround for equations. You can specify <code>--mathjax</code> and force Pandoc to attempt to render \LaTeX as mathjax, which works most of the time. This page for example was generated entirely from a markdown file, rendered to html using pandoc. I have found a few cases where mathjax did not work correctly for me, so there may be some experimenting involved. With DOCX, you can pass in the <code>--mathjax</code> flag, and Pandoc will convert it to Word’s equation editor format, but this seems to work only with the certain set of the markdown equation syntax that pandoc supports. In the case of tables, it is Markdown or bust. You have to format it in the Markdown table format that pandoc supports if you want a HTML or DOCX output.</p>
+<!-- BEGIN SLIDESNOHEADER -->
+<p>The good news is that anything you do in \LaTeX, you can do in Markdown and render as a PDF. This includes equations, tables, citations, references, images, lists, tikz diagrams etc. The bad news is that if you do decide to use \LaTeX syntax, you are still writing \LaTeX (although a lot less of it), and you have lost complete HTML and DOCX conversion capability.</p>
+<!-- END SLIDES -->
+<p>Also, Markdown / Pandoc does not support splitting the source document across multiple files. This was not as much a deal breaker for me, since the markup is pretty light and having it all in a single file is fine for a technical paper. However, for large reports extending hundreds of pages this may be a issue. There are workarounds for this (see next section), however they may be a bit of a hassle.</p>
+<!-- BEGIN SLIDESNOHEADER -->
+<h1 id="bending-markdown-to-your-will">Bending Markdown to your will</h1>
+<p>Fortunately, some of the problems I mentioned in the previous section can be solved using an excellent feature of Pandoc - filters!</p>
+<!-- END SLIDES -->
+<p>You can write your own custom filter, and you can use it to parse certain blocks in a custom fashion. For most people this will not be necessary since Pandoc is feature complete, and when a specific need arises<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> the community has often provided a custom filter that does the job. But if you come across a case where pandoc does not do what you want it to do, you can write a filter for it.</p>
+<!-- BEGIN SLIDES -->
+<p>There is a python package called <code>pandocfilters</code> that allows you to walk the AST and parse specific formats or keys. It is very powerful, and can offer unique ways to expand on pandoc’s functionality. I wrote a pandocfilter <span class="citation" data-cites="krishnamurthy_github_nodate">[<a href="#ref-krishnamurthy_github_nodate" role="doc-biblioref">8</a>]</span> to embed a jupyter notebook using a liquid tag style syntax, which I currently use for this <a href="https://kdheepak.com/blog/active-reactive-and-apparent-power.html">post</a>.</p>
+<!-- END SLIDES -->
+<p>In theory, you can write a filter that finds a \LaTeX table block in Markdown, converts it to an image and renders that in Word. Or you can write a filter that inputs other files during run time, allowing you to split your source document.</p>
+<p>My understanding is that the Python <code>pandocfilters</code> package is limited in scope. Alternatively, if you choose to, you can yield Pandoc’s complete power by writing a Haskell filter instead of using Python, but then you will be writing Haskell ;)</p>
+<p>I would tag the custom filters functionality I’ve described in this section as an advanced feature. I’ve not had to write my own filter for writing a technical paper (so far). Know that they are there when you need them.</p>
+<!-- BEGIN SLIDESNOHEADER -->
+<h1 id="tldr">TLDR</h1>
+<!-- END SLIDES -->
+<p>You can write a complete paper in Markdown and render it in PDF without any issues. I recommend using Markdown and Pandoc for writing over \LaTeX and Word because of its ease of use and its flexibility and versatility. And if you think Markdown is not cutting it for you, you can always convert it to a Word document or a TEX file and continue using your usual workflow. Check out my attempt at describing the relationship between complexity of document and difficulty in implementing when using Word, \LaTeX and Markdown in Fig. <a href="#fig:learningcurve">1</a>.</p>
+<!-- BEGIN SLIDESNOHEADER -->
+<div id="fig:learningcurve" class="fignos">
+<figure>
+<img src="/images/learningcurve.png" class="fullwidth" alt="" /><figcaption><span>Figure 1:</span> Comparing Word, \LaTeX and Markdown</figcaption>
+</figure>
+</div>
+<!-- END SLIDES -->
+<p>If you have gotten this far in the post, congratulations! This was a lot to take in, and I hope I shed some light on the potential for Markdown as an academic and technical writing tool. Let me know if you have any questions in the comments below.</p>
+<!-- BEGIN SLIDESNOHEADER -->
+<!-- END SLIDES -->
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-stallman_emacs_nodate">
+<p>[1] R. Stallman, “Emacs as word processor.” Accessed: Jan. 07, 2016. [Online]. Available: <a href="http://lists.gnu.org/archive/html/emacs-devel/2013-11/msg00515.html">http://lists.gnu.org/archive/html/emacs-devel/2013-11/msg00515.html</a>.</p>
+</div>
+<div id="ref-beaumont_bypass_2015">
+<p>[2] K. Beaumont, “Bypass almost every Corporate security control with a point’n’click GUI.” Dec. 2015, Accessed: Jan. 07, 2016. [Online]. Available: <a href="https://medium.com/@networksecurity/oleoutlook-bypass-almost-every-corporate-security-control-with-a-point-n-click-gui-37f4cbc107d0">https://medium.com/@networksecurity/oleoutlook-bypass-almost-every-corporate-security-control-with-a-point-n-click-gui-37f4cbc107d0</a>.</p>
+</div>
+<div id="ref-steingold_proprietary_nodate">
+<p>[3] S. Steingold, “Proprietary Binary Data Formats: Just Say No!” Accessed: Jan. 07, 2016. [Online]. Available: <a href="http://www.podval.org/~sds/data.html">http://www.podval.org/~sds/data.html</a>.</p>
+</div>
+<div id="ref-cottrell_word_nodate">
+<p>[4] A. Cottrell, “Word Processors: Stupid and Inefficient.” Accessed: Jan. 07, 2016. [Online]. Available: <a href="http://ricardo.ecn.wfu.edu/~cottrell/wp.html">http://ricardo.ecn.wfu.edu/~cottrell/wp.html</a>.</p>
+</div>
+<div id="ref-noauthor_stackoverflow_nodate">
+<p>[5] “StackOverflow Quote.” Accessed: Jan. 08, 2016. [Online]. Available: <a href="http://tex.stackexchange.com/a/95078">http://tex.stackexchange.com/a/95078</a>.</p>
+</div>
+<div id="ref-noauthor_wikibooks_nodate">
+<p>[6] “Wikibooks LaTeX Tables.” Accessed: Jan. 07, 2016. [Online]. Available: <a href="https://en.wikibooks.org/wiki/LaTeX/Tables">https://en.wikibooks.org/wiki/LaTeX/Tables</a>.</p>
+</div>
+<div id="ref-noauthor_github_nodate">
+<p>[7] “Github repository to Pandoc.” Accessed: Jan. 06, 2016. [Online]. Available: <a href="https://github.com/jgm/pandoc/releases">https://github.com/jgm/pandoc/releases</a>.</p>
+</div>
+<div id="ref-krishnamurthy_github_nodate">
+<p>[8] D. Krishnamurthy, “Github repository for jupyter notebook pandocfilter.” Accessed: Jan. 08, 2016. [Online]. Available: <a href="https://github.com/kdheepak/pandoc-ipynb">https://github.com/kdheepak/pandoc-ipynb</a>.</p>
+</div>
+<div id="ref-krishnamurthy_using_nodate">
+<p>[9] D. Krishnamurthy, “Using conda to manage packages.” Accessed: Jan. 06, 2016. [Online]. Available: <a href="http://kdheepak.com/blog/using-conda-to-manage-packages.html">http://kdheepak.com/blog/using-conda-to-manage-packages.html</a>.</p>
+</div>
+<div id="ref-healy_plain_nodate">
+<p>[10] K. Healy, “Plain Text, Papers, Pandoc.” [Online]. Available: <a href="http://kieranhealy.org/blog/archives/2014/01/23/plain-text/">http://kieranhealy.org/blog/archives/2014/01/23/plain-text/</a>.</p>
+</div>
+<div id="ref-noauthor_writing_nodate">
+<p>[11] “Writing academic papers in Markdown using Pandoc.” Accessed: Jan. 09, 2016. [Online]. Available: <a href="http://blog.cigrainger.com/2014/07/pandoc-markdown.html">http://blog.cigrainger.com/2014/07/pandoc-markdown.html</a>.</p>
+</div>
+<div id="ref-noauthor_writing_nodate-1">
+<p>[12] “Writing academic papers in plain text with Markdown and Jupyter notebook.” Accessed: Jan. 09, 2016. [Online]. Available: <a href="http://sylvaindeville.net/2015/07/17/writing-academic-papers-in-plain-text-with-markdown-and-jupyter-notebook/">http://sylvaindeville.net/2015/07/17/writing-academic-papers-in-plain-text-with-markdown-and-jupyter-notebook/</a>.</p>
+</div>
+<div id="ref-noauthor_academic_nodate">
+<p>[13] “Academic Markdown and Citations.” Accessed: Jan. 09, 2016. [Online]. Available: <a href="http://www.chriskrycho.com/2015/academic-markdown-and-citations.html">http://www.chriskrycho.com/2015/academic-markdown-and-citations.html</a>.</p>
+</div>
+<div id="ref-krishnamurthy_github_nodate-1">
+<p>[14] D. Krishnamurthy, “Github repository to Pandoc Paper Template.” Accessed: Jan. 06, 2016. [Online]. Available: <a href="https://github.com/kdheepak/pandoc-paper">https://github.com/kdheepak/pandoc-paper</a>.</p>
+</div>
+<div id="ref-citation_example">
+<p>[15] J. Doe, “Example Citation.”.</p>
+</div>
+<div id="ref-noauthor_pandoc_nodate">
+<p>[16] “Pandoc cross references Github issue tracker.” [Online]. Available: <a href="https://github.com/jgm/pandoc/issues/813">https://github.com/jgm/pandoc/issues/813</a>.</p>
+</div>
+<div id="ref-noauthor_googlegroups_nodate">
+<p>[17] “GoogleGroups.” Accessed: Jan. 08, 2016. [Online]. Available: <a href="https://groups.google.com/d/msg/pandoc-discuss/_KyoGN1Zf5g/rzq367675ecJ">https://groups.google.com/d/msg/pandoc-discuss/_KyoGN1Zf5g/rzq367675ecJ</a>.</p>
+</div>
+<div id="ref-duck_github_nodate">
+<p>[18] T. Duck, “Github repositories of Tom Duck.” Accessed: Jan. 09, 2016. [Online]. Available: <a href="https://github.com/tomduck">https://github.com/tomduck</a>.</p>
+</div>
+<div id="ref-noauthor_pandoc_nodate-1">
+<p>[19] “Pandoc README.” Accessed: Jan. 08, 2016. [Online]. Available: <a href="http://pandoc.org/README.html">http://pandoc.org/README.html</a>.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>I understand that there may be more <em>correct</em> ways to go about it, I just don’t want to be thinking about all that while I’m writing.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Having the ability to leave comments to myself or fellow collaborators that are filtered out of the final presentation can be very useful.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Understanding this will be important if you want to write your own custom filters. We will talk about that in the next section.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>If you install Pandoc from a package, <code>pandoc-citeproc</code> should come pre-installed. However, if you want to use a package manager such as <code>brew</code>, you may need to install <code>pandoc-citeproc</code> separately as well. Just run <code>brew install pandoc pandoc-citeproc</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>The features for references for figures, equations and tables are all python <code>pandocfilters</code> packages written by the one person <span class="citation" data-cites="duck_github_nodate">[<a href="#ref-duck_github_nodate" role="doc-biblioref">18</a>]</span>. There is a two year long standing discussion on cross references <span class="citation" data-cites="noauthor_pandoc_nodate-1">[<a href="#ref-noauthor_pandoc_nodate-1" role="doc-biblioref">19</a>]</span> that the curious reader is referred to.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

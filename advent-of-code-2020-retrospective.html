@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U" />
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="keywords" content="adventofcode, 2020, julia">
+  <meta name="description" content="Solutions to all 25 days in the Julia programming language.">
+  <meta property="og:url" content="https://blog.kdheepak.com/advent-of-code-2020-retrospective.html"/>
+  <meta property="og:title" content="Advent of Code 2020 Retrospective"/>
+  <meta property="og:description" content="Solutions to all 25 days in the Julia programming language."/>
+  <meta property="og:published_time" content=""/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://blog.kdheepak.com/rss.xml"/>
+  <title>Advent of Code 2020 Retrospective</title>
+  <style>code{white-space: pre;}</style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/css/latex.css"/>
+  <link rel="stylesheet" href="/css/tufte-extra.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/github.css"/>
+  <link rel="stylesheet" href="/css/pandoc.css"/>
+  <link rel="stylesheet" href="/css/tufte.css"/>
+  <link rel="stylesheet" href="/css/kudos.css"/>
+  <link rel="stylesheet" href="/css/custom.css"/>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+<header>
+<h1 class="title">
+    <a class="home" href="https://kdheepak.com">~</a> /
+        <a class="bloghome" href="/">blog</a> /
+        Advent of Code 2020 Retrospective
+</h1>
+<p class="subtitle sourceurl">
+ <a class="sourceurl" target="_blank" href="https://github.com/kdheepak/blog/blob/b2962a1c3e5008f95b6e50937f42ae70cb9cd47a/content/37-advent-of-code-2020.md">
+    Fri, Dec 25, 2020
+ </a>
+</p>
+</header>
+<section>
+<p>It is Christmas night, and it is the first time this month that I haven’t had to plan my schedule for the evening around a programming puzzle contest. For the last 25 days this month, I participated in <a href="https://adventofcode.com/2020/" target="_blank">Advent of Code 2020</a>, and I managed to collect all 50 stars!</p>
+<figure>
+<img src="images/advent-of-code-2020-stars.png" alt="" />
+</figure>
+<p>I solved all the puzzles in the <a href="https://julialang.org/" target="_blank">Julia</a> programming language, and my solutions are available <a href="https://github.com/kdheepak/adventofcode/tree/master/2020/julia/src" target="_blank">here</a>.</p>
+<p>In this post, I wanted to share why I think you should do Advent of Code and idiomatic solutions to all 25 days in the Julia programming language.</p>
+<section id="why-advent-of-code" class="level1">
+<h1><a href="#why-advent-of-code">#</a> Why Advent of Code</h1>
+<p>Advent of Code is a lot of fun. I think there’s a few reasons I find it quite enjoyable.</p>
+<p>Firstly, there’s the competitive aspect of it.</p>
+<p>A single puzzle unlocks every night at midnight Eastern Time, and the time when you submit a solution is recorded. There’s a global leaderboard that highlights the top 100 fastest times but you also have the ability to make a private leaderboard that you can share with anyone you like, and you can use that to track your time and challenge your friends or peers.</p>
+<p>For straightforward puzzles, it is a lot of fun to see who can read, grok and type out a bug-free working program the fastest. A bunch of people also upload recordings of their attempts, and it is humbling to see how fast they can whip out a correct solution to a problem.</p>
+<p>Secondly, unlike most other competitive programming challenges, the puzzles are mainly designed to be a teaching / learning experience.</p>
+<p>Every puzzle has two parts, where the first part introduces a prompt, and requires you to solve it before viewing the second part. The first part tends to set up an idea or check that you are on the right track, and the second part tends to extend the idea or subvert an obvious decision you made in the first part.</p>
+<p>Almost all the problems require parsing text input of various formats. In some of the latter puzzles, the puzzle inputs may be designed to hedge against certain naive solutions. Some puzzle inputs will only work with certain data structures or certain algorithms. There are a lot of “ah ha” moments when you figure what you should use and when, which makes for a very satisfying solve.</p>
+<p>Most problems are based on standard computer science programming concepts, but are never presented as such. Some problems have a mathematics tilt to it, which can make finding those solutions quite rewarding. But also, every problem is designed such that even if you don’t know the “theory” behind it you’ll be able to stumble your way into solving it if you persevere. Reading other people’s one liners after you hacked it together is quite enlightening.</p>
+<p>And since various programming language communities discuss their solutions in dedicated forums, there tends to be a lot of discussion about the tips and tricks you can use in your favourite programming language to express the problem more elegantly. Even after having used Python and Julia for years now, I still learn new things when I read other people’s solutions.</p>
+<p>And finally, that brings me to the community.</p>
+<p>The <a href="https://reddit.com/r/adventofcode" target="_blank">/r/adventofcode</a> subreddit and the Julia <a href="https://julialang.zulipchat.com" target="_blank">Zulip</a> and <a href="https://julialang.slack.com/" target="_blank">Slack</a> channel have been a joy to visit every day after solving the puzzles. I’ve particularly enjoyed seeing all the neat visualizations that come out of Advent of Code by the community.</p>
+<p>That’s the really neat thing about Advent of Code. The problems are short enough to be solved in less than an hour, the solutions are small enough to be written in just one file, puzzles tend to tackle just one concept or idea, and there is a large enough community around it. Consequently, a lot of people tend to share their solutions, and you get to see a lot of discussion around each puzzle, including a number of different ways to approach the same problem.</p>
+<p>If you’ve never heard of Advent of Code, I highly recommend you try it out. Below I’ll be discussing solutions in Julia that were shared on <a href="https://julialang.zulipchat.com" target="_blank">Zulip</a>, <a href="https://julialang.slack.com/" target="_blank">Slack</a> and <a href="https://reddit.com/r/adventofcode" target="_blank">Reddit</a>. This will contain spoilers for all days in Advent of Code 2020.</p>
+</section>
+<section id="solutions" class="level1">
+<h1><a href="#solutions">#</a> Solutions</h1>
+<ol type="1">
+<li><a href="#day-1-report-repair">Report Repair</a></li>
+<li><a href="#day-2-password-philosophy">Password Philosophy</a></li>
+<li><a href="#day-3-toboggan-trajectory">Toboggan Trajectory</a></li>
+<li><a href="#day-4-passport-processing">Passport Processing</a></li>
+<li><a href="#day-5-binary-boarding">Binary Boarding</a></li>
+<li><a href="#day-6-custom-customs">Custom Customs</a></li>
+<li><a href="#day-7-handy-haversacks">Handy Haversacks</a></li>
+<li><a href="#day-8-handheld-halting">Handheld Halting</a></li>
+<li><a href="#day-9-encoding-error">Encoding Error</a></li>
+<li><a href="#day-10-adapter-array">Adapter Array</a></li>
+<li><a href="#day-11-seating-system">Seating System</a></li>
+<li><a href="#day-12-rain-risk">Rain Risk</a></li>
+<li><a href="#day-13-shuttle-search">Shuttle Search</a></li>
+<li><a href="#day-14-docking-data">Docking Data</a></li>
+<li><a href="#day-15-rambunctious-recitation">Rambunctious Recitation</a></li>
+<li><a href="#day-16-ticket-translation">Ticket Translation</a></li>
+<li><a href="#day-17-conway-cubes">Conway Cubes</a></li>
+<li><a href="#day-18-operation-order">Operation Order</a></li>
+<li><a href="#day-19-monster-messages">Monster Messages</a></li>
+<li><a href="#day-20-jurassic-jigsaw">Jurassic Jigsaw</a></li>
+<li><a href="#day-21-allergen-assessment">Allergen Assessment</a></li>
+<li><a href="#day-22-crab-combat">Crab Combat</a></li>
+<li><a href="#day-23-crab-cups">Crab Cups</a></li>
+<li><a href="#day-24-lobby-layout">Lobby Layout</a></li>
+<li><a href="#day-25-combo-breaker">Combo Breaker</a></li>
+</ol>
+<section id="day-1-report-repair" class="level2">
+<h2><a href="#day-1-report-repair">#</a> <a href="https://adventofcode.com/2020/day/1" target="_blank">Day 1: Report Repair</a></h2>
+<p>Day 1 of advent of code is basically intended to check that you have a programming language installed, and you know how to use simple features it in (e.g. <code>for</code> loops).</p>
+<p>You can solve the first day with just multiple <code>for</code> loops. However, a more idiomatic solution can be expressed using the <code>combinations</code> function from the <a href="https://github.com/JuliaMath/Combinatorics.jl" target="_blank">Combinatorics.jl</a><span><label for="mn-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-1" class="margin-toggle"/><span class="marginnote">Python has a similar function in the standard library: <a href="https://docs.python.org/3/library/itertools.html#itertools.combinations" class="uri" target="_blank">https://docs.python.org/3/library/itertools.html#itertools.combinations</a></span></span>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>using Combinatorics</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>readInput() = sort(parse.(<span class="dt">Int</span>, split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)))))</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>expense_report(data, n) = only(prod(items) <span class="kw">for</span> items <span class="kw">in</span> combinations(data, n) <span class="kw">if</span> sum(items) == <span class="fl">2020</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>part1(data = readInput()) = expense_report(data, <span class="fl">2</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>part2(data = readInput()) = expense_report(data, <span class="fl">3</span>)</span></code></pre></div>
+<p>In Julia, small functions are usually made into their single line form. Here’s how you would write it if you would like to do it in the multi-line form.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">function</span> part1(data = readInput())</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    expense_report(data, <span class="fl">2</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">end</span></span></code></pre></div>
+<p>Functions also implicitly return the last expression evaluated as part of the function body, if an explicit <code>return</code> is not present.</p>
+</section>
+<section id="day-2-password-philosophy" class="level2">
+<h2><a href="#day-2-password-philosophy">#</a> <a href="https://adventofcode.com/2020/day/2" target="_blank">Day 2: Password Philosophy</a></h2>
+<p>Day 2 is a simple case of parsing, counting characters in a string and knowing that “exactly one” can be expressed using the <code>xor</code> operation.</p>
+<p>The solution below is based on <a href="https://github.com/Seelengrab/AdventOfCode" target="_blank">Sukera’s</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>readInput() = split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">function</span> parseInput(data)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    d = split.(data, <span class="st">&quot;: &quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    map(d) <span class="kw">do</span> (policy,password)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>        rule, letter = split(policy, <span class="ch">&#39; &#39;</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>        low, high = parse.(<span class="dt">Int</span>, split(rule, <span class="ch">&#39;-&#39;</span>))</span>
+<span id="cb3-8"><a href="#cb3-8"></a>        (low, high, only(letter), strip(password))</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="kw">end</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="kw">end</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="kw">function</span> part1(data = readInput())</span>
+<span id="cb3-13"><a href="#cb3-13"></a>    count(parseInput(data)) <span class="kw">do</span> (low, high, letter, password)</span>
+<span id="cb3-14"><a href="#cb3-14"></a>        low &lt;= count(==(letter), password) &lt;= high</span>
+<span id="cb3-15"><a href="#cb3-15"></a>    <span class="kw">end</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="kw">end</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="kw">function</span> part2(data = readInput())</span>
+<span id="cb3-19"><a href="#cb3-19"></a>    count(parseInput(data)) <span class="kw">do</span> (low, high, letter, password)</span>
+<span id="cb3-20"><a href="#cb3-20"></a>        (password[low] == letter) ⊻ (password[high] == letter)</span>
+<span id="cb3-21"><a href="#cb3-21"></a>    <span class="kw">end</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="kw">end</span></span></code></pre></div>
+<p>Julia supports an infix operator for <code>xor</code>: <code>⊻</code>.</p>
+<p>If a function <code>f</code> takes another function as the first argument, you can use the <code>f(c) do ... end</code> block syntax to map over every element in the collection <code>c</code> and apply the anonymous function defined by the <code>do ... end</code> block, the result of which is processed by the function <code>f</code>.</p>
+<p>For example, if you would like to do the following:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>julia&gt; is_a(letter) = letter == <span class="st">&quot;a&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>julia&gt; count(is_a, [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>])</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fl">1</span></span></code></pre></div>
+<p>you can express it like so instead:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>julia&gt; count([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>]) <span class="kw">do</span> letter</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    letter == <span class="st">&quot;a&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">end</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fl">1</span></span></code></pre></div>
+<p>Alternatively, you can pass in an anonymous function as the first argument by using the thin arrow <code>-&gt;</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>julia&gt; count(letter -&gt; letter == <span class="st">&quot;a&quot;</span>, [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>])</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fl">1</span></span></code></pre></div>
+<p>In Julia, you can use the <code>only</code> function to get the one and only element in a collection.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a>julia&gt; only(<span class="st">&quot;h&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ch">&#39;h&#39;</span>: ASCII/Unicode U+<span class="fl">0068</span> (category Ll: Letter, lowercase)</span></code></pre></div>
+</section>
+<section id="day-3-toboggan-trajectory" class="level2">
+<h2><a href="#day-3-toboggan-trajectory">#</a> <a href="https://adventofcode.com/2020/day/3" target="_blank">Day 3: Toboggan Trajectory</a></h2>
+<p>A lot of advent of code problems have the puzzle input as text that represents a grid. Day 3 is our first introduction to a grid of trees.</p>
+<p>Having a one liner to convert the text input to a <code>Matrix</code> can be very useful.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a>readInput() = permutedims(reduce(hcat, collect.(readlines(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>)))))</span></code></pre></div>
+<p>Here’s what the input for this particular day looks like:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a>julia&gt; A = readInput();</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>julia&gt; typeof(A)</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="dt">Matrix</span>{<span class="dt">Char</span>} (alias <span class="kw">for</span> <span class="dt">Array</span>{<span class="dt">Char</span>, <span class="fl">2</span>})</span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>julia&gt; size(A)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>(<span class="fl">323</span>, <span class="fl">31</span>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>julia&gt; xy = findall(==(<span class="ch">&#39;#&#39;</span>), A);</span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>julia&gt; using SparseArrays; sparse([p.I[<span class="fl">1</span>] <span class="kw">for</span> p <span class="kw">in</span> xy], [p.I[<span class="fl">2</span>] <span class="kw">for</span> p <span class="kw">in</span> xy], [<span class="fl">1</span> <span class="kw">for</span> _ <span class="kw">in</span> xy])</span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="fl">323</span>×<span class="fl">31</span> SparseMatrixCSC{<span class="dt">Int64</span>, <span class="dt">Int64</span>} with <span class="fl">2611</span> stored entries:</span>
+<span id="cb9-13"><a href="#cb9-13"></a>⠟⣿⡿⡯⣮⣿⡇</span>
+<span id="cb9-14"><a href="#cb9-14"></a>⡗⣿⣿⢿⢝⣽⡇</span>
+<span id="cb9-15"><a href="#cb9-15"></a>⡞⡾⣟⢏⣭⢯⡂</span>
+<span id="cb9-16"><a href="#cb9-16"></a>⣷⣿⣿⢽⣟⣻⠇</span>
+<span id="cb9-17"><a href="#cb9-17"></a>⢺⣯⣗⠽⣟⣿⡂</span>
+<span id="cb9-18"><a href="#cb9-18"></a>⡬⡻⡯⡿⣯⣵⡇</span>
+<span id="cb9-19"><a href="#cb9-19"></a>⠾⣟⣿⡺⣽⣫⠅</span>
+<span id="cb9-20"><a href="#cb9-20"></a>⣿⡿⡏⣯⡈⣻⠅</span>
+<span id="cb9-21"><a href="#cb9-21"></a>⢫⢯⣿⣻⡻⡏⡁</span>
+<span id="cb9-22"><a href="#cb9-22"></a>⠭⡟⣻⡿⢽⣿⠇</span>
+<span id="cb9-23"><a href="#cb9-23"></a>⣝⣽⣷⡑⣟⢽⠇</span>
+<span id="cb9-24"><a href="#cb9-24"></a>⢗⣛⣱⣝⠯⡟⡇</span>
+<span id="cb9-25"><a href="#cb9-25"></a>⣌⣷⡛⢯⣿⡗⠇</span>
+<span id="cb9-26"><a href="#cb9-26"></a>⢷⠿⡍⢶⡯⣟⡅</span>
+<span id="cb9-27"><a href="#cb9-27"></a>⡝⣿⡻⣿⣿⢿⡂</span>
+<span id="cb9-28"><a href="#cb9-28"></a>⢜⠽⢯⣿⣻⣇⠁</span>
+<span id="cb9-29"><a href="#cb9-29"></a>⠹⢿⢻⡯⡟⡛⡅</span>
+<span id="cb9-30"><a href="#cb9-30"></a>⣷⣮⣽⣿⡿⡻⡃</span>
+<span id="cb9-31"><a href="#cb9-31"></a>⣻⡯⣞⣷⣿⡏⠆</span>
+<span id="cb9-32"><a href="#cb9-32"></a>⣮⡗⣟⢫⣵⣿⡆</span>
+<span id="cb9-33"><a href="#cb9-33"></a>⣌⣶⣾⣢⣿⣷⡅</span>
+<span id="cb9-34"><a href="#cb9-34"></a>⣜⡷⡿⠷⣿⣛⡁</span>
+<span id="cb9-35"><a href="#cb9-35"></a>⣶⣽⣮⣾⣏⡋⡅</span>
+<span id="cb9-36"><a href="#cb9-36"></a>⣭⣽⣃⣧⣾⣳⡃</span>
+<span id="cb9-37"><a href="#cb9-37"></a>⣟⣿⡿⣯⣿⡽⡀</span>
+<span id="cb9-38"><a href="#cb9-38"></a>⣼⣪⣗⣯⡖⡿⡃</span>
+<span id="cb9-39"><a href="#cb9-39"></a>⣯⢿⡹⣻⣯⣇⡇</span>
+<span id="cb9-40"><a href="#cb9-40"></a>⣵⣟⡝⢾⢽⣳⠅</span>
+<span id="cb9-41"><a href="#cb9-41"></a>⡿⣯⡿⣻⣿⣿⡃</span>
+<span id="cb9-42"><a href="#cb9-42"></a>⣇⣿⣟⣶⣿⣦⡇</span>
+<span id="cb9-43"><a href="#cb9-43"></a>⡺⣝⣷⣎⢟⣛⡅</span>
+<span id="cb9-44"><a href="#cb9-44"></a>⣻⢏⣯⣟⣎⣓⡅</span>
+<span id="cb9-45"><a href="#cb9-45"></a>⡕⣿⣿⣵⣕⢽⡇</span>
+<span id="cb9-46"><a href="#cb9-46"></a>⡿⣟⣿⣮⣯⣷⡃</span>
+<span id="cb9-47"><a href="#cb9-47"></a>⣟⡃⣇⡻⣿⣯⡇</span>
+<span id="cb9-48"><a href="#cb9-48"></a>⣠⣧⣾⣟⣞⢿⠀</span></code></pre></div>
+<p>This solution is based on <a href="https://github.com/ferrolho/advent-of-code/blob/b34dbe9ee5eef7a36fbf77044c83acc75fbe54cf/2020/03/puzzle.jl" target="_blank">Henrique Ferrolho’s</a> solution.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">function</span> solve(trees, slope)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    n = cld(size(trees, <span class="fl">1</span>), slope.y)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>    rs = range(<span class="fl">1</span>, step=slope.y, length=n)</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    cs = range(<span class="fl">1</span>, step=slope.x, length=n)</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    cs = map(c -&gt; mod1(c, size(trees, <span class="fl">2</span>)), cs)</span>
+<span id="cb10-6"><a href="#cb10-6"></a>    idxs = CartesianIndex.(rs, cs)</span>
+<span id="cb10-7"><a href="#cb10-7"></a>    count(==(<span class="ch">&#39;#&#39;</span>), trees[idxs])</span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="kw">end</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a>part1(data = readInput()) = solve(data, (x = <span class="fl">3</span>, y = <span class="fl">1</span>))</span>
+<span id="cb10-11"><a href="#cb10-11"></a>part2(data = readInput()) = prod(solve.(Ref(data), [(x=<span class="fl">1</span>,y=<span class="fl">1</span>),(x=<span class="fl">5</span>,y=<span class="fl">1</span>),(x=<span class="fl">3</span>,y=<span class="fl">1</span>),(x=<span class="fl">7</span>,y=<span class="fl">1</span>),(x=<span class="fl">1</span>,y=<span class="fl">2</span>)]))</span></code></pre></div>
+<p>In Julia, you <code>==(e)</code> returns a “fixed” function which partially applies over the value of <code>e</code> and accepts one argument which you can use to test equality.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a>julia&gt; ==(<span class="ch">&#39;#&#39;</span>)(<span class="ch">&#39;#&#39;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>true</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a>julia&gt; ==(<span class="ch">&#39;#&#39;</span>)(<span class="ch">&#39;.&#39;</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a>false</span></code></pre></div>
+<p>Julia has <code>mod1</code> for 1 based mod, which is useful for indexing in these type of situations. Julia also has ceiling division (<code>cld</code>) and floor division (<code>fld</code>) which happen to be handy here.</p>
+<p>Julia has support for broadcasting using the <code>f.(c)</code> syntax, which allows for the element by element application of the method <code>f</code> on every element in the collection <code>c</code>, i.e. <code>f(e) for e in c</code>. This tends to be very handy in Advent of Code.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1"></a>julia&gt; c = [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>];</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a>julia&gt; f(x::<span class="dt">Int</span>) = x + <span class="fl">1</span>;</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>julia&gt; println(f.(c))</span>
+<span id="cb12-6"><a href="#cb12-6"></a>[<span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>]</span></code></pre></div>
+<p>Additionally, you can use <code>Ref(data)</code> to tell Julia that it is a singleton that shouldn’t be broadcast over. Alternatively, you can use <code>(data,)</code> to get the same behavior.</p>
+</section>
+<section id="day-4-passport-processing" class="level2">
+<h2><a href="#day-4-passport-processing">#</a> <a href="https://adventofcode.com/2020/day/4" target="_blank">Day 4: Passport Processing</a></h2>
+<p>Since the input has passports separated by an empty line, you can split on <code>"\n\n"</code> to get each passport into an element of a <code>Vector</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a>readInput() = split(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<p>This is what the first 5 passports look like:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1"></a>julia&gt; readInput() |&gt; x -&gt; first(x, <span class="fl">3</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fl">5</span>-element <span class="dt">Vector</span>{<span class="dt">SubString</span>{<span class="dt">String</span>}}:</span>
+<span id="cb14-3"><a href="#cb14-3"></a> <span class="st">&quot;hgt:159cm</span><span class="sc">\n</span><span class="st">pid:561068005 eyr:2025 iyr:2017 cid:139 ecl:blu hcl:#ceb3a1</span><span class="sc">\n</span><span class="st">byr:1940&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a> <span class="st">&quot;iyr:2014</span><span class="sc">\n</span><span class="st">byr:1986 pid:960679613 eyr:2025 ecl:hzl&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a> <span class="st">&quot;cid:211 ecl:blu hcl:#7d3b0c iyr:2011 pid:006632702</span><span class="sc">\n</span><span class="st">byr:1982 eyr:2023 hgt:68in&quot;</span></span></code></pre></div>
+<p>Julia allows piping the results of one function into another using <code>|&gt;</code>.</p>
+<p>Learning how to use regex well in your programming language of choice can make solutions concise and terse. Check out this solution by <a href="https://github.com/pabloferz/AoC/blob/e64841e31d9dc9391be73b041a2e01795dafa1b6/2020/04/Day4.jl" target="_blank">Pablo Zubieta</a>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">const</span> fields1 = (r<span class="st">&quot;byr&quot;</span>, r<span class="st">&quot;iyr&quot;</span>, r<span class="st">&quot;eyr&quot;</span>, r<span class="st">&quot;hgt&quot;</span>, r<span class="st">&quot;hcl&quot;</span>, r<span class="st">&quot;ecl&quot;</span>, r<span class="st">&quot;pid&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">const</span> fields2 = (</span>
+<span id="cb15-3"><a href="#cb15-3"></a>    r<span class="st">&quot;byr:(19[2-9][0-9]|200[0-2])</span><span class="sc">\b</span><span class="st">&quot;</span>,</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    r<span class="st">&quot;iyr:20(1[0-9]|20)</span><span class="sc">\b</span><span class="st">&quot;</span>,</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    r<span class="st">&quot;eyr:20(2[0-9]|30)</span><span class="sc">\b</span><span class="st">&quot;</span>,</span>
+<span id="cb15-6"><a href="#cb15-6"></a>    r<span class="st">&quot;hgt:(1([5-8][0-9]|9[0-3])cm|(59|6[0-9]|7[0-6])in)</span><span class="sc">\b</span><span class="st">&quot;</span>,</span>
+<span id="cb15-7"><a href="#cb15-7"></a>    r<span class="st">&quot;hcl:#[0-9a-f]{6}</span><span class="sc">\b</span><span class="st">&quot;</span>,</span>
+<span id="cb15-8"><a href="#cb15-8"></a>    r<span class="st">&quot;ecl:(amb|blu|brn|gry|grn|hzl|oth)</span><span class="sc">\b</span><span class="st">&quot;</span>,</span>
+<span id="cb15-9"><a href="#cb15-9"></a>    r<span class="st">&quot;pid:\d{9}</span><span class="sc">\b</span><span class="st">&quot;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>)</span>
+<span id="cb15-11"><a href="#cb15-11"></a></span>
+<span id="cb15-12"><a href="#cb15-12"></a>part1(data = readInput()) = count(p -&gt; all(t -&gt; contains(p, t), fields1), data)</span>
+<span id="cb15-13"><a href="#cb15-13"></a>part2(data = readInput()) = count(p -&gt; all(t -&gt; contains(p, t), fields2), data)</span></code></pre></div>
+<p>There were a lot of puzzles this year where I would have been able to parse the input more easily by knowing just a little bit more regex.</p>
+</section>
+<section id="day-5-binary-boarding" class="level2">
+<h2><a href="#day-5-binary-boarding">#</a> <a href="https://adventofcode.com/2020/day/5" target="_blank">Day 5: Binary Boarding</a></h2>
+<p>Sometimes having a little insight into what the problem is asking can go a long way. For example, in this puzzle, the seat ID is just a binary representation of the input.</p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="88" height="192">
+    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        /* This fix the spacing bug in svg text*/
+                        white-space: pre;
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: transparent;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: transparent;
+                        }
+                        .nofill{
+                            fill: transparent;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+    <defs>
+        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+        </marker>
+        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+        </marker>
+        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="2" class="filled"></circle>
+        </marker>
+        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+        </marker>
+        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+        </marker>
+    </defs>
+    <rect class="backdrop" x="0" y="0" width="88" height="192"></rect>
+    <text x="2" y="12" >FBFBBFFRLR</text>
+    <line x1="36" y1="32" x2="36" y2="64" class="solid end_marked_arrow"></line>
+    <text x="2" y="92" >0101100101</text>
+    <line x1="36" y1="112" x2="36" y2="144" class="solid end_marked_arrow"></line>
+    <text x="26" y="172" >357</text>
+</svg>
+</p>
+<p>So you can calculate the seat ID using binary shifting or by converting the input to <code>1</code>s and <code>0</code>s and parsing the input as a binary number directly.</p>
+<p>This solution is based on <a href="https://github.com/Arkoniak/advent_of_code/blob/c692bc20147362cfb373e1483cf73588489a597b/2020/05/day05.jl" target="_blank">Andrey Oskin’s</a>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1"></a>seatid(s) = reduce((x, y) -&gt; (x &lt;&lt; <span class="fl">1</span>) | ((y == <span class="ch">&#39;R&#39;</span>) | (y == <span class="ch">&#39;B&#39;</span>)), s; init = <span class="fl">0</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># OR</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>seatid(s) = parse(<span class="dt">Int</span>, map(c -&gt; c ∈ (<span class="ch">&#39;R&#39;</span>, <span class="ch">&#39;B&#39;</span>) ? <span class="ch">&#39;1&#39;</span> : <span class="ch">&#39;0&#39;</span>, s), base = <span class="fl">2</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a>part1() = mapreduce(seatid, max, eachline(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>)))</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">function</span> part2()</span>
+<span id="cb16-8"><a href="#cb16-8"></a>    seats = sort(seatid.(eachline(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>))))</span>
+<span id="cb16-9"><a href="#cb16-9"></a>    prev = first(seats)</span>
+<span id="cb16-10"><a href="#cb16-10"></a>    <span class="kw">for</span> seat <span class="kw">in</span> seats</span>
+<span id="cb16-11"><a href="#cb16-11"></a>        (seat - prev == <span class="fl">2</span>) &amp;&amp; <span class="kw">return</span> prev + <span class="fl">1</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a>        prev = seat</span>
+<span id="cb16-13"><a href="#cb16-13"></a>    <span class="kw">end</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="kw">end</span></span></code></pre></div>
+<p>The <code>eachline</code> function is an alternative to <code>readlines</code>. It iteratively reads from a stream or IO.</p>
+</section>
+<section id="day-6-custom-customs" class="level2">
+<h2><a href="#day-6-custom-customs">#</a> <a href="https://adventofcode.com/2020/day/6" target="_blank">Day 6: Custom Customs</a></h2>
+<p>Day 6 introduces set operations with the prompt asking you to identify “any” and “every” question, which can be expressed using <code>union</code> and <code>intersect</code>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a>readInput() = split.(split(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>))</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a>part1(data = readInput()) = sum(q -&gt; length(∪(<span class="dt">Set</span>.(q)...)), data)</span>
+<span id="cb17-4"><a href="#cb17-4"></a>part2(data = readInput()) = sum(q -&gt; length(∩(<span class="dt">Set</span>.(q)...)), data)</span></code></pre></div>
+<p>In Julia, you can use the unicode symbols of mathematical operations for <code>union</code> and <code>intersect</code> of sets, namely <code>∪</code> and <code>∩</code> respectively. In the Julia REPL or text editors with Julia plugins, you can use the name and tab complete to get the unicode symbol.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1"></a>julia&gt; \cup&lt;TAB&gt;</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a>julia&gt; ∪</span>
+<span id="cb18-4"><a href="#cb18-4"></a>union (generic <span class="kw">function</span> with <span class="fl">5</span> methods)</span>
+<span id="cb18-5"><a href="#cb18-5"></a></span>
+<span id="cb18-6"><a href="#cb18-6"></a>julia&gt; \cap&lt;TAB&gt;</span>
+<span id="cb18-7"><a href="#cb18-7"></a></span>
+<span id="cb18-8"><a href="#cb18-8"></a>julia&gt; ∩</span>
+<span id="cb18-9"><a href="#cb18-9"></a>intersect (generic <span class="kw">function</span> with <span class="fl">19</span> methods)</span></code></pre></div>
+<p>Also, julia has methods on functions like <code>sum</code> that accept a function as the first argument, which is useful for mapping over every element in a collection.</p>
+<p>The <code>...</code> operator can be used to splat elements from a collection into arguments of a function.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1"></a>julia&gt; f(a, b, c) = @show a, b, c;</span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a>julia&gt; x = [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a>julia&gt; f(x...);</span>
+<span id="cb19-6"><a href="#cb19-6"></a>(a, b, c) = (<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>)</span></code></pre></div>
+</section>
+<section id="day-7-handy-haversacks" class="level2">
+<h2><a href="#day-7-handy-haversacks">#</a> <a href="https://adventofcode.com/2020/day/7" target="_blank">Day 7: Handy Haversacks</a></h2>
+<p>Day 7 is the first introduction to graphs this year. While it is possible to find solutions to both parts of this puzzle using recursion, the problem can be well represented as a graph.</p>
+<p>This code is based on <a href="https://github.com/CNOT" target="_blank">Ali Hamed Moosavian’s</a> and <a href="https://github.com/Arkoniak/advent_of_code/blob/c692bc20147362cfb373e1483cf73588489a597b/2020/07/day07.jl" target="_blank">Andrey Oskin’s</a> solutions and visualizations:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1"></a>using LightGraphs</span>
+<span id="cb20-2"><a href="#cb20-2"></a>using SimpleWeightedGraphs</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a>readInput() = build_graph(split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>))</span>
+<span id="cb20-5"><a href="#cb20-5"></a></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="kw">function</span> build_graph(data)</span>
+<span id="cb20-7"><a href="#cb20-7"></a>    edges = []</span>
+<span id="cb20-8"><a href="#cb20-8"></a>    <span class="kw">for</span> line <span class="kw">in</span> data</span>
+<span id="cb20-9"><a href="#cb20-9"></a>        outer_bag, inner_bags = split(line, <span class="st">&quot; contain &quot;</span>)</span>
+<span id="cb20-10"><a href="#cb20-10"></a>        occursin(<span class="st">&quot;no other bags&quot;</span>, inner_bags) &amp;&amp; <span class="kw">continue</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>        <span class="kw">for</span> bag <span class="kw">in</span> split(inner_bags, <span class="st">&quot;, &quot;</span>)</span>
+<span id="cb20-12"><a href="#cb20-12"></a>            counter, name = parse(<span class="dt">Int</span>, first(bag)), strip(bag[<span class="fl">3</span>:<span class="kw">end</span>], <span class="ch">&#39;.&#39;</span>)</span>
+<span id="cb20-13"><a href="#cb20-13"></a>            e = <span class="dt">String</span>(rstrip(outer_bag, <span class="ch">&#39;s&#39;</span>)), <span class="dt">String</span>(rstrip(name, <span class="ch">&#39;s&#39;</span>)), counter</span>
+<span id="cb20-14"><a href="#cb20-14"></a>            push!(edges, e)</span>
+<span id="cb20-15"><a href="#cb20-15"></a>        <span class="kw">end</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>    <span class="kw">end</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a></span>
+<span id="cb20-18"><a href="#cb20-18"></a>    nodes = collect(<span class="dt">Set</span>(src <span class="kw">for</span> (src, _, _) <span class="kw">in</span> edges) ∪ <span class="dt">Set</span>(dst <span class="kw">for</span> (_, dst, _) <span class="kw">in</span> edges))</span>
+<span id="cb20-19"><a href="#cb20-19"></a>    mapping = <span class="dt">Dict</span>(n =&gt; i <span class="kw">for</span> (i,n) <span class="kw">in</span> enumerate(nodes))</span>
+<span id="cb20-20"><a href="#cb20-20"></a></span>
+<span id="cb20-21"><a href="#cb20-21"></a>    g = SimpleWeightedDiGraph(length(nodes))</span>
+<span id="cb20-22"><a href="#cb20-22"></a>    <span class="kw">for</span> (src, dst, counter) <span class="kw">in</span> edges</span>
+<span id="cb20-23"><a href="#cb20-23"></a>        add_edge!(g, mapping[src], mapping[dst], counter)</span>
+<span id="cb20-24"><a href="#cb20-24"></a>    <span class="kw">end</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a>    g, mapping, nodes</span>
+<span id="cb20-26"><a href="#cb20-26"></a><span class="kw">end</span></span></code></pre></div>
+<p>Now that you have built a graph, you can find the solution by just traversing the graph.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1"></a>part1(data = readInput()) = part1(data[<span class="fl">1</span>], data[<span class="fl">2</span>])</span>
+<span id="cb21-2"><a href="#cb21-2"></a>part1(g, mapping) = count(!=(<span class="fl">0</span>), bfs_parents(g, mapping[<span class="st">&quot;shiny gold bag&quot;</span>], dir = :<span class="kw">in</span>)) - <span class="fl">1</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">function</span> total_bags(g, v)</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    isempty(neighbors(g, v)) &amp;&amp; <span class="kw">return</span> <span class="fl">1</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>    <span class="fl">1</span> + sum(neighbors(g, v)) <span class="kw">do</span> nb</span>
+<span id="cb21-7"><a href="#cb21-7"></a>        <span class="dt">Int</span>(g.weights[nb, v]) * total_bags(g, nb)</span>
+<span id="cb21-8"><a href="#cb21-8"></a>    <span class="kw">end</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="kw">end</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a></span>
+<span id="cb21-11"><a href="#cb21-11"></a>part2(data = readInput()) = part2(data[<span class="fl">1</span>], data[<span class="fl">2</span>])</span>
+<span id="cb21-12"><a href="#cb21-12"></a>part2(g, mapping) = total_bags(g, mapping[<span class="st">&quot;shiny gold bag&quot;</span>]) - <span class="fl">1</span></span></code></pre></div>
+<p><img src="images/adventofcode-day07-part1.png" style="width:45.0%" alt="part1" /> <img src="images/adventofcode-day07-part2.png" style="width:45.0%" alt="part2" /></p>
+<p>Julia allows for <a href="https://docs.julialang.org/en/v1/manual/methods/" target="_blank">multiple dispatch</a> based on the number of arguments and the type of each argument. This lets you define multiple methods of a function.</p>
+</section>
+<section id="day-8-handheld-halting" class="level2">
+<h2><a href="#day-8-handheld-halting">#</a> <a href="https://adventofcode.com/2020/day/8" target="_blank">Day 8: Handheld Halting</a></h2>
+<p>Day 8 appears to be a straightforward op code interpreter.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1"></a>readInput() = strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>))</span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a>part1(data = readInput()) = boot(split(data, <span class="ch">&#39;\n&#39;</span>))</span>
+<span id="cb22-4"><a href="#cb22-4"></a>part2(data = readInput()) = corrupt(split(data, <span class="ch">&#39;\n&#39;</span>))</span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="kw">function</span> boot(instructions)</span>
+<span id="cb22-7"><a href="#cb22-7"></a>    acc, i, s = <span class="fl">0</span>, <span class="fl">1</span>, <span class="dt">Set</span>{<span class="dt">Int</span>}()</span>
+<span id="cb22-8"><a href="#cb22-8"></a>    <span class="kw">while</span> true</span>
+<span id="cb22-9"><a href="#cb22-9"></a>        i ∈ s ? <span class="kw">break</span> : push!(s, i)</span>
+<span id="cb22-10"><a href="#cb22-10"></a>        inst, n = split(instructions[i])</span>
+<span id="cb22-11"><a href="#cb22-11"></a>        n = parse(<span class="dt">Int</span>, n)</span>
+<span id="cb22-12"><a href="#cb22-12"></a>        inst == <span class="st">&quot;acc&quot;</span> &amp;&amp; ( i += <span class="fl">1</span>; acc += n )</span>
+<span id="cb22-13"><a href="#cb22-13"></a>        inst == <span class="st">&quot;jmp&quot;</span> &amp;&amp; ( i += n )</span>
+<span id="cb22-14"><a href="#cb22-14"></a>        inst == <span class="st">&quot;nop&quot;</span> &amp;&amp; ( i += <span class="fl">1</span> )</span>
+<span id="cb22-15"><a href="#cb22-15"></a>    <span class="kw">end</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a>    acc</span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="kw">end</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a></span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="kw">function</span> corrupt(original_instructions)</span>
+<span id="cb22-20"><a href="#cb22-20"></a>    <span class="kw">for</span> j <span class="kw">in</span> <span class="fl">1</span>:length(original_instructions)</span>
+<span id="cb22-21"><a href="#cb22-21"></a>        boot_loop_detected = false</span>
+<span id="cb22-22"><a href="#cb22-22"></a>        acc, i, s = <span class="fl">0</span>, <span class="fl">1</span>, <span class="dt">Set</span>{<span class="dt">Int</span>}()</span>
+<span id="cb22-23"><a href="#cb22-23"></a>        instructions = copy(original_instructions)</span>
+<span id="cb22-24"><a href="#cb22-24"></a>        <span class="kw">if</span> occursin(<span class="st">&quot;jmp&quot;</span>, instructions[j])</span>
+<span id="cb22-25"><a href="#cb22-25"></a>            instructions[j] = replace(instructions[j], <span class="st">&quot;jmp&quot;</span> =&gt; <span class="st">&quot;nop&quot;</span>)</span>
+<span id="cb22-26"><a href="#cb22-26"></a>        <span class="kw">elseif</span> occursin(<span class="st">&quot;nop&quot;</span>, instructions[j])</span>
+<span id="cb22-27"><a href="#cb22-27"></a>            instructions[j] = replace(instructions[j], <span class="st">&quot;nop&quot;</span> =&gt; <span class="st">&quot;jmp&quot;</span>)</span>
+<span id="cb22-28"><a href="#cb22-28"></a>        <span class="kw">end</span></span>
+<span id="cb22-29"><a href="#cb22-29"></a>        <span class="kw">while</span> true</span>
+<span id="cb22-30"><a href="#cb22-30"></a>            i ∈ s ? ( boot_loop_detected = true; <span class="kw">break</span> ) : push!(s, i)</span>
+<span id="cb22-31"><a href="#cb22-31"></a>            i &gt; length(instructions) &amp;&amp; <span class="kw">break</span></span>
+<span id="cb22-32"><a href="#cb22-32"></a>            inst, n = split(instructions[i])</span>
+<span id="cb22-33"><a href="#cb22-33"></a>            n = parse(<span class="dt">Int</span>, n)</span>
+<span id="cb22-34"><a href="#cb22-34"></a>            inst == <span class="st">&quot;acc&quot;</span> &amp;&amp; ( i += <span class="fl">1</span>; acc += n )</span>
+<span id="cb22-35"><a href="#cb22-35"></a>            inst == <span class="st">&quot;jmp&quot;</span> &amp;&amp; ( i += n )</span>
+<span id="cb22-36"><a href="#cb22-36"></a>            inst == <span class="st">&quot;nop&quot;</span> &amp;&amp; ( i += <span class="fl">1</span> )</span>
+<span id="cb22-37"><a href="#cb22-37"></a>        <span class="kw">end</span></span>
+<span id="cb22-38"><a href="#cb22-38"></a>        !boot_loop_detected &amp;&amp; <span class="kw">return</span> acc</span>
+<span id="cb22-39"><a href="#cb22-39"></a>    <span class="kw">end</span></span>
+<span id="cb22-40"><a href="#cb22-40"></a><span class="kw">end</span></span></code></pre></div>
+<p>I believe this problem can also be represented as a graph and solved using memoized depth first search. I would like to re-write this solution using <a href="https://github.com/JuliaGraphs/LightGraphs.jl" target="_blank"><code>LightGraphs.jl</code></a>.</p>
+</section>
+<section id="day-9-encoding-error" class="level2">
+<h2><a href="#day-9-encoding-error">#</a> <a href="https://adventofcode.com/2020/day/9" target="_blank">Day 9: Encoding Error</a></h2>
+<p>Day 9 was also straightforward.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1"></a>readInput() = parse.(<span class="dt">Int</span>, split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>))</span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="kw">function</span> check(numbers, n)</span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="kw">for</span> i <span class="kw">in</span> numbers, j <span class="kw">in</span> numbers</span>
+<span id="cb23-5"><a href="#cb23-5"></a>        i + j == n &amp;&amp; <span class="kw">return</span> true</span>
+<span id="cb23-6"><a href="#cb23-6"></a>    <span class="kw">end</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>    false</span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="kw">end</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="kw">function</span> part1(numbers = readInput())</span>
+<span id="cb23-11"><a href="#cb23-11"></a>    preamble = <span class="fl">25</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a>    <span class="kw">for</span> i <span class="kw">in</span> (preamble + <span class="fl">1</span>):length(numbers)</span>
+<span id="cb23-13"><a href="#cb23-13"></a>        check(numbers[i-preamble:i-<span class="fl">1</span>], numbers[i]) &amp;&amp; <span class="kw">continue</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a>        <span class="kw">return</span> i, numbers[i]</span>
+<span id="cb23-15"><a href="#cb23-15"></a>    <span class="kw">end</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="kw">end</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a></span>
+<span id="cb23-18"><a href="#cb23-18"></a><span class="kw">function</span> part2(numbers = readInput())</span>
+<span id="cb23-19"><a href="#cb23-19"></a>    idx, num = part1(numbers)</span>
+<span id="cb23-20"><a href="#cb23-20"></a>    <span class="kw">for</span> i <span class="kw">in</span> eachindex(numbers), j <span class="kw">in</span> i:lastindex(numbers)</span>
+<span id="cb23-21"><a href="#cb23-21"></a>        sum(numbers[i:j]) == num &amp;&amp; <span class="kw">return</span> sum(extrema(numbers[i:j]))</span>
+<span id="cb23-22"><a href="#cb23-22"></a>    <span class="kw">end</span></span>
+<span id="cb23-23"><a href="#cb23-23"></a><span class="kw">end</span></span></code></pre></div>
+<p>Julia has a function called <code>extrema</code> that computes the minimum and maximum element in a single pass.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1"></a>julia&gt; extrema([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>])</span>
+<span id="cb24-2"><a href="#cb24-2"></a>(<span class="fl">1</span>, <span class="fl">5</span>)</span></code></pre></div>
+<p><a href="https://github.com/Teo-ShaoWei" target="_blank">Teo ShaoWei</a>’s solution using <a href="https://github.com/JuliaMath/Combinatorics.jl" target="_blank">Combinatorics.jl</a> is also quite elegant.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1"></a>using Combinatorics</span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a>readInput() = parse.(<span class="dt">Int</span>, split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>))</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="kw">function</span> bad_number(nums, k)</span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="kw">for</span> i <span class="kw">in</span> (k + <span class="fl">1</span>):length(nums)</span>
+<span id="cb25-7"><a href="#cb25-7"></a>        <span class="kw">if</span> !any(num1 + num2 == nums[i] <span class="kw">for</span> (num1, num2) <span class="kw">in</span> combinations(nums[i-k:i-<span class="fl">1</span>], <span class="fl">2</span>))</span>
+<span id="cb25-8"><a href="#cb25-8"></a>            <span class="kw">return</span> (i, nums[i])</span>
+<span id="cb25-9"><a href="#cb25-9"></a>        <span class="kw">end</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a>    <span class="kw">end</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="kw">end</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a></span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="kw">function</span> rectify(nums, k)</span>
+<span id="cb25-14"><a href="#cb25-14"></a>    v = bad_number(nums, k)</span>
+<span id="cb25-15"><a href="#cb25-15"></a>    i = j = <span class="fl">1</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a>    <span class="kw">while</span> (s = sum(nums[i:j])) != v</span>
+<span id="cb25-17"><a href="#cb25-17"></a>        s &lt; v ? j += <span class="fl">1</span> : i += <span class="fl">1</span></span>
+<span id="cb25-18"><a href="#cb25-18"></a>    <span class="kw">end</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a>    <span class="kw">return</span> minimum(nums[i:j]) + maximum(nums[i:j])</span>
+<span id="cb25-20"><a href="#cb25-20"></a><span class="kw">end</span></span>
+<span id="cb25-21"><a href="#cb25-21"></a></span>
+<span id="cb25-22"><a href="#cb25-22"></a>input = readInput()</span>
+<span id="cb25-23"><a href="#cb25-23"></a>part1 = bad_number(input, <span class="fl">25</span>)</span>
+<span id="cb25-24"><a href="#cb25-24"></a>part2 = rectify(input, <span class="fl">25</span>)</span></code></pre></div>
+</section>
+<section id="day-10-adapter-array" class="level2">
+<h2><a href="#day-10-adapter-array">#</a> <a href="https://adventofcode.com/2020/day/10" target="_blank">Day 10: Adapter Array</a></h2>
+<p>Part 2 on this day asks to find the number of distinct ways to arrange the Jolt adapters to connect the charging outlet to the device.</p>
+<p>This problem can be formulated as a dynamic programming problem. This is most straightforward to solve using recursion and memoization. Here’s <a href="https://github.com/tk3369/AdventOfCode2020/blob/1273e4a086832c5c159fe460f533016fedb33ab2/day10.jl" target="_blank">Tom Kwong’s</a> solution:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">function</span> readInput()</span>
+<span id="cb26-2"><a href="#cb26-2"></a>    data = parse.(<span class="dt">Int</span>, split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>)) |&gt; sort</span>
+<span id="cb26-3"><a href="#cb26-3"></a>    vcat(<span class="fl">0</span>, data, data[<span class="kw">end</span>]+<span class="fl">3</span>)</span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="kw">end</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a></span>
+<span id="cb26-6"><a href="#cb26-6"></a>part1(data = readInput()) = count(==(<span class="fl">1</span>), diff(data)) * count(==(<span class="fl">3</span>), diff(data))</span>
+<span id="cb26-7"><a href="#cb26-7"></a></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="kw">function</span> part2(data = readInput())</span>
+<span id="cb26-9"><a href="#cb26-9"></a>    len = length(data)</span>
+<span id="cb26-10"><a href="#cb26-10"></a>    dct = <span class="dt">Dict</span>{<span class="dt">Int</span>,<span class="dt">Int</span>}()</span>
+<span id="cb26-11"><a href="#cb26-11"></a>    <span class="kw">function</span> helper(v, i)</span>
+<span id="cb26-12"><a href="#cb26-12"></a>        haskey(dct, i) &amp;&amp; <span class="kw">return</span> dct[i]</span>
+<span id="cb26-13"><a href="#cb26-13"></a>        i == len &amp;&amp; <span class="kw">return</span> <span class="fl">1</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>        n1 =               v[i+<span class="fl">1</span>] - v[i] &lt;= <span class="fl">3</span> ? helper(v, i+<span class="fl">1</span>) : <span class="fl">0</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a>        n2 = i+<span class="fl">2</span> &lt;= len &amp;&amp; v[i+<span class="fl">2</span>] - v[i] &lt;= <span class="fl">3</span> ? helper(v, i+<span class="fl">2</span>) : <span class="fl">0</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>        n3 = i+<span class="fl">3</span> &lt;= len &amp;&amp; v[i+<span class="fl">3</span>] - v[i] &lt;= <span class="fl">3</span> ? helper(v, i+<span class="fl">3</span>) : <span class="fl">0</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>        val = n1 + n2 + n3</span>
+<span id="cb26-18"><a href="#cb26-18"></a>        dct[i] = val</span>
+<span id="cb26-19"><a href="#cb26-19"></a>        <span class="kw">return</span> val</span>
+<span id="cb26-20"><a href="#cb26-20"></a>    <span class="kw">end</span></span>
+<span id="cb26-21"><a href="#cb26-21"></a>    helper(data, <span class="fl">1</span>)</span>
+<span id="cb26-22"><a href="#cb26-22"></a><span class="kw">end</span></span></code></pre></div>
+<p>One key insight here is that the data doesn’t contain jolt adapters that are only 1 or 3 apart.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1"></a>julia&gt; StatsBase.countmap(diff(readInput()))</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="dt">Dict</span>{<span class="dt">Int64</span>, <span class="dt">Int64</span>} with <span class="fl">2</span> entries:</span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fl">3</span> =&gt; <span class="fl">32</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fl">1</span> =&gt; <span class="fl">71</span></span></code></pre></div>
+<p>Since any adapter that is 3 away can’t be removed, the number of distinct ways is just the product of all the different ways you can choose two adapters from the set of 1 away adapters that are in between the 3 away adapters. Here’s a solution based on <a href="https://github.com/jonniedie/Advent2020/blob/dd722991120aa79cf4e0ec028612fb0c48d7d54c/scripts/Day10/code.jl" target="_blank">Jonnie Diegelman’s</a> that takes advantage of that:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">function</span> readInput()</span>
+<span id="cb28-2"><a href="#cb28-2"></a>    data = parse.(<span class="dt">Int</span>, split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>)) |&gt; sort</span>
+<span id="cb28-3"><a href="#cb28-3"></a>    data = vcat(<span class="fl">0</span>, data, data[<span class="kw">end</span>]+<span class="fl">3</span>)</span>
+<span id="cb28-4"><a href="#cb28-4"></a>    join(string.(diff(data)))</span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="kw">end</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-7"><a href="#cb28-7"></a>part1(data = readInput()) = count(==(<span class="ch">&#39;1&#39;</span>), data) * count(==(<span class="ch">&#39;3&#39;</span>), data)</span>
+<span id="cb28-8"><a href="#cb28-8"></a>part2(data = readInput()) = prod(binomial.(length.(split(data, <span class="ch">&#39;3&#39;</span>, keepempty=false)), <span class="fl">2</span>) .+ <span class="fl">1</span>)</span></code></pre></div>
+<p>This only works however when the set of 1 away adapters is not longer than 5 elements, which is the case in our puzzle inputs.</p>
+<p>Alternatively, because the steps needed are one, two or three, you can calculate all possible steps by using a tribonacci sum. The tribonacci sum gives us all ways to traverse a set of ones, i.e. <code>11111...</code> by hopping from <code>1</code> to <code>1</code> in steps of size 1, 2 or 3.</p>
+<p>Thanks to <a href="https://github.com/Seelengrab/AdventOfCode" target="_blank">Sukera</a> and <a href="https://github.com/Arkoniak/advent_of_code/blob/master/2020/10/day10.jl" target="_blank">Andrey Oskin</a> for their code and insight into solving this puzzle.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">function</span> readInput()</span>
+<span id="cb29-2"><a href="#cb29-2"></a>    data = parse.(<span class="dt">Int</span>, split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>)) |&gt; sort</span>
+<span id="cb29-3"><a href="#cb29-3"></a>    data = vcat(<span class="fl">0</span>, data, data[<span class="kw">end</span>]+<span class="fl">3</span>)</span>
+<span id="cb29-4"><a href="#cb29-4"></a>    split(join(string.(diff(data))), <span class="ch">&#39;3&#39;</span>, keepempty = false)</span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="kw">end</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="kw">function</span> tribonacci(n)</span>
+<span id="cb29-8"><a href="#cb29-8"></a>    n &lt;= <span class="fl">1</span> &amp;&amp; <span class="kw">return</span> <span class="fl">1</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a>    n == <span class="fl">2</span> &amp;&amp; <span class="kw">return</span> <span class="fl">2</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a>    tribonacci(n-<span class="fl">1</span>) + tribonacci(n-<span class="fl">2</span>) + tribonacci(n-<span class="fl">3</span>)</span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="kw">end</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a></span>
+<span id="cb29-13"><a href="#cb29-13"></a>part2(data = readInput()) = prod(tribonacci.(length.(data)))</span></code></pre></div>
+<p>The tribonacci sequence can also be generalized:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">const</span> a1 = (<span class="fl">19</span> + <span class="fl">3</span>sqrt(<span class="fl">33</span>))^(<span class="fl">1</span>/<span class="fl">3</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="kw">const</span> a2 = (<span class="fl">19</span> - <span class="fl">3</span>sqrt(<span class="fl">33</span>))^(<span class="fl">1</span>/<span class="fl">3</span>)</span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="kw">const</span> b = (<span class="fl">586</span> + <span class="fl">102</span>sqrt(<span class="fl">33</span>))^(<span class="fl">1</span>/<span class="fl">3</span>)</span>
+<span id="cb30-4"><a href="#cb30-4"></a>tribonacci(n) = round(<span class="dt">Int</span>, (<span class="fl">3</span>b * (<span class="fl">1</span>/<span class="fl">3</span> * (a1 + a2 + <span class="fl">1</span>))^(n + <span class="fl">1</span>))/(b^<span class="fl">2</span> - <span class="fl">2</span>b + <span class="fl">4</span>))</span></code></pre></div>
+<p>See the <a href="https://en.wikipedia.org/wiki/Generalizations_of_Fibonacci_numbers#Tribonacci_numbers" target="_blank">Wikipedia</a> article for more information.</p>
+</section>
+<section id="day-11-seating-system" class="level2">
+<h2><a href="#day-11-seating-system">#</a> <a href="https://adventofcode.com/2020/day/11" target="_blank">Day 11: Seating System</a></h2>
+<p>This is the first tribute in Advent of Code 2020 to <a href="https://en.wikipedia.org/wiki/John_Horton_Conway" target="_blank">John Conway</a>, who passed away earlier this year. John Conway was an English mathematician, most notably famous for the invention of the cellular automation called the <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">Game of Life</a>.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1"></a>readInput() = permutedims(reduce(hcat, collect.(split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>))))</span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a>part1(data = readInput()) = simulate(data, <span class="fl">0</span>, <span class="fl">1</span>)</span>
+<span id="cb31-4"><a href="#cb31-4"></a>part2(data = readInput()) = simulate(data, <span class="fl">1</span>, size(data, <span class="fl">1</span>) * <span class="fl">2</span>)</span>
+<span id="cb31-5"><a href="#cb31-5"></a></span>
+<span id="cb31-6"><a href="#cb31-6"></a><span class="kw">function</span> simulate(grid, company, sight)</span>
+<span id="cb31-7"><a href="#cb31-7"></a>    <span class="kw">while</span> true</span>
+<span id="cb31-8"><a href="#cb31-8"></a>        old_grid = deepcopy(grid)</span>
+<span id="cb31-9"><a href="#cb31-9"></a>        tick(grid, company, sight)</span>
+<span id="cb31-10"><a href="#cb31-10"></a>        grid == old_grid &amp;&amp; <span class="kw">break</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a>    <span class="kw">end</span></span>
+<span id="cb31-12"><a href="#cb31-12"></a>    count(==(<span class="ch">&#39;#&#39;</span>), grid)</span>
+<span id="cb31-13"><a href="#cb31-13"></a><span class="kw">end</span></span>
+<span id="cb31-14"><a href="#cb31-14"></a></span>
+<span id="cb31-15"><a href="#cb31-15"></a><span class="kw">function</span> tick(grid, company, sight)</span>
+<span id="cb31-16"><a href="#cb31-16"></a>    rows, cols = size(grid)</span>
+<span id="cb31-17"><a href="#cb31-17"></a>    old_grid = deepcopy(grid)</span>
+<span id="cb31-18"><a href="#cb31-18"></a>    <span class="kw">for</span> r <span class="kw">in</span> <span class="fl">1</span>:rows, c <span class="kw">in</span> <span class="fl">1</span>:cols</span>
+<span id="cb31-19"><a href="#cb31-19"></a>        A = adjacent_seats(old_grid, r, c, sight)</span>
+<span id="cb31-20"><a href="#cb31-20"></a>        grid[r, c] == <span class="ch">&#39;L&#39;</span> &amp;&amp; count(==(<span class="ch">&#39;#&#39;</span>), A) == <span class="fl">0</span> &amp;&amp; ( grid[r, c] = <span class="ch">&#39;#&#39;</span> )</span>
+<span id="cb31-21"><a href="#cb31-21"></a>        grid[r, c] == <span class="ch">&#39;#&#39;</span> &amp;&amp; count(==(<span class="ch">&#39;#&#39;</span>), A) &gt;= <span class="fl">4</span> + company &amp;&amp; ( grid[r, c] = <span class="ch">&#39;L&#39;</span> )</span>
+<span id="cb31-22"><a href="#cb31-22"></a>    <span class="kw">end</span></span>
+<span id="cb31-23"><a href="#cb31-23"></a><span class="kw">end</span></span>
+<span id="cb31-24"><a href="#cb31-24"></a></span>
+<span id="cb31-25"><a href="#cb31-25"></a><span class="kw">function</span> adjacent_seats(grid, i, j, sight)</span>
+<span id="cb31-26"><a href="#cb31-26"></a>    A = []</span>
+<span id="cb31-27"><a href="#cb31-27"></a>    <span class="kw">for</span> direction <span class="kw">in</span> CartesianIndex.([(-<span class="fl">1</span>,-<span class="fl">1</span>), (-<span class="fl">1</span>,+<span class="fl">1</span>), (+<span class="fl">1</span>,-<span class="fl">1</span>), (+<span class="fl">1</span>, +<span class="fl">1</span>), (-<span class="fl">1</span>,<span class="fl">0</span>), (+<span class="fl">1</span>,<span class="fl">0</span>), (<span class="fl">0</span>,-<span class="fl">1</span>), (<span class="fl">0</span>,+<span class="fl">1</span>)])</span>
+<span id="cb31-28"><a href="#cb31-28"></a>        xy = CartesianIndex(i, j) + direction</span>
+<span id="cb31-29"><a href="#cb31-29"></a>        counter = <span class="fl">1</span></span>
+<span id="cb31-30"><a href="#cb31-30"></a>        <span class="kw">while</span> checkbounds(<span class="dt">Bool</span>, grid, xy) &amp;&amp; grid[xy] == <span class="ch">&#39;.&#39;</span> &amp;&amp; counter &lt; sight</span>
+<span id="cb31-31"><a href="#cb31-31"></a>            xy += direction</span>
+<span id="cb31-32"><a href="#cb31-32"></a>            counter += <span class="fl">1</span></span>
+<span id="cb31-33"><a href="#cb31-33"></a>        <span class="kw">end</span></span>
+<span id="cb31-34"><a href="#cb31-34"></a>        checkbounds(<span class="dt">Bool</span>, grid, xy) &amp;&amp; push!(A, grid[xy])</span>
+<span id="cb31-35"><a href="#cb31-35"></a>    <span class="kw">end</span></span>
+<span id="cb31-36"><a href="#cb31-36"></a>    A</span>
+<span id="cb31-37"><a href="#cb31-37"></a><span class="kw">end</span></span></code></pre></div>
+<p>The key thing to remember when implementing cellular automata is to copy the grid at each tick.</p>
+<p>Julia’s <code>CartesianIndex</code> makes it easier to deal with multi-dimensional indexing. Additionally, I found the <code>checkbounds</code> function quite handy for this problem.</p>
+</section>
+<section id="day-12-rain-risk" class="level2">
+<h2><a href="#day-12-rain-risk">#</a> <a href="https://adventofcode.com/2020/day/12" target="_blank">Day 12: Rain Risk</a></h2>
+<p>This was one of my better performances on the Julia leaderboard. Using complex numbers makes it quite straightforward to deal with problems involving rotation.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1"></a>readInput() = split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>)</span>
+<span id="cb32-2"><a href="#cb32-2"></a></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="kw">function</span> part1(data = readInput())</span>
+<span id="cb32-4"><a href="#cb32-4"></a>    data = map(data) <span class="kw">do</span> d</span>
+<span id="cb32-5"><a href="#cb32-5"></a>        first(d), parse(<span class="dt">Int</span>, d[<span class="kw">begin</span>+<span class="fl">1</span>:<span class="kw">end</span>])</span>
+<span id="cb32-6"><a href="#cb32-6"></a>    <span class="kw">end</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>    current = <span class="fl">0</span> + <span class="fl">0im</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>    direction = <span class="fl">1</span> + <span class="fl">0im</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a>    <span class="kw">for</span> (action, move) <span class="kw">in</span> data</span>
+<span id="cb32-10"><a href="#cb32-10"></a>        <span class="kw">if</span>     action == <span class="ch">&#39;N&#39;</span> current += move * im</span>
+<span id="cb32-11"><a href="#cb32-11"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;S&#39;</span> current -= move * im</span>
+<span id="cb32-12"><a href="#cb32-12"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;E&#39;</span> current += move</span>
+<span id="cb32-13"><a href="#cb32-13"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;W&#39;</span> current -= move</span>
+<span id="cb32-14"><a href="#cb32-14"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;F&#39;</span> current += direction * move</span>
+<span id="cb32-15"><a href="#cb32-15"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;L&#39;</span> direction *= im^(move ÷ <span class="fl">90</span>)</span>
+<span id="cb32-16"><a href="#cb32-16"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;R&#39;</span> direction *= (-im)^(move ÷ <span class="fl">90</span>)</span>
+<span id="cb32-17"><a href="#cb32-17"></a>        <span class="kw">else</span>   error(<span class="st">&quot;Unrecognized $action, $move&quot;</span>) <span class="kw">end</span></span>
+<span id="cb32-18"><a href="#cb32-18"></a>    <span class="kw">end</span></span>
+<span id="cb32-19"><a href="#cb32-19"></a>    abs(current.re) + abs(current.im)</span>
+<span id="cb32-20"><a href="#cb32-20"></a><span class="kw">end</span></span>
+<span id="cb32-21"><a href="#cb32-21"></a></span>
+<span id="cb32-22"><a href="#cb32-22"></a><span class="kw">function</span> part2(data = readInput())</span>
+<span id="cb32-23"><a href="#cb32-23"></a>    data = map(data) <span class="kw">do</span> d</span>
+<span id="cb32-24"><a href="#cb32-24"></a>        first(d), parse(<span class="dt">Int</span>, d[<span class="kw">begin</span>+<span class="fl">1</span>:<span class="kw">end</span>])</span>
+<span id="cb32-25"><a href="#cb32-25"></a>    <span class="kw">end</span></span>
+<span id="cb32-26"><a href="#cb32-26"></a>    waypoint = <span class="fl">10</span> + <span class="fl">1im</span></span>
+<span id="cb32-27"><a href="#cb32-27"></a>    current = <span class="fl">0</span> + <span class="fl">0im</span></span>
+<span id="cb32-28"><a href="#cb32-28"></a>    direction = <span class="fl">1</span> + <span class="fl">0im</span></span>
+<span id="cb32-29"><a href="#cb32-29"></a>    <span class="kw">for</span> (action, move) <span class="kw">in</span> data</span>
+<span id="cb32-30"><a href="#cb32-30"></a>        <span class="kw">if</span>     action == <span class="ch">&#39;N&#39;</span> waypoint += move * im</span>
+<span id="cb32-31"><a href="#cb32-31"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;S&#39;</span> waypoint -= move * im</span>
+<span id="cb32-32"><a href="#cb32-32"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;E&#39;</span> waypoint += move</span>
+<span id="cb32-33"><a href="#cb32-33"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;W&#39;</span> waypoint -= move</span>
+<span id="cb32-34"><a href="#cb32-34"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;F&#39;</span> current += waypoint * move</span>
+<span id="cb32-35"><a href="#cb32-35"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;L&#39;</span> waypoint *= im^(move ÷ <span class="fl">90</span>)</span>
+<span id="cb32-36"><a href="#cb32-36"></a>        <span class="kw">elseif</span> action == <span class="ch">&#39;R&#39;</span> waypoint *= (-im)^(move ÷ <span class="fl">90</span>)</span>
+<span id="cb32-37"><a href="#cb32-37"></a>        <span class="kw">else</span>   error(<span class="st">&quot;Unrecognized $action, $move&quot;</span>) <span class="kw">end</span></span>
+<span id="cb32-38"><a href="#cb32-38"></a>    <span class="kw">end</span></span>
+<span id="cb32-39"><a href="#cb32-39"></a>    abs(current.re) + abs(current.im)</span>
+<span id="cb32-40"><a href="#cb32-40"></a><span class="kw">end</span></span></code></pre></div>
+<p>Thanks to <a href="https://github.com/cmcaine/advent2020/blob/aae90d873af5a7ce870a1e0bb0355b598ee389fe/src/day12.jl" target="_blank">Colin Caine</a> for suggesting using <code>if ... elseif ... end</code> for minor performance improvements. Check out his other solutions for more optimized takes on the problems.</p>
+<p><a href="https://github.com/mkborregaard" target="_blank">Michael Krabbe Borregaard</a> had some neat visualizations for this day.</p>
+<p><img src="images/adventofcode-day12-part1.png" style="width:45.0%" alt="part1" /> <img src="images/adventofcode-day12-part2.png" style="width:45.0%" alt="part2" /></p>
+</section>
+<section id="day-13-shuttle-search" class="level2">
+<h2><a href="#day-13-shuttle-search">#</a> <a href="https://adventofcode.com/2020/day/13" target="_blank">Day 13: Shuttle Search</a></h2>
+<p>This was one of the harder days for me. I had never heard of <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem" target="_blank">Chinese Remainder Theorem</a> (CRT) and apparently that’s what this problem was based on.</p>
+<p>Here’s a solution by <a href="https://git.mehalter.com/mehalter/AOC.jl/src/commit/e65eccac7e3825d5d9706b18e1fe244958f5f1e8/2020/src/day_13.jl" target="_blank">Micah Halter</a> that uses the <code>CRT</code> function from <a href="https://github.com/scheinerman/Mods.jl" target="_blank">Mods.jl</a> package.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1"></a>using Mods</span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="kw">function</span> readInput()</span>
+<span id="cb33-4"><a href="#cb33-4"></a>    t_str, buses_str = readlines(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>))</span>
+<span id="cb33-5"><a href="#cb33-5"></a>    time = parse(<span class="dt">Int</span>, t_str)</span>
+<span id="cb33-6"><a href="#cb33-6"></a>    buses = map(x-&gt;x==<span class="st">&quot;x&quot;</span> ? nothing : parse(<span class="dt">Int</span>, x), split(buses_str, <span class="ch">&#39;,&#39;</span>))</span>
+<span id="cb33-7"><a href="#cb33-7"></a>    time, buses</span>
+<span id="cb33-8"><a href="#cb33-8"></a><span class="kw">end</span></span>
+<span id="cb33-9"><a href="#cb33-9"></a></span>
+<span id="cb33-10"><a href="#cb33-10"></a><span class="kw">function</span> part1(data = readInput())</span>
+<span id="cb33-11"><a href="#cb33-11"></a>    time, buses = data</span>
+<span id="cb33-12"><a href="#cb33-12"></a>    wait, bus = min(map(x-&gt;(x*ceil(time / x), x), filter(!isnothing, buses))...)</span>
+<span id="cb33-13"><a href="#cb33-13"></a>    (wait - time) * bus</span>
+<span id="cb33-14"><a href="#cb33-14"></a><span class="kw">end</span></span>
+<span id="cb33-15"><a href="#cb33-15"></a></span>
+<span id="cb33-16"><a href="#cb33-16"></a><span class="kw">function</span> part2(data = readInput())</span>
+<span id="cb33-17"><a href="#cb33-17"></a>    _, buses = data</span>
+<span id="cb33-18"><a href="#cb33-18"></a>    mods = map(k-&gt;Mod{buses[k]}(-(k-<span class="fl">1</span>)), filter(k-&gt;!isnothing(buses[k]), keys(buses)))</span>
+<span id="cb33-19"><a href="#cb33-19"></a>    CRT(mods...).val</span>
+<span id="cb33-20"><a href="#cb33-20"></a><span class="kw">end</span></span></code></pre></div>
+<p>Here’s another solution from <a href="https://github.com/dgkf/advent-of-code/blob/98ee142a61b453a766331c65ece372978041935e/2020/13/13.jl" target="_blank">Doug</a> that finds the cycles using <code>lcm</code> much more elegantly than how I ended up doing it. The key bit of insight here is that the <code>lcm(previous_bus_schedules, new_bus_schedule)</code> will be the cycle at which the pattern repeats. Using this, you can break the problem down by iteratively and calculate the next cycle.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">function</span> readInput()</span>
+<span id="cb34-2"><a href="#cb34-2"></a>    input = readlines(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>))</span>
+<span id="cb34-3"><a href="#cb34-3"></a>    n = parse(<span class="dt">Int</span>, input[<span class="fl">1</span>])</span>
+<span id="cb34-4"><a href="#cb34-4"></a>    schedule = parse.(<span class="dt">Int</span>, replace(split(input[<span class="fl">2</span>], <span class="st">&quot;,&quot;</span>), <span class="st">&quot;x&quot;</span> =&gt; <span class="st">&quot;-1&quot;</span>))</span>
+<span id="cb34-5"><a href="#cb34-5"></a>    bus_n = filter(!=(-<span class="fl">1</span>), schedule)</span>
+<span id="cb34-6"><a href="#cb34-6"></a>    bus_dt = (<span class="fl">1</span>:length(schedule))[schedule .!= -<span class="fl">1</span>] .- <span class="fl">1</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a>    bus_n, bus_dt, n</span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="kw">end</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a></span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="kw">function</span> part1(data = readInput())</span>
+<span id="cb34-11"><a href="#cb34-11"></a>    bus_n, bus_dt, n = data</span>
+<span id="cb34-12"><a href="#cb34-12"></a>    min_rem, min_rem_i = findmin(bus_n .- n .% bus_n)</span>
+<span id="cb34-13"><a href="#cb34-13"></a>    bus_n[min_rem_i] * min_rem</span>
+<span id="cb34-14"><a href="#cb34-14"></a><span class="kw">end</span></span>
+<span id="cb34-15"><a href="#cb34-15"></a></span>
+<span id="cb34-16"><a href="#cb34-16"></a><span class="kw">function</span> part2(data = readInput())</span>
+<span id="cb34-17"><a href="#cb34-17"></a>    bus_n, bus_dt, n = data</span>
+<span id="cb34-18"><a href="#cb34-18"></a>    inc = bus_n[<span class="fl">1</span>]</span>
+<span id="cb34-19"><a href="#cb34-19"></a>    n = <span class="fl">0</span></span>
+<span id="cb34-20"><a href="#cb34-20"></a>    <span class="kw">for</span> (i, offset) <span class="kw">in</span> zip(bus_n[<span class="fl">2</span>:<span class="kw">end</span>], bus_dt[<span class="fl">2</span>:<span class="kw">end</span>])</span>
+<span id="cb34-21"><a href="#cb34-21"></a>        <span class="kw">while</span> (n + offset) % i != <span class="fl">0</span></span>
+<span id="cb34-22"><a href="#cb34-22"></a>            n += inc</span>
+<span id="cb34-23"><a href="#cb34-23"></a>        <span class="kw">end</span></span>
+<span id="cb34-24"><a href="#cb34-24"></a>        inc = lcm(inc, i)</span>
+<span id="cb34-25"><a href="#cb34-25"></a>    <span class="kw">end</span></span>
+<span id="cb34-26"><a href="#cb34-26"></a>    <span class="kw">return</span> n</span>
+<span id="cb34-27"><a href="#cb34-27"></a><span class="kw">end</span></span></code></pre></div>
+</section>
+<section id="day-14-docking-data" class="level2">
+<h2><a href="#day-14-docking-data">#</a> <a href="https://adventofcode.com/2020/day/14" target="_blank">Day 14: Docking Data</a></h2>
+<p>This puzzle requires dealing with bit shifting and masking of bits.</p>
+<p>Here’s <a href="https://github.com/pabloferz/AoC/" target="_blank">Pablo Zubieta’s</a> solution:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">function</span> parse_mask_ops(line)</span>
+<span id="cb35-2"><a href="#cb35-2"></a>    mask, list = split(line, r<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; limit = <span class="fl">2</span>, keepempty = false)</span>
+<span id="cb35-3"><a href="#cb35-3"></a>    instructions = <span class="dt">Tuple</span>{<span class="dt">Int</span>,<span class="dt">Int</span>}[]</span>
+<span id="cb35-4"><a href="#cb35-4"></a>    <span class="kw">for</span> m <span class="kw">in</span> eachmatch(r<span class="st">&quot;mem.(\d+). = (\d+)&quot;</span>, list)</span>
+<span id="cb35-5"><a href="#cb35-5"></a>        address, n = m.captures</span>
+<span id="cb35-6"><a href="#cb35-6"></a>        push!(instructions, (parse(<span class="dt">Int</span>, address), parse(<span class="dt">Int</span>, n)))</span>
+<span id="cb35-7"><a href="#cb35-7"></a>    <span class="kw">end</span></span>
+<span id="cb35-8"><a href="#cb35-8"></a>    <span class="kw">return</span> mask, instructions</span>
+<span id="cb35-9"><a href="#cb35-9"></a><span class="kw">end</span></span>
+<span id="cb35-10"><a href="#cb35-10"></a></span>
+<span id="cb35-11"><a href="#cb35-11"></a>readInput() = parse_mask_ops.(split(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>), r<span class="st">&quot;mask = &quot;</span>; keepempty = false))</span>
+<span id="cb35-12"><a href="#cb35-12"></a></span>
+<span id="cb35-13"><a href="#cb35-13"></a>struct Part1 <span class="kw">end</span></span>
+<span id="cb35-14"><a href="#cb35-14"></a>struct Part2 <span class="kw">end</span></span>
+<span id="cb35-15"><a href="#cb35-15"></a></span>
+<span id="cb35-16"><a href="#cb35-16"></a><span class="kw">function</span> write!(::Part1, memory, mask, addr, n)</span>
+<span id="cb35-17"><a href="#cb35-17"></a>    <span class="kw">for</span> (i, bit) <span class="kw">in</span> enumerate(mask)</span>
+<span id="cb35-18"><a href="#cb35-18"></a>        <span class="kw">if</span> bit != <span class="ch">&#39;X&#39;</span></span>
+<span id="cb35-19"><a href="#cb35-19"></a>            m = <span class="fl">1</span> &lt;&lt; (<span class="fl">36</span> - i)</span>
+<span id="cb35-20"><a href="#cb35-20"></a>            n = (bit == <span class="ch">&#39;1&#39;</span>) ? (n | m) : (n &amp; ~m)</span>
+<span id="cb35-21"><a href="#cb35-21"></a>        <span class="kw">end</span></span>
+<span id="cb35-22"><a href="#cb35-22"></a>    <span class="kw">end</span></span>
+<span id="cb35-23"><a href="#cb35-23"></a>    memory[addr] = n</span>
+<span id="cb35-24"><a href="#cb35-24"></a><span class="kw">end</span></span>
+<span id="cb35-25"><a href="#cb35-25"></a></span>
+<span id="cb35-26"><a href="#cb35-26"></a><span class="kw">function</span> write!(::Part2, memory, mask, addr, n)</span>
+<span id="cb35-27"><a href="#cb35-27"></a>    inds = <span class="dt">Int8</span>[]</span>
+<span id="cb35-28"><a href="#cb35-28"></a>    <span class="kw">for</span> (i, bit) <span class="kw">in</span> enumerate(mask)</span>
+<span id="cb35-29"><a href="#cb35-29"></a>        <span class="kw">if</span> bit == <span class="ch">&#39;1&#39;</span></span>
+<span id="cb35-30"><a href="#cb35-30"></a>            addr |= (<span class="fl">1</span> &lt;&lt; (<span class="fl">36</span> - i))</span>
+<span id="cb35-31"><a href="#cb35-31"></a>        <span class="kw">elseif</span> bit == <span class="ch">&#39;X&#39;</span></span>
+<span id="cb35-32"><a href="#cb35-32"></a>            push!(inds, i)</span>
+<span id="cb35-33"><a href="#cb35-33"></a>        <span class="kw">end</span></span>
+<span id="cb35-34"><a href="#cb35-34"></a>    <span class="kw">end</span></span>
+<span id="cb35-35"><a href="#cb35-35"></a>    l = length(inds)</span>
+<span id="cb35-36"><a href="#cb35-36"></a>    <span class="kw">for</span> p <span class="kw">in</span> <span class="fl">0</span>:(<span class="fl">2</span>^l - <span class="fl">1</span>)</span>
+<span id="cb35-37"><a href="#cb35-37"></a>        <span class="kw">for</span> (k, i) <span class="kw">in</span> enumerate(inds)</span>
+<span id="cb35-38"><a href="#cb35-38"></a>            m = <span class="fl">1</span> &lt;&lt; (<span class="fl">36</span> - i)</span>
+<span id="cb35-39"><a href="#cb35-39"></a>            b = (p &gt;&gt; (l - k)) &amp; <span class="fl">1</span></span>
+<span id="cb35-40"><a href="#cb35-40"></a>            addr = b != <span class="fl">0</span> ? (addr | m) : (addr &amp; ~m)</span>
+<span id="cb35-41"><a href="#cb35-41"></a>        <span class="kw">end</span></span>
+<span id="cb35-42"><a href="#cb35-42"></a>        memory[addr] = n</span>
+<span id="cb35-43"><a href="#cb35-43"></a>    <span class="kw">end</span></span>
+<span id="cb35-44"><a href="#cb35-44"></a><span class="kw">end</span></span>
+<span id="cb35-45"><a href="#cb35-45"></a></span>
+<span id="cb35-46"><a href="#cb35-46"></a><span class="kw">function</span> solve(p::<span class="dt">Union</span>{Part1,Part2}, input)</span>
+<span id="cb35-47"><a href="#cb35-47"></a>    memory = <span class="dt">Dict</span>{<span class="dt">Int</span>,<span class="dt">Int</span>}()</span>
+<span id="cb35-48"><a href="#cb35-48"></a>    <span class="kw">for</span> (mask, list) <span class="kw">in</span> input</span>
+<span id="cb35-49"><a href="#cb35-49"></a>        <span class="kw">for</span> (address, n) <span class="kw">in</span> list</span>
+<span id="cb35-50"><a href="#cb35-50"></a>            write!(p, memory, mask, address, n)</span>
+<span id="cb35-51"><a href="#cb35-51"></a>        <span class="kw">end</span></span>
+<span id="cb35-52"><a href="#cb35-52"></a>    <span class="kw">end</span></span>
+<span id="cb35-53"><a href="#cb35-53"></a>    <span class="kw">return</span> sum(values(memory))</span>
+<span id="cb35-54"><a href="#cb35-54"></a><span class="kw">end</span></span>
+<span id="cb35-55"><a href="#cb35-55"></a></span>
+<span id="cb35-56"><a href="#cb35-56"></a>part1(data = readInput()) = solve(Part1(), data)</span>
+<span id="cb35-57"><a href="#cb35-57"></a>part2(data = readInput()) = solve(Part2(), data)</span></code></pre></div>
+<p>I liked this solution because it was clean <em>and</em> fast:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1"></a>julia&gt; @btime part1();</span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fl">392.104</span> μs (<span class="fl">2987</span> allocations: <span class="fl">251.47</span> KiB)</span>
+<span id="cb36-3"><a href="#cb36-3"></a></span>
+<span id="cb36-4"><a href="#cb36-4"></a>julia&gt; @btime part2();</span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fl">5.218</span> ms (<span class="fl">4426</span> allocations: <span class="fl">5.96</span> MiB)</span></code></pre></div>
+<p>For comparison, these were the times from my original solution:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1"></a>julia&gt; @btime part1();</span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fl">2.860</span> ms (<span class="fl">75635</span> allocations: <span class="fl">4.77</span> MiB)</span>
+<span id="cb37-3"><a href="#cb37-3"></a></span>
+<span id="cb37-4"><a href="#cb37-4"></a>julia&gt; @btime part2();</span>
+<span id="cb37-5"><a href="#cb37-5"></a>  <span class="fl">287.836</span> ms (<span class="fl">6234948</span> allocations: <span class="fl">319.65</span> MiB)</span></code></pre></div>
+<p>There are more optimized solutions though, for example here are the timings for <a href="https://github.com/cmcaine/advent2020/blob/aae90d873af5a7ce870a1e0bb0355b598ee389fe/src/day14.jl" target="_blank">the solution posted by Colin Caine</a>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1"></a>julia&gt; @btime part1();</span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fl">25.614</span> μs (<span class="fl">14</span> allocations: <span class="fl">23.98</span> KiB)</span>
+<span id="cb38-3"><a href="#cb38-3"></a></span>
+<span id="cb38-4"><a href="#cb38-4"></a>julia&gt; @btime part2();</span>
+<span id="cb38-5"><a href="#cb38-5"></a>  <span class="fl">3.354</span> ms (<span class="fl">41</span> allocations: <span class="fl">5.67</span> MiB)</span>
+<span id="cb38-6"><a href="#cb38-6"></a></span>
+<span id="cb38-7"><a href="#cb38-7"></a>julia&gt; @btime part2a();</span>
+<span id="cb38-8"><a href="#cb38-8"></a>  <span class="fl">2.865</span> ms (<span class="fl">37</span> allocations: <span class="fl">5.67</span> MiB)</span></code></pre></div>
+</section>
+<section id="day-15-rambunctious-recitation" class="level2">
+<h2><a href="#day-15-rambunctious-recitation">#</a> <a href="https://adventofcode.com/2020/day/15" target="_blank">Day 15: Rambunctious Recitation</a></h2>
+<p>This puzzle seemed to mainly focus on choosing the right data structure for the <code>history</code> of the memory game. Storing it as a mapping of number to list of indices works well for both parts. A mapping of indices to number will cause the code to be slow, and will make solving part 2 impractical.</p>
+<p>Here’s a solution by <a href="https://github.com/Seelengrab/" target="_blank">Sukera</a>:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1"></a>readInput() = parse.(<span class="dt">Int</span>, split(readline(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>)), <span class="ch">&#39;,&#39;</span>))</span>
+<span id="cb39-2"><a href="#cb39-2"></a></span>
+<span id="cb39-3"><a href="#cb39-3"></a>makeArr() = <span class="dt">Int</span>[]</span>
+<span id="cb39-4"><a href="#cb39-4"></a></span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="kw">function</span> solve(input, goal=<span class="fl">2020</span>)</span>
+<span id="cb39-6"><a href="#cb39-6"></a>    history = <span class="dt">Dict</span>{<span class="dt">Int</span>, <span class="dt">Vector</span>{<span class="dt">Int</span>}}()</span>
+<span id="cb39-7"><a href="#cb39-7"></a>    <span class="kw">for</span> (idx, num) <span class="kw">in</span> enumerate(input)</span>
+<span id="cb39-8"><a href="#cb39-8"></a>        history[num] = [idx]</span>
+<span id="cb39-9"><a href="#cb39-9"></a>    <span class="kw">end</span></span>
+<span id="cb39-10"><a href="#cb39-10"></a>    turn = length(input) + <span class="fl">1</span></span>
+<span id="cb39-11"><a href="#cb39-11"></a>    num = <span class="fl">0</span></span>
+<span id="cb39-12"><a href="#cb39-12"></a>    <span class="kw">for</span> t <span class="kw">in</span> turn:goal-<span class="fl">1</span></span>
+<span id="cb39-13"><a href="#cb39-13"></a>        arr = get!(history, num, makeArr())</span>
+<span id="cb39-14"><a href="#cb39-14"></a>        push!(arr, t)</span>
+<span id="cb39-15"><a href="#cb39-15"></a>        <span class="kw">if</span> isone(length(arr))</span>
+<span id="cb39-16"><a href="#cb39-16"></a>            num = <span class="fl">0</span></span>
+<span id="cb39-17"><a href="#cb39-17"></a>        <span class="kw">else</span></span>
+<span id="cb39-18"><a href="#cb39-18"></a>            num = abs(arr[<span class="kw">end</span>-<span class="fl">1</span>] - arr[<span class="kw">end</span>])</span>
+<span id="cb39-19"><a href="#cb39-19"></a>        <span class="kw">end</span></span>
+<span id="cb39-20"><a href="#cb39-20"></a>    <span class="kw">end</span></span>
+<span id="cb39-21"><a href="#cb39-21"></a>    num</span>
+<span id="cb39-22"><a href="#cb39-22"></a><span class="kw">end</span></span>
+<span id="cb39-23"><a href="#cb39-23"></a></span>
+<span id="cb39-24"><a href="#cb39-24"></a>part1(data = readInput()) = solve(data)</span>
+<span id="cb39-25"><a href="#cb39-25"></a>part2(data = readInput()) = solve(data, <span class="fl">30000000</span>)</span></code></pre></div>
+<p>This video is worth checking out too:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/etMJxB-igrc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</section>
+<section id="day-16-ticket-translation" class="level2">
+<h2><a href="#day-16-ticket-translation">#</a> <a href="https://adventofcode.com/2020/day/16" target="_blank">Day 16: Ticket Translation</a></h2>
+<p>Calculating which fields were invalid for part 1 was rather straightforward.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">function</span> readInput()</span>
+<span id="cb40-2"><a href="#cb40-2"></a>    data = strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>))</span>
+<span id="cb40-3"><a href="#cb40-3"></a>    rules, your_ticket, nearby_tickets = split(data, <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb40-4"><a href="#cb40-4"></a>    rules = <span class="dt">Dict</span>(map(split(rules, <span class="ch">&#39;\n&#39;</span>)) <span class="kw">do</span> rule</span>
+<span id="cb40-5"><a href="#cb40-5"></a>        rule, r1start, r1end, r2start, r2end = match(r<span class="st">&quot;([\w ]+): (\d+)-(\d+) or (\d+)-(\d+)&quot;</span>, rule)</span>
+<span id="cb40-6"><a href="#cb40-6"></a>        r1start, r1end, r2start, r2end = parse.(<span class="dt">Int</span>, [r1start, r1end, r2start, r2end])</span>
+<span id="cb40-7"><a href="#cb40-7"></a>        rule =&gt; (r1start:r1end, r2start:r2end)</span>
+<span id="cb40-8"><a href="#cb40-8"></a>    <span class="kw">end</span>)</span>
+<span id="cb40-9"><a href="#cb40-9"></a>    your_ticket = parse.(<span class="dt">Int</span>, split(split(your_ticket, <span class="ch">&#39;\n&#39;</span>)[<span class="fl">2</span>], <span class="ch">&#39;,&#39;</span>))</span>
+<span id="cb40-10"><a href="#cb40-10"></a>    nearby_tickets = [parse.(<span class="dt">Int</span>, ticket) <span class="kw">for</span> ticket <span class="kw">in</span> split.(split(nearby_tickets, <span class="ch">&#39;\n&#39;</span>)[<span class="fl">2</span>:<span class="kw">end</span>], <span class="ch">&#39;,&#39;</span>)]</span>
+<span id="cb40-11"><a href="#cb40-11"></a>    rules, your_ticket, nearby_tickets</span>
+<span id="cb40-12"><a href="#cb40-12"></a><span class="kw">end</span></span>
+<span id="cb40-13"><a href="#cb40-13"></a></span>
+<span id="cb40-14"><a href="#cb40-14"></a><span class="kw">function</span> part1(data = readInput())</span>
+<span id="cb40-15"><a href="#cb40-15"></a>    rules, your_ticket, nearby_tickets = data</span>
+<span id="cb40-16"><a href="#cb40-16"></a>    invalid_fields = <span class="dt">Int</span>[]</span>
+<span id="cb40-17"><a href="#cb40-17"></a>    <span class="kw">for</span> ticket <span class="kw">in</span> nearby_tickets, field <span class="kw">in</span> ticket</span>
+<span id="cb40-18"><a href="#cb40-18"></a>        !any([field ∈ rule <span class="kw">for</span> rule <span class="kw">in</span> Iterators.flatten(values(rules))]) &amp;&amp; push!(invalid_fields, field)</span>
+<span id="cb40-19"><a href="#cb40-19"></a>    <span class="kw">end</span></span>
+<span id="cb40-20"><a href="#cb40-20"></a>    sum(invalid_fields)</span>
+<span id="cb40-21"><a href="#cb40-21"></a><span class="kw">end</span></span></code></pre></div>
+<p>I believe part 2 is better expressed as a graph where you solve the max flow problem to find the maximum matching. However, this is not how I solved it below. I’m hoping to re-solve this problem using <a href="https://github.com/JuliaGraphs/LightGraphs.jl" target="_blank">LightGraphs.jl</a>.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">function</span> part2(data = readInput())</span>
+<span id="cb41-2"><a href="#cb41-2"></a>    rules, your_ticket, nearby_tickets = data</span>
+<span id="cb41-3"><a href="#cb41-3"></a></span>
+<span id="cb41-4"><a href="#cb41-4"></a>    invalid_tickets = <span class="dt">Int</span>[]</span>
+<span id="cb41-5"><a href="#cb41-5"></a>    <span class="kw">for</span> (i, ticket) <span class="kw">in</span> enumerate(nearby_tickets), field <span class="kw">in</span> ticket</span>
+<span id="cb41-6"><a href="#cb41-6"></a>        !any([field ∈ rule <span class="kw">for</span> rule <span class="kw">in</span> Iterators.flatten(values(rules))]) &amp;&amp; push!(invalid_tickets, i)</span>
+<span id="cb41-7"><a href="#cb41-7"></a>    <span class="kw">end</span></span>
+<span id="cb41-8"><a href="#cb41-8"></a>    valid_tickets = deleteat!(nearby_tickets, invalid_tickets)</span>
+<span id="cb41-9"><a href="#cb41-9"></a></span>
+<span id="cb41-10"><a href="#cb41-10"></a>    valid = ones(<span class="dt">Bool</span>, length(first(valid_tickets)), length(rules))</span>
+<span id="cb41-11"><a href="#cb41-11"></a>    <span class="kw">for</span> ticket <span class="kw">in</span> valid_tickets, (i, field) <span class="kw">in</span> enumerate(ticket), (j, rule) <span class="kw">in</span> enumerate(rules)</span>
+<span id="cb41-12"><a href="#cb41-12"></a>        _, (rule1, rule2) = rule</span>
+<span id="cb41-13"><a href="#cb41-13"></a>        !(field ∈ rule1 || field ∈ rule2) &amp;&amp; ( valid[i, j] = false )</span>
+<span id="cb41-14"><a href="#cb41-14"></a>    <span class="kw">end</span></span>
+<span id="cb41-15"><a href="#cb41-15"></a></span>
+<span id="cb41-16"><a href="#cb41-16"></a>    final = [<span class="fl">0</span> <span class="kw">for</span> _ <span class="kw">in</span> <span class="fl">1</span>:length(rules)]</span>
+<span id="cb41-17"><a href="#cb41-17"></a>    accounted_for = <span class="dt">Set</span>{<span class="dt">Int</span>}()</span>
+<span id="cb41-18"><a href="#cb41-18"></a>    <span class="kw">while</span> length(accounted_for) != length(rules)</span>
+<span id="cb41-19"><a href="#cb41-19"></a>        <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:length(first(valid_tickets))</span>
+<span id="cb41-20"><a href="#cb41-20"></a>            valid_rules = [j <span class="kw">for</span> j <span class="kw">in</span> <span class="fl">1</span>:length(rules) <span class="kw">if</span> valid[i, j] &amp;&amp; j ∉ accounted_for]</span>
+<span id="cb41-21"><a href="#cb41-21"></a>            <span class="kw">if</span> length(valid_rules) == <span class="fl">1</span></span>
+<span id="cb41-22"><a href="#cb41-22"></a>                final[i] = only(valid_rules)</span>
+<span id="cb41-23"><a href="#cb41-23"></a>                push!(accounted_for, only(valid_rules))</span>
+<span id="cb41-24"><a href="#cb41-24"></a>            <span class="kw">end</span></span>
+<span id="cb41-25"><a href="#cb41-25"></a>        <span class="kw">end</span></span>
+<span id="cb41-26"><a href="#cb41-26"></a>    <span class="kw">end</span></span>
+<span id="cb41-27"><a href="#cb41-27"></a></span>
+<span id="cb41-28"><a href="#cb41-28"></a>    answer = <span class="fl">1</span></span>
+<span id="cb41-29"><a href="#cb41-29"></a>    <span class="kw">for</span> (interest, k) <span class="kw">in</span> enumerate(keys(rules))</span>
+<span id="cb41-30"><a href="#cb41-30"></a>        !startswith(k, <span class="st">&quot;departure&quot;</span>) &amp;&amp; <span class="kw">continue</span></span>
+<span id="cb41-31"><a href="#cb41-31"></a>        <span class="kw">for</span> (i, index) <span class="kw">in</span> enumerate(final)</span>
+<span id="cb41-32"><a href="#cb41-32"></a>            index == interest &amp;&amp; ( answer *= your_ticket[i] )</span>
+<span id="cb41-33"><a href="#cb41-33"></a>        <span class="kw">end</span></span>
+<span id="cb41-34"><a href="#cb41-34"></a>    <span class="kw">end</span></span>
+<span id="cb41-35"><a href="#cb41-35"></a>    answer</span>
+<span id="cb41-36"><a href="#cb41-36"></a><span class="kw">end</span></span></code></pre></div>
+<p>My learning from this day was that in Julia you can refactor the code with multiple nested <code>for</code> loops:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">for</span> ticket <span class="kw">in</span> valid_tickets</span>
+<span id="cb42-2"><a href="#cb42-2"></a>    <span class="kw">for</span> (i, field) <span class="kw">in</span> enumerate(ticket)</span>
+<span id="cb42-3"><a href="#cb42-3"></a>        <span class="kw">for</span> (j, rule) <span class="kw">in</span> enumerate(rules)</span>
+<span id="cb42-4"><a href="#cb42-4"></a>            _, (rule1, rule2) = rule</span>
+<span id="cb42-5"><a href="#cb42-5"></a>            !(field ∈ rule1 || field ∈ rule2) &amp;&amp; ( valid[i, j] = false )</span>
+<span id="cb42-6"><a href="#cb42-6"></a>        <span class="kw">end</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a>    <span class="kw">end</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="kw">end</span></span></code></pre></div>
+<p>into a single line like so:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">for</span> ticket <span class="kw">in</span> valid_tickets, (i, field) <span class="kw">in</span> enumerate(ticket), (j, rule) <span class="kw">in</span> enumerate(rules)</span>
+<span id="cb43-2"><a href="#cb43-2"></a>    _, (rule1, rule2) = rule</span>
+<span id="cb43-3"><a href="#cb43-3"></a>    !(field ∈ rule1 || field ∈ rule2) &amp;&amp; ( valid[i, j] = false )</span>
+<span id="cb43-4"><a href="#cb43-4"></a><span class="kw">end</span></span></code></pre></div>
+<p>You can even use the variable from the outer loop as the index in the inner loop, like you’d expect. This can help reduce the nesting level of your inner expressions.</p>
+</section>
+<section id="day-17-conway-cubes" class="level2">
+<h2><a href="#day-17-conway-cubes">#</a> <a href="https://adventofcode.com/2020/day/17" target="_blank">Day 17: Conway Cubes</a></h2>
+<p>Another homage to <a href="https://en.wikipedia.org/wiki/John_Horton_Conway" target="_blank">John Conway</a>, this time in multiple dimensions.</p>
+<p>Here’s <a href="https://github.com/mkborregaard" target="_blank">Michael Krabbe Borregaard’s</a> succinct solution that takes advantage of <code>CartesianIndices</code>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">function</span> parsefield(lines, n, dims)</span>
+<span id="cb44-2"><a href="#cb44-2"></a>    field = falses(fill(n, dims)...)</span>
+<span id="cb44-3"><a href="#cb44-3"></a>    <span class="kw">for</span> (i,line) <span class="kw">in</span> enumerate(lines), (j, char) <span class="kw">in</span> enumerate(line)</span>
+<span id="cb44-4"><a href="#cb44-4"></a>        char == <span class="ch">&#39;#&#39;</span> &amp;&amp; (field[i + n÷<span class="fl">2</span>, j + n÷<span class="fl">2</span>, fill(n÷<span class="fl">2</span>, dims-<span class="fl">2</span>)...] = true)</span>
+<span id="cb44-5"><a href="#cb44-5"></a>    <span class="kw">end</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>    field</span>
+<span id="cb44-7"><a href="#cb44-7"></a><span class="kw">end</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a></span>
+<span id="cb44-9"><a href="#cb44-9"></a><span class="kw">function</span> startup(lines, rounds, dims)</span>
+<span id="cb44-10"><a href="#cb44-10"></a>    field = parsefield(lines, <span class="fl">2</span>*(length(lines) + rounds + <span class="fl">2</span>), dims)</span>
+<span id="cb44-11"><a href="#cb44-11"></a>    newfield = copy(field)</span>
+<span id="cb44-12"><a href="#cb44-12"></a>    <span class="kw">for</span> n <span class="kw">in</span> <span class="fl">1</span>:rounds</span>
+<span id="cb44-13"><a href="#cb44-13"></a>        <span class="kw">for</span> ind <span class="kw">in</span> CartesianIndices(field)[fill(<span class="fl">2</span>+rounds-n:size(field, <span class="fl">1</span>)-rounds-<span class="fl">1</span>+n, dims)...]</span>
+<span id="cb44-14"><a href="#cb44-14"></a>            counter = sum(field[((-<span class="fl">1</span>:<span class="fl">1</span>) .+ i <span class="kw">for</span> i <span class="kw">in</span> <span class="dt">Tuple</span>(ind))...]) - field[ind]</span>
+<span id="cb44-15"><a href="#cb44-15"></a>            newfield[ind] = field[ind] ? counter <span class="kw">in</span> (<span class="fl">2</span>,<span class="fl">3</span>) : counter == <span class="fl">3</span></span>
+<span id="cb44-16"><a href="#cb44-16"></a>        <span class="kw">end</span></span>
+<span id="cb44-17"><a href="#cb44-17"></a>        field .= newfield</span>
+<span id="cb44-18"><a href="#cb44-18"></a>    <span class="kw">end</span></span>
+<span id="cb44-19"><a href="#cb44-19"></a>    sum(field)</span>
+<span id="cb44-20"><a href="#cb44-20"></a><span class="kw">end</span></span>
+<span id="cb44-21"><a href="#cb44-21"></a></span>
+<span id="cb44-22"><a href="#cb44-22"></a>readInput() = readlines(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>))</span>
+<span id="cb44-23"><a href="#cb44-23"></a>part1(data = readInput()) = startup(data, <span class="fl">6</span>, <span class="fl">3</span>)</span>
+<span id="cb44-24"><a href="#cb44-24"></a>part2(data = readInput()) = startup(data, <span class="fl">6</span>, <span class="fl">4</span>)</span></code></pre></div>
+<p>Cellular automata puzzles are always fun, and make for some neat visualizations. Here are a couple of multi dimensional visualizations by <a href="https://github.com/tk3369/AdventOfCode2020/" target="_blank">Tom Kwong</a>:</p>
+<figure>
+<img src="https://user-images.githubusercontent.com/1813121/103164882-1371eb00-47ce-11eb-92d7-624ebf54c0f9.gif" alt="" /><figcaption><a href="https://twitter.com/tomkwong/status/1339468003608387586" class="uri" target="_blank">https://twitter.com/tomkwong/status/1339468003608387586</a></figcaption>
+</figure>
+<figure>
+<img src="https://user-images.githubusercontent.com/1813121/103164897-39978b00-47ce-11eb-8c36-d9477cb839d1.gif" alt="" /><figcaption><a href="https://twitter.com/tomkwong/status/1339735696194457600" class="uri" target="_blank">https://twitter.com/tomkwong/status/1339735696194457600</a></figcaption>
+</figure>
+</section>
+<section id="day-18-operation-order" class="level2">
+<h2><a href="#day-18-operation-order">#</a> <a href="https://adventofcode.com/2020/day/18" target="_blank">Day 18: Operation Order</a></h2>
+<p>The intended way to solve such problems is by implementing the <a href="https://en.wikipedia.org/wiki/Shunting-yard_algorithm" target="_blank">Shunting-yard algorithm</a>.</p>
+<p>However, you can hack the operator precedence in your programming language of choice and take advantage of the built in parser.</p>
+<p>Here is <a href="https://github.com/dgkf/advent-of-code/blob/98ee142a61b453a766331c65ece372978041935e/2020/18/18.jl" target="_blank">Doug’s</a> that managed to get him a spot on the global leaderboard.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb45-1"><a href="#cb45-1"></a>readInput() = readlines(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>))</span>
+<span id="cb45-2"><a href="#cb45-2"></a></span>
+<span id="cb45-3"><a href="#cb45-3"></a>⨦(a,b) = a * b  <span class="co"># define &quot;multiplication&quot; with same precedence as &quot;+&quot;</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a>part1(data = readInput()) = sum(l -&gt; eval(Meta.parse(replace(l, <span class="st">&quot;*&quot;</span> =&gt; <span class="st">&quot;⨦&quot;</span>))), data)</span>
+<span id="cb45-5"><a href="#cb45-5"></a></span>
+<span id="cb45-6"><a href="#cb45-6"></a>⨱(a,b) = a + b  <span class="co"># define &quot;addition&quot; with precedence of &quot;*&quot;</span></span>
+<span id="cb45-7"><a href="#cb45-7"></a>part2(data = readInput()) = sum(l -&gt; eval(Meta.parse(replace(replace(l, <span class="st">&quot;*&quot;</span> =&gt; <span class="st">&quot;⨦&quot;</span>), <span class="st">&quot;+&quot;</span> =&gt; <span class="st">&quot;⨱&quot;</span>))), data)</span></code></pre></div>
+<p>The key is to find the right operators in your programming language that have the precedence required as per the prompt.</p>
+</section>
+<section id="day-19-monster-messages" class="level2">
+<h2><a href="#day-19-monster-messages">#</a> <a href="https://adventofcode.com/2020/day/19" target="_blank">Day 19: Monster Messages</a></h2>
+<p>This was another hard day for me. First, I tried to implement a recursive algorithm. After failing to figure this out, I picked it up again on the next day with a clean slate, and I tried to build a regex that would match various messages. This worked for part 1 but I kept running out of memory for part 2. Finally, after changing some of the rules hard-coding them by hand I was able to solve part 2.</p>
+<p>Specifically, I hard coded rules <code>"8"</code> and <code>"11"</code> to the following.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1"></a>rules[<span class="st">&quot;8&quot;</span>] = <span class="st">&quot;(42)+&quot;</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>rules[<span class="st">&quot;11&quot;</span>] = <span class="st">&quot;42 31 | 42 ( 42 31 | 42 ( 42 31 | 42 ( 42 31 | 42 ( 42 31 ) 31 ) 31 ) 31 ) 31&quot;</span></span></code></pre></div>
+<p>This limits the depth of rule <code>"11"</code>. One more step however and I was getting PCRE memory errors.</p>
+<p>Here’s a solution by <a href="https://github.com/dgkf/advent-of-code/blob/98ee142a61b453a766331c65ece372978041935e/2020/19/19.jl" target="_blank">Doug</a> that does the same thing elegantly and programmatically.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">function</span> readInput()</span>
+<span id="cb47-2"><a href="#cb47-2"></a>  rules, messages = split.(split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>), <span class="ch">&#39;\n&#39;</span>)</span>
+<span id="cb47-3"><a href="#cb47-3"></a>  rules = <span class="dt">Dict</span>(map(rules) <span class="kw">do</span> line</span>
+<span id="cb47-4"><a href="#cb47-4"></a>      m = match(r<span class="st">&quot;^(\d+): (</span><span class="sc">\&quot;</span><span class="st">(\w+)</span><span class="sc">\&quot;</span><span class="st">|([^|]+)|(.+))$&quot;</span>, line)</span>
+<span id="cb47-5"><a href="#cb47-5"></a>      <span class="dt">String</span>(m[<span class="fl">1</span>]) =&gt; m[<span class="fl">3</span>] isa <span class="dt">Nothing</span> ? (m[<span class="fl">4</span>] isa <span class="dt">Nothing</span> ? <span class="st">&quot;(?:$(m[5]))&quot;</span> : <span class="dt">String</span>(m[<span class="fl">4</span>])) : <span class="dt">String</span>(m[<span class="fl">3</span>])</span>
+<span id="cb47-6"><a href="#cb47-6"></a>  <span class="kw">end</span>)</span>
+<span id="cb47-7"><a href="#cb47-7"></a>  rules, messages</span>
+<span id="cb47-8"><a href="#cb47-8"></a><span class="kw">end</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a></span>
+<span id="cb47-10"><a href="#cb47-10"></a><span class="kw">function</span> resolve(rule, rules)</span>
+<span id="cb47-11"><a href="#cb47-11"></a>    ns = [nsi.match <span class="kw">for</span> nsi = eachmatch(r<span class="st">&quot;</span><span class="sc">\b</span><span class="st">\d+</span><span class="sc">\b</span><span class="st">&quot;</span>, rule)]</span>
+<span id="cb47-12"><a href="#cb47-12"></a>    n_res = [<span class="dt">Regex</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">b$nsi</span><span class="sc">\\</span><span class="st">b&quot;</span>) <span class="kw">for</span> nsi = ns]</span>
+<span id="cb47-13"><a href="#cb47-13"></a>    n_rep = [resolve(rules[nsi], rules) <span class="kw">for</span> nsi=ns]</span>
+<span id="cb47-14"><a href="#cb47-14"></a>    replace(reduce(replace, n_res .=&gt; n_rep, init = rule), <span class="st">&quot; &quot;</span> =&gt; <span class="st">&quot;&quot;</span>)</span>
+<span id="cb47-15"><a href="#cb47-15"></a><span class="kw">end</span></span>
+<span id="cb47-16"><a href="#cb47-16"></a></span>
+<span id="cb47-17"><a href="#cb47-17"></a><span class="kw">function</span> part1(data = readInput())</span>
+<span id="cb47-18"><a href="#cb47-18"></a>    rules, messages = data</span>
+<span id="cb47-19"><a href="#cb47-19"></a>    count(contains(<span class="dt">Regex</span>(<span class="st">&quot;^$(resolve(rules[&quot;</span><span class="fl">0</span><span class="st">&quot;], rules))\$&quot;</span>)), messages)</span>
+<span id="cb47-20"><a href="#cb47-20"></a><span class="kw">end</span></span>
+<span id="cb47-21"><a href="#cb47-21"></a></span>
+<span id="cb47-22"><a href="#cb47-22"></a><span class="kw">function</span> part2(data = readInput())</span>
+<span id="cb47-23"><a href="#cb47-23"></a>    rules, messages = data</span>
+<span id="cb47-24"><a href="#cb47-24"></a>    rule42 = resolve(rules[<span class="st">&quot;42&quot;</span>], rules)</span>
+<span id="cb47-25"><a href="#cb47-25"></a>    rule31 = resolve(rules[<span class="st">&quot;31&quot;</span>], rules)</span>
+<span id="cb47-26"><a href="#cb47-26"></a>    count(contains(<span class="dt">Regex</span>(<span class="st">&quot;^$rule42+($rule42(?1)?$rule31)\$&quot;</span>)), messages)</span>
+<span id="cb47-27"><a href="#cb47-27"></a><span class="kw">end</span></span></code></pre></div>
+<p>As noted by <a href="https://git.sr.ht/~quf/advent-of-code-2020/" target="_blank">/u/furiousleep</a> on <a href="https://reddit.com/r/adventofcode/comments/klmlx2/2020_days_125_idiomatic_solutions_in_julia_with/gh9xhrk/" target="_blank">/r/adventofcode (along with other valuable feedback)</a>, the intended solution for this would use the <a href="https://en.wikipedia.org/wiki/CYK_algorithm" target="_blank">CYK algorithm</a>. I would like to rewrite my solution using this algorithm instead.</p>
+</section>
+<section id="day-20-jurassic-jigsaw" class="level2">
+<h2><a href="#day-20-jurassic-jigsaw">#</a> <a href="https://adventofcode.com/2020/day/20" target="_blank">Day 20: Jurassic Jigsaw</a></h2>
+<p>This puzzle was really fun to figure out but also tedious to type out everything that you needed to type out. While I was able to solve the problem, I hard-coded many things in my solution. My code doesn’t even work for the test cases. This is just one of those puzzles that is easier to solve on paper than to write an actual working implementation.</p>
+<p>Here’s a working solution by <a href="https://github.com/talentdeficit/aoc2020/blob/1bdc06f7428c8e8c59a2748fbd1c2fa0e04e67c5/bin/twenty/run.jl" target="_blank">Alisdair Sullivan</a>:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb48-1"><a href="#cb48-1"></a>readInput() = map(t -&gt; split(t, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>), split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>))</span>
+<span id="cb48-2"><a href="#cb48-2"></a></span>
+<span id="cb48-3"><a href="#cb48-3"></a>mutable struct Tile</span>
+<span id="cb48-4"><a href="#cb48-4"></a>    id::<span class="dt">Int</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>    raw::<span class="dt">Array</span>{<span class="dt">Char</span>, <span class="fl">2</span>}</span>
+<span id="cb48-6"><a href="#cb48-6"></a><span class="kw">end</span></span>
+<span id="cb48-7"><a href="#cb48-7"></a></span>
+<span id="cb48-8"><a href="#cb48-8"></a><span class="kw">function</span> copy(tile::Tile)</span>
+<span id="cb48-9"><a href="#cb48-9"></a>    new = copy(tile.raw)</span>
+<span id="cb48-10"><a href="#cb48-10"></a>    <span class="kw">return</span> Tile(tile.id, new)</span>
+<span id="cb48-11"><a href="#cb48-11"></a><span class="kw">end</span></span>
+<span id="cb48-12"><a href="#cb48-12"></a></span>
+<span id="cb48-13"><a href="#cb48-13"></a>t = Tile(<span class="fl">1</span>, [<span class="ch">&#39;a&#39;</span> <span class="ch">&#39;b&#39;</span> <span class="ch">&#39;c&#39;</span>; <span class="ch">&#39;d&#39;</span> <span class="ch">&#39;e&#39;</span> <span class="ch">&#39;f&#39;</span>])</span>
+<span id="cb48-14"><a href="#cb48-14"></a></span>
+<span id="cb48-15"><a href="#cb48-15"></a><span class="kw">function</span> size(tile::Tile)</span>
+<span id="cb48-16"><a href="#cb48-16"></a>    <span class="kw">return</span> Base.size(tile.raw)</span>
+<span id="cb48-17"><a href="#cb48-17"></a><span class="kw">end</span></span>
+<span id="cb48-18"><a href="#cb48-18"></a></span>
+<span id="cb48-19"><a href="#cb48-19"></a><span class="kw">function</span> top(tile::Tile)</span>
+<span id="cb48-20"><a href="#cb48-20"></a>    (y, x) = size(tile)</span>
+<span id="cb48-21"><a href="#cb48-21"></a>    <span class="kw">return</span> tile.raw[range(<span class="fl">1</span>, length=x, step=y)]</span>
+<span id="cb48-22"><a href="#cb48-22"></a><span class="kw">end</span></span>
+<span id="cb48-23"><a href="#cb48-23"></a></span>
+<span id="cb48-24"><a href="#cb48-24"></a><span class="kw">function</span> right(tile::Tile)</span>
+<span id="cb48-25"><a href="#cb48-25"></a>    (y, x) = size(tile)</span>
+<span id="cb48-26"><a href="#cb48-26"></a>    <span class="kw">return</span> tile.raw[range((x * y) - y + <span class="fl">1</span>, length=y, step=<span class="fl">1</span>)]</span>
+<span id="cb48-27"><a href="#cb48-27"></a><span class="kw">end</span></span>
+<span id="cb48-28"><a href="#cb48-28"></a></span>
+<span id="cb48-29"><a href="#cb48-29"></a><span class="kw">function</span> bottom(tile::Tile)</span>
+<span id="cb48-30"><a href="#cb48-30"></a>    (y, x) = size(tile)</span>
+<span id="cb48-31"><a href="#cb48-31"></a>    <span class="kw">return</span> tile.raw[range(y, length=x, step=y)]</span>
+<span id="cb48-32"><a href="#cb48-32"></a><span class="kw">end</span></span>
+<span id="cb48-33"><a href="#cb48-33"></a></span>
+<span id="cb48-34"><a href="#cb48-34"></a><span class="kw">function</span> left(tile::Tile)</span>
+<span id="cb48-35"><a href="#cb48-35"></a>    (y, x) = size(tile)</span>
+<span id="cb48-36"><a href="#cb48-36"></a>    <span class="kw">return</span> tile.raw[range(<span class="fl">1</span>, length=y, step=<span class="fl">1</span>)]</span>
+<span id="cb48-37"><a href="#cb48-37"></a><span class="kw">end</span></span>
+<span id="cb48-38"><a href="#cb48-38"></a></span>
+<span id="cb48-39"><a href="#cb48-39"></a><span class="kw">function</span> flip!(tile)</span>
+<span id="cb48-40"><a href="#cb48-40"></a>    new = tile.raw[:,<span class="kw">end</span>:-<span class="fl">1</span>:<span class="fl">1</span>]</span>
+<span id="cb48-41"><a href="#cb48-41"></a>    tile.raw = new</span>
+<span id="cb48-42"><a href="#cb48-42"></a><span class="kw">end</span></span>
+<span id="cb48-43"><a href="#cb48-43"></a></span>
+<span id="cb48-44"><a href="#cb48-44"></a><span class="kw">function</span> rotate!(tile)</span>
+<span id="cb48-45"><a href="#cb48-45"></a>    new = rotr90(tile.raw)</span>
+<span id="cb48-46"><a href="#cb48-46"></a>    tile.raw = new</span>
+<span id="cb48-47"><a href="#cb48-47"></a><span class="kw">end</span></span>
+<span id="cb48-48"><a href="#cb48-48"></a></span>
+<span id="cb48-49"><a href="#cb48-49"></a><span class="kw">function</span> parse_tiles(tiles)</span>
+<span id="cb48-50"><a href="#cb48-50"></a>    <span class="kw">return</span> map(tile -&gt; parse_tile(tile), tiles)</span>
+<span id="cb48-51"><a href="#cb48-51"></a><span class="kw">end</span></span>
+<span id="cb48-52"><a href="#cb48-52"></a></span>
+<span id="cb48-53"><a href="#cb48-53"></a><span class="kw">function</span> parse_tile(tile)</span>
+<span id="cb48-54"><a href="#cb48-54"></a>    m = match(r<span class="st">&quot;(\d+)&quot;</span>, first(tile))</span>
+<span id="cb48-55"><a href="#cb48-55"></a>    id = parse(<span class="dt">Int</span>, m.captures[<span class="fl">1</span>])</span>
+<span id="cb48-56"><a href="#cb48-56"></a>    raw = reduce(vcat, permutedims.(collect.(tile[<span class="fl">2</span>:<span class="kw">end</span>])))</span>
+<span id="cb48-57"><a href="#cb48-57"></a>    <span class="kw">return</span> Tile(id, raw)</span>
+<span id="cb48-58"><a href="#cb48-58"></a><span class="kw">end</span></span>
+<span id="cb48-59"><a href="#cb48-59"></a></span>
+<span id="cb48-60"><a href="#cb48-60"></a><span class="kw">function</span> find_edges(tile)</span>
+<span id="cb48-61"><a href="#cb48-61"></a>    edges = []</span>
+<span id="cb48-62"><a href="#cb48-62"></a>    push!(edges, top(tile))</span>
+<span id="cb48-63"><a href="#cb48-63"></a>    push!(edges, right(tile))</span>
+<span id="cb48-64"><a href="#cb48-64"></a>    push!(edges, bottom(tile))</span>
+<span id="cb48-65"><a href="#cb48-65"></a>    push!(edges, left(tile))</span>
+<span id="cb48-66"><a href="#cb48-66"></a>    push!(edges, reverse(top(tile)))</span>
+<span id="cb48-67"><a href="#cb48-67"></a>    push!(edges, reverse(right(tile)))</span>
+<span id="cb48-68"><a href="#cb48-68"></a>    push!(edges, reverse(bottom(tile)))</span>
+<span id="cb48-69"><a href="#cb48-69"></a>    push!(edges, reverse(left(tile)))</span>
+<span id="cb48-70"><a href="#cb48-70"></a>    <span class="kw">return</span> edges</span>
+<span id="cb48-71"><a href="#cb48-71"></a><span class="kw">end</span></span>
+<span id="cb48-72"><a href="#cb48-72"></a></span>
+<span id="cb48-73"><a href="#cb48-73"></a><span class="kw">function</span> orient!(tile, matches)</span>
+<span id="cb48-74"><a href="#cb48-74"></a>    <span class="kw">for</span> flipped <span class="kw">in</span> (false, true), i <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">4</span></span>
+<span id="cb48-75"><a href="#cb48-75"></a>        matches(tile) &amp;&amp; <span class="kw">return</span></span>
+<span id="cb48-76"><a href="#cb48-76"></a>        flipped &amp;&amp; flip!(tile)</span>
+<span id="cb48-77"><a href="#cb48-77"></a>        flipped &amp;&amp; matches(tile) &amp;&amp; <span class="kw">return</span></span>
+<span id="cb48-78"><a href="#cb48-78"></a>        flipped &amp;&amp; flip!(tile)</span>
+<span id="cb48-79"><a href="#cb48-79"></a>        rotate!(tile)</span>
+<span id="cb48-80"><a href="#cb48-80"></a>    <span class="kw">end</span></span>
+<span id="cb48-81"><a href="#cb48-81"></a><span class="kw">end</span></span>
+<span id="cb48-82"><a href="#cb48-82"></a></span>
+<span id="cb48-83"><a href="#cb48-83"></a><span class="kw">function</span> find_corners(tiles)</span>
+<span id="cb48-84"><a href="#cb48-84"></a>    corners = []</span>
+<span id="cb48-85"><a href="#cb48-85"></a>    ec = count_edges(tiles)</span>
+<span id="cb48-86"><a href="#cb48-86"></a></span>
+<span id="cb48-87"><a href="#cb48-87"></a>    <span class="kw">for</span> tile <span class="kw">in</span> tiles</span>
+<span id="cb48-88"><a href="#cb48-88"></a>        c = sum([length(ec[top(tile)]), length(ec[bottom(tile)]), length(ec[left(tile)]), length(ec[right(tile)])])</span>
+<span id="cb48-89"><a href="#cb48-89"></a>        c == <span class="fl">6</span> &amp;&amp; push!(corners, tile)</span>
+<span id="cb48-90"><a href="#cb48-90"></a>    <span class="kw">end</span></span>
+<span id="cb48-91"><a href="#cb48-91"></a>    <span class="kw">return</span> corners</span>
+<span id="cb48-92"><a href="#cb48-92"></a><span class="kw">end</span></span>
+<span id="cb48-93"><a href="#cb48-93"></a></span>
+<span id="cb48-94"><a href="#cb48-94"></a><span class="kw">function</span> count_edges(tiles)</span>
+<span id="cb48-95"><a href="#cb48-95"></a>    acc = <span class="dt">Dict</span>{<span class="dt">Vector</span>{<span class="dt">Char</span>}, <span class="dt">Vector</span>{<span class="dt">Int</span>}}()</span>
+<span id="cb48-96"><a href="#cb48-96"></a>    <span class="kw">for</span> tile <span class="kw">in</span> tiles</span>
+<span id="cb48-97"><a href="#cb48-97"></a>        edges = find_edges(tile)</span>
+<span id="cb48-98"><a href="#cb48-98"></a>        <span class="kw">for</span> edge <span class="kw">in</span> edges</span>
+<span id="cb48-99"><a href="#cb48-99"></a>            haskey(acc, edge) ? acc[edge] = append!(acc[edge], tile.id) : acc[edge] = [tile.id]</span>
+<span id="cb48-100"><a href="#cb48-100"></a>        <span class="kw">end</span></span>
+<span id="cb48-101"><a href="#cb48-101"></a>    <span class="kw">end</span></span>
+<span id="cb48-102"><a href="#cb48-102"></a>    <span class="kw">return</span> acc</span>
+<span id="cb48-103"><a href="#cb48-103"></a><span class="kw">end</span></span>
+<span id="cb48-104"><a href="#cb48-104"></a></span>
+<span id="cb48-105"><a href="#cb48-105"></a><span class="kw">function</span> find_origin(tiles)</span>
+<span id="cb48-106"><a href="#cb48-106"></a>    edges = count_edges(tiles)</span>
+<span id="cb48-107"><a href="#cb48-107"></a>    corner = first(find_corners(tiles))</span>
+<span id="cb48-108"><a href="#cb48-108"></a>    <span class="kw">for</span> _ <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">4</span></span>
+<span id="cb48-109"><a href="#cb48-109"></a>        t = edges[top(corner)]</span>
+<span id="cb48-110"><a href="#cb48-110"></a>        l = edges[left(corner)]</span>
+<span id="cb48-111"><a href="#cb48-111"></a>        length(t) == <span class="fl">1</span> &amp;&amp; length(l) == <span class="fl">1</span> &amp;&amp; <span class="kw">return</span> corner</span>
+<span id="cb48-112"><a href="#cb48-112"></a>        rotate!(corner)</span>
+<span id="cb48-113"><a href="#cb48-113"></a>    <span class="kw">end</span></span>
+<span id="cb48-114"><a href="#cb48-114"></a><span class="kw">end</span></span>
+<span id="cb48-115"><a href="#cb48-115"></a></span>
+<span id="cb48-116"><a href="#cb48-116"></a><span class="kw">function</span> trim(tile)</span>
+<span id="cb48-117"><a href="#cb48-117"></a>    raw = tile.raw</span>
+<span id="cb48-118"><a href="#cb48-118"></a>    (x, y) = size(tile)</span>
+<span id="cb48-119"><a href="#cb48-119"></a>    <span class="kw">return</span> raw[<span class="fl">2</span>:(x - <span class="fl">1</span>),<span class="fl">2</span>:(y - <span class="fl">1</span>)]</span>
+<span id="cb48-120"><a href="#cb48-120"></a><span class="kw">end</span></span>
+<span id="cb48-121"><a href="#cb48-121"></a></span>
+<span id="cb48-122"><a href="#cb48-122"></a><span class="kw">function</span> assemble(tiles)</span>
+<span id="cb48-123"><a href="#cb48-123"></a>    origin = find_origin(deepcopy(tiles))</span>
+<span id="cb48-124"><a href="#cb48-124"></a>    edges = count_edges(deepcopy(tiles))</span>
+<span id="cb48-125"><a href="#cb48-125"></a></span>
+<span id="cb48-126"><a href="#cb48-126"></a>    rows = []</span>
+<span id="cb48-127"><a href="#cb48-127"></a>    row = [origin]</span>
+<span id="cb48-128"><a href="#cb48-128"></a></span>
+<span id="cb48-129"><a href="#cb48-129"></a>    rowstart = origin</span>
+<span id="cb48-130"><a href="#cb48-130"></a>    current = origin</span>
+<span id="cb48-131"><a href="#cb48-131"></a></span>
+<span id="cb48-132"><a href="#cb48-132"></a>    <span class="kw">while</span> !isnothing(current)</span>
+<span id="cb48-133"><a href="#cb48-133"></a>        match = edges[right(current)]</span>
+<span id="cb48-134"><a href="#cb48-134"></a>        <span class="kw">if</span> length(match) == <span class="fl">2</span></span>
+<span id="cb48-135"><a href="#cb48-135"></a>            next_id = only(filter(id -&gt; id != current.id, match))</span>
+<span id="cb48-136"><a href="#cb48-136"></a>            next_idx = findfirst(t -&gt; t.id == next_id, tiles)</span>
+<span id="cb48-137"><a href="#cb48-137"></a>            next = tiles[next_idx]</span>
+<span id="cb48-138"><a href="#cb48-138"></a>            matcher = (t) -&gt; left(t) == right(current)</span>
+<span id="cb48-139"><a href="#cb48-139"></a>            orient!(next, matcher)</span>
+<span id="cb48-140"><a href="#cb48-140"></a>            push!(row, next)</span>
+<span id="cb48-141"><a href="#cb48-141"></a>            current = next</span>
+<span id="cb48-142"><a href="#cb48-142"></a>        <span class="kw">else</span></span>
+<span id="cb48-143"><a href="#cb48-143"></a>            push!(rows, row)</span>
+<span id="cb48-144"><a href="#cb48-144"></a>            match = edges[bottom(rowstart)]</span>
+<span id="cb48-145"><a href="#cb48-145"></a>            <span class="kw">if</span> length(match) == <span class="fl">2</span></span>
+<span id="cb48-146"><a href="#cb48-146"></a>                next_id = only(filter(id -&gt; id != rowstart.id, match))</span>
+<span id="cb48-147"><a href="#cb48-147"></a>                next_idx = findfirst(t -&gt; t.id == next_id, tiles)</span>
+<span id="cb48-148"><a href="#cb48-148"></a>                next = tiles[next_idx]</span>
+<span id="cb48-149"><a href="#cb48-149"></a>                orient!(next, (t) -&gt; top(t) == bottom(rowstart))</span>
+<span id="cb48-150"><a href="#cb48-150"></a>                current = next</span>
+<span id="cb48-151"><a href="#cb48-151"></a>                rowstart = current</span>
+<span id="cb48-152"><a href="#cb48-152"></a>                row = [rowstart]</span>
+<span id="cb48-153"><a href="#cb48-153"></a>            <span class="kw">else</span></span>
+<span id="cb48-154"><a href="#cb48-154"></a>                current = nothing</span>
+<span id="cb48-155"><a href="#cb48-155"></a>            <span class="kw">end</span></span>
+<span id="cb48-156"><a href="#cb48-156"></a>        <span class="kw">end</span></span>
+<span id="cb48-157"><a href="#cb48-157"></a>    <span class="kw">end</span></span>
+<span id="cb48-158"><a href="#cb48-158"></a></span>
+<span id="cb48-159"><a href="#cb48-159"></a>    <span class="kw">return</span> vcat(map(row -&gt; hcat(map(tile -&gt; trim(tile), row)...), rows)...)</span>
+<span id="cb48-160"><a href="#cb48-160"></a><span class="kw">end</span></span>
+<span id="cb48-161"><a href="#cb48-161"></a></span>
+<span id="cb48-162"><a href="#cb48-162"></a><span class="kw">function</span> find_seamonsters(assembled)</span>
+<span id="cb48-163"><a href="#cb48-163"></a>    <span class="co"># seamonster pattern</span></span>
+<span id="cb48-164"><a href="#cb48-164"></a>    indices = [</span>
+<span id="cb48-165"><a href="#cb48-165"></a>        CartesianIndex(<span class="fl">19</span>, <span class="fl">1</span>),</span>
+<span id="cb48-166"><a href="#cb48-166"></a>        CartesianIndex(<span class="fl">1</span>, <span class="fl">2</span>),</span>
+<span id="cb48-167"><a href="#cb48-167"></a>        CartesianIndex(<span class="fl">6</span>, <span class="fl">2</span>),</span>
+<span id="cb48-168"><a href="#cb48-168"></a>        CartesianIndex(<span class="fl">7</span>, <span class="fl">2</span>),</span>
+<span id="cb48-169"><a href="#cb48-169"></a>        CartesianIndex(<span class="fl">12</span>, <span class="fl">2</span>),</span>
+<span id="cb48-170"><a href="#cb48-170"></a>        CartesianIndex(<span class="fl">13</span>, <span class="fl">2</span>),</span>
+<span id="cb48-171"><a href="#cb48-171"></a>        CartesianIndex(<span class="fl">18</span>, <span class="fl">2</span>),</span>
+<span id="cb48-172"><a href="#cb48-172"></a>        CartesianIndex(<span class="fl">19</span>, <span class="fl">2</span>),</span>
+<span id="cb48-173"><a href="#cb48-173"></a>        CartesianIndex(<span class="fl">20</span>, <span class="fl">2</span>),</span>
+<span id="cb48-174"><a href="#cb48-174"></a>        CartesianIndex(<span class="fl">2</span>, <span class="fl">3</span>),</span>
+<span id="cb48-175"><a href="#cb48-175"></a>        CartesianIndex(<span class="fl">5</span>, <span class="fl">3</span>),</span>
+<span id="cb48-176"><a href="#cb48-176"></a>        CartesianIndex(<span class="fl">8</span>, <span class="fl">3</span>),</span>
+<span id="cb48-177"><a href="#cb48-177"></a>        CartesianIndex(<span class="fl">11</span>, <span class="fl">3</span>),</span>
+<span id="cb48-178"><a href="#cb48-178"></a>        CartesianIndex(<span class="fl">14</span>, <span class="fl">3</span>),</span>
+<span id="cb48-179"><a href="#cb48-179"></a>        CartesianIndex(<span class="fl">17</span>, <span class="fl">3</span>)</span>
+<span id="cb48-180"><a href="#cb48-180"></a>    ]</span>
+<span id="cb48-181"><a href="#cb48-181"></a></span>
+<span id="cb48-182"><a href="#cb48-182"></a>    (xr, yr) = Base.size(assembled) .- (<span class="fl">20</span>, <span class="fl">3</span>)</span>
+<span id="cb48-183"><a href="#cb48-183"></a></span>
+<span id="cb48-184"><a href="#cb48-184"></a>    counts = []</span>
+<span id="cb48-185"><a href="#cb48-185"></a></span>
+<span id="cb48-186"><a href="#cb48-186"></a>    <span class="kw">for</span> flipped <span class="kw">in</span> (false, true), i <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">4</span></span>
+<span id="cb48-187"><a href="#cb48-187"></a>        flipped ? assembled = assembled[<span class="kw">end</span>:-<span class="fl">1</span>:<span class="fl">1</span>,:] : nothing</span>
+<span id="cb48-188"><a href="#cb48-188"></a>        count = <span class="fl">0</span></span>
+<span id="cb48-189"><a href="#cb48-189"></a>        idx = CartesianIndex(<span class="fl">0</span>,<span class="fl">0</span>)</span>
+<span id="cb48-190"><a href="#cb48-190"></a>        <span class="kw">for</span> j <span class="kw">in</span> <span class="fl">1</span>:yr</span>
+<span id="cb48-191"><a href="#cb48-191"></a>            (x, y) = <span class="dt">Tuple</span>(idx)</span>
+<span id="cb48-192"><a href="#cb48-192"></a>            idx = CartesianIndex(<span class="fl">0</span>, y + <span class="fl">1</span>)</span>
+<span id="cb48-193"><a href="#cb48-193"></a>            <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:xr</span>
+<span id="cb48-194"><a href="#cb48-194"></a>                idx += CartesianIndex(<span class="fl">1</span>, <span class="fl">0</span>)</span>
+<span id="cb48-195"><a href="#cb48-195"></a>                all(i -&gt; assembled[idx + i] == <span class="ch">&#39;#&#39;</span>, indices) ? count += <span class="fl">1</span> : nothing</span>
+<span id="cb48-196"><a href="#cb48-196"></a>            <span class="kw">end</span></span>
+<span id="cb48-197"><a href="#cb48-197"></a>        <span class="kw">end</span></span>
+<span id="cb48-198"><a href="#cb48-198"></a>        push!(counts, count)</span>
+<span id="cb48-199"><a href="#cb48-199"></a>        flipped ? assembled = assembled[<span class="kw">end</span>:-<span class="fl">1</span>:<span class="fl">1</span>,:] : nothing</span>
+<span id="cb48-200"><a href="#cb48-200"></a>        assembled = rotr90(assembled)</span>
+<span id="cb48-201"><a href="#cb48-201"></a>    <span class="kw">end</span></span>
+<span id="cb48-202"><a href="#cb48-202"></a>    <span class="kw">return</span> counts</span>
+<span id="cb48-203"><a href="#cb48-203"></a><span class="kw">end</span></span>
+<span id="cb48-204"><a href="#cb48-204"></a></span>
+<span id="cb48-205"><a href="#cb48-205"></a><span class="kw">function</span> check(puzzle)</span>
+<span id="cb48-206"><a href="#cb48-206"></a>    acc = <span class="fl">0</span></span>
+<span id="cb48-207"><a href="#cb48-207"></a>    <span class="kw">for</span> i <span class="kw">in</span> eachindex(puzzle)</span>
+<span id="cb48-208"><a href="#cb48-208"></a>        puzzle[i] == <span class="ch">&#39;#&#39;</span> ? acc += <span class="fl">1</span> : nothing</span>
+<span id="cb48-209"><a href="#cb48-209"></a>    <span class="kw">end</span></span>
+<span id="cb48-210"><a href="#cb48-210"></a>    <span class="kw">return</span> acc</span>
+<span id="cb48-211"><a href="#cb48-211"></a><span class="kw">end</span></span>
+<span id="cb48-212"><a href="#cb48-212"></a></span>
+<span id="cb48-213"><a href="#cb48-213"></a><span class="kw">function</span> part1(tiles = readInput())</span>
+<span id="cb48-214"><a href="#cb48-214"></a>  tiles = parse_tiles(tiles)</span>
+<span id="cb48-215"><a href="#cb48-215"></a>  corners = find_corners(tiles)</span>
+<span id="cb48-216"><a href="#cb48-216"></a>  prod(map(tile -&gt; tile.id, corners))</span>
+<span id="cb48-217"><a href="#cb48-217"></a><span class="kw">end</span></span>
+<span id="cb48-218"><a href="#cb48-218"></a></span>
+<span id="cb48-219"><a href="#cb48-219"></a><span class="kw">function</span> part2(tiles = readInput())</span>
+<span id="cb48-220"><a href="#cb48-220"></a>  tiles = parse_tiles(tiles)</span>
+<span id="cb48-221"><a href="#cb48-221"></a>  corners = find_corners(tiles)</span>
+<span id="cb48-222"><a href="#cb48-222"></a></span>
+<span id="cb48-223"><a href="#cb48-223"></a>  assembled = assemble(tiles)</span>
+<span id="cb48-224"><a href="#cb48-224"></a>  counts = find_seamonsters(assembled)</span>
+<span id="cb48-225"><a href="#cb48-225"></a></span>
+<span id="cb48-226"><a href="#cb48-226"></a>  check(assembled) - (maximum(counts) * <span class="fl">15</span>)</span>
+<span id="cb48-227"><a href="#cb48-227"></a><span class="kw">end</span></span></code></pre></div>
+<p>The key functions I found that others were using were <code>rotl90</code>, <code>rotr90</code> and <code>rot180</code> from the Julia standard library, like in <a href="https://github.com/pabloferz/AoC/blob/5475590e2ac3b08c4800aac59b5ad96e287a8c6a/2020/20/Day20.jl" target="_blank">Pablo Zubieta’s solution</a>.</p>
+<p><a href="https://github.com/mkitti/advent_of_code_2020/blob/27a3886fd71a40a4b745037780cbeacacc770d78/aoc_20/aoc_20.jl" target="_blank">Mark Kittisopikul</a> also used <code>imfilter</code> from <a href="https://github.com/JuliaImages/ImageFiltering.jl" target="_blank">ImageFiltering.jl</a> to find the monsters, which I thought was pretty neat.</p>
+</section>
+<section id="day-21-allergen-assessment" class="level2">
+<h2><a href="#day-21-allergen-assessment">#</a> <a href="https://adventofcode.com/2020/day/21" target="_blank">Day 21: Allergen Assessment</a></h2>
+<p>This puzzle is another graph problem that can be solved quite elegantly using maximum flow algorithms to find the maximum matching. Here’s the solution of the test case using <a href="https://github.com/JuliaGraphs/LightGraphs.jl" target="_blank">LightGraphs.jl</a> and <a href="https://github.com/JuliaGraphs/LightGraphsFlows.jl" target="_blank">LightGraphFlows.jl</a>, as well as a visualization using <a href="https://github.com/JuliaPlots/GraphRecipes.jl" target="_blank">GraphRecipes.jl</a> and <a href="https://github.com/JuliaPlots/Plots.jl" target="_blank">Plots.jl</a>:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb49-1"><a href="#cb49-1"></a>using LightGraphs</span>
+<span id="cb49-2"><a href="#cb49-2"></a>using LightGraphsFlows</span>
+<span id="cb49-3"><a href="#cb49-3"></a>using GraphRecipes, Plots</span>
+<span id="cb49-4"><a href="#cb49-4"></a></span>
+<span id="cb49-5"><a href="#cb49-5"></a>readInput() = strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>))</span>
+<span id="cb49-6"><a href="#cb49-6"></a></span>
+<span id="cb49-7"><a href="#cb49-7"></a><span class="kw">function</span> m()</span>
+<span id="cb49-8"><a href="#cb49-8"></a>    data = split(strip(readInput()), <span class="ch">&#39;\n&#39;</span>)</span>
+<span id="cb49-9"><a href="#cb49-9"></a>    data = map(data) <span class="kw">do</span> line</span>
+<span id="cb49-10"><a href="#cb49-10"></a>        ingredients, allergens = match(r<span class="st">&quot;^(.*) \(contains (.*)\)$&quot;</span>, line).captures</span>
+<span id="cb49-11"><a href="#cb49-11"></a>        <span class="dt">String</span>.(split(ingredients)), <span class="dt">String</span>.(split(allergens, <span class="st">&quot;, &quot;</span>))</span>
+<span id="cb49-12"><a href="#cb49-12"></a>    <span class="kw">end</span></span>
+<span id="cb49-13"><a href="#cb49-13"></a></span>
+<span id="cb49-14"><a href="#cb49-14"></a>    all_ingredients, all_allergens = <span class="dt">Set</span>{<span class="dt">String</span>}(), <span class="dt">Set</span>{<span class="dt">String</span>}()</span>
+<span id="cb49-15"><a href="#cb49-15"></a>    <span class="kw">for</span> (ingredients, allergens) <span class="kw">in</span> data</span>
+<span id="cb49-16"><a href="#cb49-16"></a>        all_ingredients = all_ingredients ∪ <span class="dt">Set</span>(ingredients)</span>
+<span id="cb49-17"><a href="#cb49-17"></a>        all_allergens = all_allergens ∪ <span class="dt">Set</span>(allergens)</span>
+<span id="cb49-18"><a href="#cb49-18"></a>    <span class="kw">end</span></span>
+<span id="cb49-19"><a href="#cb49-19"></a>    all_ingredients, all_allergens = collect(all_ingredients), collect(all_allergens)</span>
+<span id="cb49-20"><a href="#cb49-20"></a></span>
+<span id="cb49-21"><a href="#cb49-21"></a>    d = <span class="dt">Dict</span>()</span>
+<span id="cb49-22"><a href="#cb49-22"></a>    <span class="kw">for</span> (ingredients, allergens) <span class="kw">in</span> data, allergen <span class="kw">in</span> allergens</span>
+<span id="cb49-23"><a href="#cb49-23"></a>        allergen ∉ keys(d) &amp;&amp; ( d[allergen] = <span class="dt">Set</span>(ingredients) )</span>
+<span id="cb49-24"><a href="#cb49-24"></a>        d[allergen] = d[allergen] ∩ <span class="dt">Set</span>(ingredients)</span>
+<span id="cb49-25"><a href="#cb49-25"></a>    <span class="kw">end</span></span>
+<span id="cb49-26"><a href="#cb49-26"></a></span>
+<span id="cb49-27"><a href="#cb49-27"></a>    MAX_NODES = length(all_ingredients) + length(all_allergens) + <span class="fl">2</span></span>
+<span id="cb49-28"><a href="#cb49-28"></a>    g = SimpleDiGraph(MAX_NODES)</span>
+<span id="cb49-29"><a href="#cb49-29"></a>    <span class="kw">for</span> i <span class="kw">in</span> all_ingredients</span>
+<span id="cb49-30"><a href="#cb49-30"></a>        i = <span class="fl">1</span> + findfirst(==(i), all_ingredients)</span>
+<span id="cb49-31"><a href="#cb49-31"></a>        add_edge!(g, <span class="fl">1</span>, i)</span>
+<span id="cb49-32"><a href="#cb49-32"></a>    <span class="kw">end</span></span>
+<span id="cb49-33"><a href="#cb49-33"></a>    <span class="kw">for</span> a <span class="kw">in</span> all_allergens</span>
+<span id="cb49-34"><a href="#cb49-34"></a>        a = length(all_ingredients) + <span class="fl">1</span> + findfirst(==(a), all_allergens)</span>
+<span id="cb49-35"><a href="#cb49-35"></a>        add_edge!(g, a, MAX_NODES)</span>
+<span id="cb49-36"><a href="#cb49-36"></a>    <span class="kw">end</span></span>
+<span id="cb49-37"><a href="#cb49-37"></a>    <span class="kw">for</span> (allergen, ingredients) <span class="kw">in</span> d, ingredient <span class="kw">in</span> ingredients</span>
+<span id="cb49-38"><a href="#cb49-38"></a>        i = <span class="fl">1</span> + findfirst(==(ingredient), all_ingredients)</span>
+<span id="cb49-39"><a href="#cb49-39"></a>        a = <span class="fl">1</span> + length(all_ingredients) + findfirst(==(allergen), all_allergens)</span>
+<span id="cb49-40"><a href="#cb49-40"></a>        add_edge!(g, i, a)</span>
+<span id="cb49-41"><a href="#cb49-41"></a>    <span class="kw">end</span></span>
+<span id="cb49-42"><a href="#cb49-42"></a></span>
+<span id="cb49-43"><a href="#cb49-43"></a>    graphplot(g,</span>
+<span id="cb49-44"><a href="#cb49-44"></a>        names = <span class="fl">1</span>:MAX_NODES,</span>
+<span id="cb49-45"><a href="#cb49-45"></a>        x = vcat([[<span class="fl">1</span>]; [<span class="fl">2</span> <span class="kw">for</span> _ <span class="kw">in</span> <span class="fl">1</span>:length(all_ingredients)]; [<span class="fl">3</span> <span class="kw">for</span> _ <span class="kw">in</span> <span class="fl">1</span>:length(all_allergens)]; [<span class="fl">4</span>]]),</span>
+<span id="cb49-46"><a href="#cb49-46"></a>        y = vcat(</span>
+<span id="cb49-47"><a href="#cb49-47"></a>                 [</span>
+<span id="cb49-48"><a href="#cb49-48"></a>                  [<span class="fl">1</span>];</span>
+<span id="cb49-49"><a href="#cb49-49"></a>                  [i - length(all_ingredients) ÷ <span class="fl">2</span> <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:length(all_ingredients)];</span>
+<span id="cb49-50"><a href="#cb49-50"></a>                  [a - length(all_allergens) ÷ <span class="fl">2</span> <span class="kw">for</span> a <span class="kw">in</span> <span class="fl">1</span>:length(all_allergens)];</span>
+<span id="cb49-51"><a href="#cb49-51"></a>                  [<span class="fl">1</span>]</span>
+<span id="cb49-52"><a href="#cb49-52"></a>                 ]</span>
+<span id="cb49-53"><a href="#cb49-53"></a>                ),</span>
+<span id="cb49-54"><a href="#cb49-54"></a>        markercolor = vcat([</span>
+<span id="cb49-55"><a href="#cb49-55"></a>                            [colorant<span class="st">&quot;white&quot;</span>];</span>
+<span id="cb49-56"><a href="#cb49-56"></a>                            [colorant<span class="st">&quot;blue&quot;</span> <span class="kw">for</span> _ <span class="kw">in</span> <span class="fl">1</span>:length(all_ingredients)];</span>
+<span id="cb49-57"><a href="#cb49-57"></a>                            [colorant<span class="st">&quot;green&quot;</span> <span class="kw">for</span> _ <span class="kw">in</span> <span class="fl">1</span>:length(all_allergens)];</span>
+<span id="cb49-58"><a href="#cb49-58"></a>                            [colorant<span class="st">&quot;white&quot;</span>]</span>
+<span id="cb49-59"><a href="#cb49-59"></a>                      ]),</span>
+<span id="cb49-60"><a href="#cb49-60"></a>        markersize = <span class="fl">1</span>)</span>
+<span id="cb49-61"><a href="#cb49-61"></a></span>
+<span id="cb49-62"><a href="#cb49-62"></a>    _, F = maximum_flow(g, <span class="fl">1</span>, MAX_NODES)</span>
+<span id="cb49-63"><a href="#cb49-63"></a></span>
+<span id="cb49-64"><a href="#cb49-64"></a>    no_allergen_ingredients = all_ingredients[[i - <span class="fl">1</span> <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:MAX_NODES <span class="kw">if</span> count(==(<span class="fl">0</span>), F[i, :]) == MAX_NODES]]</span>
+<span id="cb49-65"><a href="#cb49-65"></a></span>
+<span id="cb49-66"><a href="#cb49-66"></a>    no_allergen_ingredients</span>
+<span id="cb49-67"><a href="#cb49-67"></a>    sum(map(data) <span class="kw">do</span> (ingredients, _)</span>
+<span id="cb49-68"><a href="#cb49-68"></a>        count(i ∈ ingredients <span class="kw">for</span> i <span class="kw">in</span> no_allergen_ingredients)</span>
+<span id="cb49-69"><a href="#cb49-69"></a>    <span class="kw">end</span>)</span>
+<span id="cb49-70"><a href="#cb49-70"></a><span class="kw">end</span></span></code></pre></div>
+<p>Here are a couple of visualizations, the test data visualized as a graph is on the left and the maximum flow solution on the right.</p>
+<p><img src="images/adventofcode-day21-part1-1.png" style="width:45.0%" alt="Input data" /> <img src="images/adventofcode-day21-part1-2.png" style="width:45.0%" alt="Maximum flow solution" /></p>
+</section>
+<section id="day-22-crab-combat" class="level2">
+<h2><a href="#day-22-crab-combat">#</a> <a href="https://adventofcode.com/2020/day/22" target="_blank">Day 22: Crab Combat</a></h2>
+<p>This puzzle was mostly straightforward too. The key here seems to be to implement the stopping conditions correctly, and take advantage of the stack based behavior of recursion in most programming languages.</p>
+<p>Here’s a solution by <a href="https://github.com/ferrolho/advent-of-code/blob/b34dbe9ee5eef7a36fbf77044c83acc75fbe54cf/2020/22/puzzle.jl" target="_blank">Henrique Ferrolho’s</a>.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">function</span> play(p₁, p₂, part₂)</span>
+<span id="cb50-2"><a href="#cb50-2"></a>  seen = <span class="dt">Set</span>{<span class="dt">Tuple</span>{<span class="dt">Array</span>,<span class="dt">Array</span>}}([])</span>
+<span id="cb50-3"><a href="#cb50-3"></a></span>
+<span id="cb50-4"><a href="#cb50-4"></a>  <span class="kw">while</span> !any(isempty.((p₁, p₂)))</span>
+<span id="cb50-5"><a href="#cb50-5"></a>    (p₁, p₂) ∈ seen &amp;&amp; <span class="kw">return</span> <span class="fl">1</span>, p₁  <span class="co"># infinite-game-prevention rule</span></span>
+<span id="cb50-6"><a href="#cb50-6"></a>    push!(seen, copy.((p₁, p₂)))</span>
+<span id="cb50-7"><a href="#cb50-7"></a></span>
+<span id="cb50-8"><a href="#cb50-8"></a>    c₁, c₂ = popfirst!.((p₁, p₂))  <span class="co"># both players draw their top card</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a></span>
+<span id="cb50-10"><a href="#cb50-10"></a>    <span class="kw">if</span> part₂ &amp;&amp; all(length.((p₁, p₂)) .&gt;= (c₁, c₂))</span>
+<span id="cb50-11"><a href="#cb50-11"></a>      w, _ = play(copy.((p₁[<span class="fl">1</span>:c₁], p₂[<span class="fl">1</span>:c₂]))..., part₂)</span>
+<span id="cb50-12"><a href="#cb50-12"></a>    <span class="kw">elseif</span> c₁ &gt; c₂  w = <span class="fl">1</span></span>
+<span id="cb50-13"><a href="#cb50-13"></a>    <span class="kw">elseif</span> c₂ &gt; c₁  w = <span class="fl">2</span></span>
+<span id="cb50-14"><a href="#cb50-14"></a>    <span class="kw">else</span> @error <span class="st">&quot;Unexpected case: c₁ == c₂&quot;</span> <span class="kw">end</span></span>
+<span id="cb50-15"><a href="#cb50-15"></a></span>
+<span id="cb50-16"><a href="#cb50-16"></a>    w == <span class="fl">1</span> &amp;&amp; push!(p₁, c₁, c₂)  <span class="co"># player 1 wins</span></span>
+<span id="cb50-17"><a href="#cb50-17"></a>    w == <span class="fl">2</span> &amp;&amp; push!(p₂, c₂, c₁)  <span class="co"># player 2 wins</span></span>
+<span id="cb50-18"><a href="#cb50-18"></a>  <span class="kw">end</span></span>
+<span id="cb50-19"><a href="#cb50-19"></a></span>
+<span id="cb50-20"><a href="#cb50-20"></a>  !isempty(p₁) ? (<span class="fl">1</span>, p₁) : (<span class="fl">2</span>, p₂)</span>
+<span id="cb50-21"><a href="#cb50-21"></a><span class="kw">end</span></span>
+<span id="cb50-22"><a href="#cb50-22"></a></span>
+<span id="cb50-23"><a href="#cb50-23"></a><span class="kw">function</span> day22()</span>
+<span id="cb50-24"><a href="#cb50-24"></a>  p₁, p₂ = split(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>) .|&gt;</span>
+<span id="cb50-25"><a href="#cb50-25"></a>           x -&gt; parse.(<span class="dt">Int</span>, split(x, <span class="ch">&#39;\n&#39;</span>, keepempty=false)[<span class="fl">2</span>:<span class="kw">end</span>])</span>
+<span id="cb50-26"><a href="#cb50-26"></a></span>
+<span id="cb50-27"><a href="#cb50-27"></a>  result₁, result₂ = map([false, true]) <span class="kw">do</span> part₂</span>
+<span id="cb50-28"><a href="#cb50-28"></a>    _, deck = play(copy.((p₁, p₂))..., part₂)</span>
+<span id="cb50-29"><a href="#cb50-29"></a>    multipliers = length(deck):-<span class="fl">1</span>:<span class="fl">1</span></span>
+<span id="cb50-30"><a href="#cb50-30"></a>    sum(deck .* multipliers)</span>
+<span id="cb50-31"><a href="#cb50-31"></a>  <span class="kw">end</span></span>
+<span id="cb50-32"><a href="#cb50-32"></a></span>
+<span id="cb50-33"><a href="#cb50-33"></a>  result₁, result₂</span>
+<span id="cb50-34"><a href="#cb50-34"></a><span class="kw">end</span></span>
+<span id="cb50-35"><a href="#cb50-35"></a></span>
+<span id="cb50-36"><a href="#cb50-36"></a>part1() = day22()[<span class="fl">1</span>]</span>
+<span id="cb50-37"><a href="#cb50-37"></a>part2() = day22()[<span class="fl">2</span>]</span></code></pre></div>
+<p>Julia allows using unicode symbols as part of variable names which can make for some pretty looking code.</p>
+</section>
+<section id="day-23-crab-cups" class="level2">
+<h2><a href="#day-23-crab-cups">#</a> <a href="https://adventofcode.com/2020/day/23" target="_blank">Day 23: Crab Cups</a></h2>
+<p>This puzzle took me a while to figure out. I spent way too long looking for patterns in each state. Thanks to some helpful tips from fellow Julia advent-of-coders, I re-wrote it from scratch using a Linked List.</p>
+<p>The key idea is here to manage the ordering in a separate data structure. Using a linked list is just one way to handle this.</p>
+<p>Here’s a solution by <a href="https://github.com/nviennot" target="_blank">Nicolas Viennot</a> based on exchanging ideas with <a href="https://github.com/Teo-ShaoWei" target="_blank">Teo ShaoWei</a> that manages to do that quite elegantly using another array to manage indices:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb51-1"><a href="#cb51-1"></a>readInput() = parse.(<span class="dt">Int32</span>, collect(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>))))</span>
+<span id="cb51-2"><a href="#cb51-2"></a></span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="kw">function</span> peek(next, at, n; result=similar(next,n))</span>
+<span id="cb51-4"><a href="#cb51-4"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:n</span>
+<span id="cb51-5"><a href="#cb51-5"></a>        result[i] = next[at]</span>
+<span id="cb51-6"><a href="#cb51-6"></a>        at = next[at]</span>
+<span id="cb51-7"><a href="#cb51-7"></a>    <span class="kw">end</span></span>
+<span id="cb51-8"><a href="#cb51-8"></a>    result</span>
+<span id="cb51-9"><a href="#cb51-9"></a><span class="kw">end</span></span>
+<span id="cb51-10"><a href="#cb51-10"></a></span>
+<span id="cb51-11"><a href="#cb51-11"></a><span class="kw">function</span> run(cups, steps=<span class="fl">1</span>)</span>
+<span id="cb51-12"><a href="#cb51-12"></a>    N = length(cups)</span>
+<span id="cb51-13"><a href="#cb51-13"></a>    prealloc = similar(cups, <span class="fl">3</span>)</span>
+<span id="cb51-14"><a href="#cb51-14"></a></span>
+<span id="cb51-15"><a href="#cb51-15"></a>    next = similar(cups)</span>
+<span id="cb51-16"><a href="#cb51-16"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:N</span>
+<span id="cb51-17"><a href="#cb51-17"></a>        next[cups[i]] = cups[mod1(i+<span class="fl">1</span>,N)]</span>
+<span id="cb51-18"><a href="#cb51-18"></a>    <span class="kw">end</span></span>
+<span id="cb51-19"><a href="#cb51-19"></a></span>
+<span id="cb51-20"><a href="#cb51-20"></a>    current = cups[<span class="fl">1</span>]</span>
+<span id="cb51-21"><a href="#cb51-21"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:steps</span>
+<span id="cb51-22"><a href="#cb51-22"></a>        pickups = peek(next, current, <span class="fl">3</span>, result=prealloc)</span>
+<span id="cb51-23"><a href="#cb51-23"></a></span>
+<span id="cb51-24"><a href="#cb51-24"></a>        dst = mod1(current-<span class="fl">1</span>, N)</span>
+<span id="cb51-25"><a href="#cb51-25"></a>        <span class="kw">while</span> dst <span class="kw">in</span> pickups</span>
+<span id="cb51-26"><a href="#cb51-26"></a>          dst = mod1(dst-<span class="fl">1</span>, N)</span>
+<span id="cb51-27"><a href="#cb51-27"></a>        <span class="kw">end</span></span>
+<span id="cb51-28"><a href="#cb51-28"></a></span>
+<span id="cb51-29"><a href="#cb51-29"></a>        next[current] = next[pickups[<span class="kw">end</span>]]</span>
+<span id="cb51-30"><a href="#cb51-30"></a>        next[pickups[<span class="kw">end</span>]] = next[dst]</span>
+<span id="cb51-31"><a href="#cb51-31"></a>        next[dst] = pickups[<span class="fl">1</span>]</span>
+<span id="cb51-32"><a href="#cb51-32"></a>        current = next[current]</span>
+<span id="cb51-33"><a href="#cb51-33"></a>    <span class="kw">end</span></span>
+<span id="cb51-34"><a href="#cb51-34"></a></span>
+<span id="cb51-35"><a href="#cb51-35"></a>    <span class="kw">return</span> next</span>
+<span id="cb51-36"><a href="#cb51-36"></a><span class="kw">end</span></span>
+<span id="cb51-37"><a href="#cb51-37"></a></span>
+<span id="cb51-38"><a href="#cb51-38"></a>part1(cups = readInput()) = join(peek(run(cups, <span class="fl">100</span>), <span class="fl">1</span>, <span class="fl">8</span>))</span>
+<span id="cb51-39"><a href="#cb51-39"></a>part2(cups = readInput()) = prod(peek(run(vcat(cups, <span class="fl">10</span>:<span class="fl">1</span>_000_000), <span class="fl">10</span>_000_000), <span class="fl">1</span>, <span class="fl">2</span>))</span></code></pre></div>
+</section>
+<section id="day-24-lobby-layout" class="level2">
+<h2><a href="#day-24-lobby-layout">#</a> <a href="https://adventofcode.com/2020/day/24" target="_blank">Day 24: Lobby Layout</a></h2>
+<p>In another tribute to John Conway, now you must model hexagon grids.</p>
+<p>Having never worked with hexagon grid before, I reached for complex numbers again, which turned out to be a bad idea. I was indexing a dictionary with the real and imaginary components of the complex number which were floating point numbers. This caused all sorts of indexing problems due to rounding issues.</p>
+<p>I could have sorted this out by using only integer values or by using the coordinate system described in this resource: <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-cube" class="uri" target="_blank">https://www.redblobgames.com/grids/hexagons/#coordinates-cube</a>.</p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="216" height="224">
+    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        /* This fix the spacing bug in svg text*/
+                        white-space: pre;
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: transparent;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: transparent;
+                        }
+                        .nofill{
+                            fill: transparent;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+    <defs>
+        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+        </marker>
+        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+        </marker>
+        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="2" class="filled"></circle>
+        </marker>
+        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+        </marker>
+        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+        </marker>
+    </defs>
+    <rect class="backdrop" x="0" y="0" width="216" height="224"></rect>
+    <text x="98" y="28" >0</text>
+    <line x1="112" y1="24" x2="120" y2="24" class="solid"></line>
+    <text x="122" y="28" >1</text>
+    <line x1="40" y1="56" x2="48" y2="56" class="solid"></line>
+    <text x="50" y="60" >1</text>
+    <text x="66" y="60" >0</text>
+    <text x="106" y="60" >+1</text>
+    <text x="154" y="60" >1</text>
+    <line x1="168" y1="56" x2="176" y2="56" class="solid"></line>
+    <text x="178" y="60" >1</text>
+    <text x="58" y="92" >1</text>
+    <text x="98" y="92" >x</text>
+    <text x="122" y="92" >z</text>
+    <text x="170" y="92" >0</text>
+    <line x1="40" y1="120" x2="48" y2="120" class="solid"></line>
+    <text x="50" y="124" >1</text>
+    <text x="66" y="124" >1</text>
+    <text x="114" y="124" >y</text>
+    <text x="154" y="124" >1</text>
+    <text x="178" y="124" >0</text>
+    <text x="58" y="156" >0</text>
+    <text x="98" y="156" >0</text>
+    <text x="122" y="156" >1</text>
+    <line x1="160" y1="152" x2="168" y2="152" class="solid"></line>
+    <text x="170" y="156" >1</text>
+    <line x1="104" y1="184" x2="112" y2="184" class="solid"></line>
+    <text x="114" y="188" >1</text>
+    <g>
+        <line x1="92" y1="8" x2="132" y2="8" class="solid"></line>
+        <line x1="92" y1="8" x2="80" y2="32" class="solid"></line>
+        <line x1="132" y1="8" x2="144" y2="32" class="solid"></line>
+        <line x1="144" y1="32" x2="148" y2="40" class="solid"></line>
+        <line x1="148" y1="40" x2="188" y2="40" class="solid"></line>
+        <line x1="148" y1="40" x2="136" y2="64" class="solid"></line>
+        <line x1="188" y1="40" x2="200" y2="64" class="solid"></line>
+        <line x1="200" y1="64" x2="204" y2="72" class="solid"></line>
+        <line x1="204" y1="72" x2="192" y2="96" class="solid"></line>
+        <line x1="36" y1="40" x2="76" y2="40" class="solid"></line>
+        <line x1="36" y1="40" x2="24" y2="64" class="solid"></line>
+        <line x1="80" y1="32" x2="76" y2="40" class="solid"></line>
+        <line x1="76" y1="40" x2="88" y2="64" class="solid"></line>
+        <line x1="24" y1="64" x2="20" y2="72" class="solid"></line>
+        <line x1="20" y1="72" x2="32" y2="96" class="solid"></line>
+        <line x1="88" y1="64" x2="92" y2="72" class="solid"></line>
+        <line x1="92" y1="72" x2="132" y2="72" class="solid"></line>
+        <line x1="92" y1="72" x2="80" y2="96" class="solid"></line>
+        <line x1="136" y1="64" x2="132" y2="72" class="solid"></line>
+        <line x1="132" y1="72" x2="144" y2="96" class="solid"></line>
+        <line x1="32" y1="96" x2="36" y2="104" class="solid"></line>
+        <line x1="36" y1="104" x2="76" y2="104" class="solid"></line>
+        <line x1="36" y1="104" x2="24" y2="128" class="solid"></line>
+        <line x1="80" y1="96" x2="76" y2="104" class="solid"></line>
+        <line x1="76" y1="104" x2="88" y2="128" class="solid"></line>
+        <line x1="144" y1="96" x2="148" y2="104" class="solid"></line>
+        <line x1="148" y1="104" x2="188" y2="104" class="solid"></line>
+        <line x1="148" y1="104" x2="136" y2="128" class="solid"></line>
+        <line x1="192" y1="96" x2="188" y2="104" class="solid"></line>
+        <line x1="188" y1="104" x2="200" y2="128" class="solid"></line>
+        <line x1="24" y1="128" x2="20" y2="136" class="solid"></line>
+        <line x1="20" y1="136" x2="32" y2="160" class="solid"></line>
+        <line x1="88" y1="128" x2="92" y2="136" class="solid"></line>
+        <line x1="92" y1="136" x2="132" y2="136" class="solid"></line>
+        <line x1="92" y1="136" x2="80" y2="160" class="solid"></line>
+        <line x1="136" y1="128" x2="132" y2="136" class="solid"></line>
+        <line x1="132" y1="136" x2="144" y2="160" class="solid"></line>
+        <line x1="200" y1="128" x2="204" y2="136" class="solid"></line>
+        <line x1="204" y1="136" x2="192" y2="160" class="solid"></line>
+        <line x1="32" y1="160" x2="34" y2="164" class="solid"></line>
+        <path d="M 34,164 A 8,8 0,0,0 40,168" class="nofill"></path>
+        <line x1="40" y1="168" x2="76" y2="168" class="solid"></line>
+        <line x1="80" y1="160" x2="76" y2="168" class="solid"></line>
+        <line x1="76" y1="168" x2="88" y2="192" class="solid"></line>
+        <line x1="144" y1="160" x2="148" y2="168" class="solid"></line>
+        <line x1="148" y1="168" x2="188" y2="168" class="solid"></line>
+        <line x1="148" y1="168" x2="136" y2="192" class="solid"></line>
+        <line x1="192" y1="160" x2="188" y2="168" class="solid"></line>
+        <line x1="88" y1="192" x2="90" y2="196" class="solid"></line>
+        <path d="M 90,196 A 8,8 0,0,0 96,200" class="nofill"></path>
+        <line x1="96" y1="200" x2="128" y2="200" class="solid"></line>
+        <line x1="136" y1="192" x2="134" y2="196" class="solid"></line>
+        <path d="M 134,196 A 8,8 0,0,1 128,200" class="nofill"></path>
+    </g>
+</svg>
+</p>
+<p>Here’s another elegant solution by <a href="https://github.com/nviennot" target="_blank">Nicolas Viennot</a>.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb52-1"><a href="#cb52-1"></a>using OffsetArrays</span>
+<span id="cb52-2"><a href="#cb52-2"></a></span>
+<span id="cb52-3"><a href="#cb52-3"></a>parse_path(line) = getproperty.(eachmatch(r<span class="st">&quot;(e|se|sw|w|nw|ne)&quot;</span>, line), :match)</span>
+<span id="cb52-4"><a href="#cb52-4"></a>readInput() = parse_path.(readlines(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>)))</span>
+<span id="cb52-5"><a href="#cb52-5"></a></span>
+<span id="cb52-6"><a href="#cb52-6"></a><span class="kw">const</span> hex_dirs = <span class="dt">Dict</span>(k =&gt; CartesianIndex(v) <span class="kw">for</span> (k,v) <span class="kw">in</span> [</span>
+<span id="cb52-7"><a href="#cb52-7"></a>    <span class="st">&quot;e&quot;</span>  =&gt; ( <span class="fl">1</span>,  <span class="fl">0</span>),</span>
+<span id="cb52-8"><a href="#cb52-8"></a>    <span class="st">&quot;se&quot;</span> =&gt; ( <span class="fl">1</span>, -<span class="fl">1</span>),</span>
+<span id="cb52-9"><a href="#cb52-9"></a>    <span class="st">&quot;sw&quot;</span> =&gt; ( <span class="fl">0</span>, -<span class="fl">1</span>),</span>
+<span id="cb52-10"><a href="#cb52-10"></a>    <span class="st">&quot;w&quot;</span>  =&gt; (-<span class="fl">1</span>,  <span class="fl">0</span>),</span>
+<span id="cb52-11"><a href="#cb52-11"></a>    <span class="st">&quot;nw&quot;</span> =&gt; (-<span class="fl">1</span>,  <span class="fl">1</span>),</span>
+<span id="cb52-12"><a href="#cb52-12"></a>    <span class="st">&quot;ne&quot;</span> =&gt; ( <span class="fl">0</span>,  <span class="fl">1</span>)</span>
+<span id="cb52-13"><a href="#cb52-13"></a>])</span>
+<span id="cb52-14"><a href="#cb52-14"></a></span>
+<span id="cb52-15"><a href="#cb52-15"></a><span class="kw">const</span> N = <span class="fl">200</span></span>
+<span id="cb52-16"><a href="#cb52-16"></a></span>
+<span id="cb52-17"><a href="#cb52-17"></a>get_destination(path) = mapreduce(x-&gt;hex_dirs[x], +, path)</span>
+<span id="cb52-18"><a href="#cb52-18"></a></span>
+<span id="cb52-19"><a href="#cb52-19"></a><span class="kw">function</span> init_tiles(paths)</span>
+<span id="cb52-20"><a href="#cb52-20"></a>    A = OffsetArray(falses(N,N),-N÷<span class="fl">2</span>-<span class="fl">1</span>,-N÷<span class="fl">2</span>-<span class="fl">1</span>)</span>
+<span id="cb52-21"><a href="#cb52-21"></a>    foreach(dst -&gt; A[dst] ⊻= <span class="fl">1</span>, get_destination.(paths))</span>
+<span id="cb52-22"><a href="#cb52-22"></a>    A</span>
+<span id="cb52-23"><a href="#cb52-23"></a><span class="kw">end</span></span>
+<span id="cb52-24"><a href="#cb52-24"></a></span>
+<span id="cb52-25"><a href="#cb52-25"></a>part1(data = readInput()) = count(init_tiles(data))</span>
+<span id="cb52-26"><a href="#cb52-26"></a></span>
+<span id="cb52-27"><a href="#cb52-27"></a><span class="kw">function</span> get_neighbor_counts(A)</span>
+<span id="cb52-28"><a href="#cb52-28"></a>    C = OffsetArray(zeros(<span class="dt">Int</span>, N-<span class="fl">2</span>,N-<span class="fl">2</span>),-N÷<span class="fl">2</span>,-N÷<span class="fl">2</span>)</span>
+<span id="cb52-29"><a href="#cb52-29"></a>    <span class="kw">for</span> i <span class="kw">in</span> CartesianIndices(C)</span>
+<span id="cb52-30"><a href="#cb52-30"></a>        C[i] = sum(A[i+dir] <span class="kw">for</span> dir <span class="kw">in</span> values(hex_dirs))</span>
+<span id="cb52-31"><a href="#cb52-31"></a>    <span class="kw">end</span></span>
+<span id="cb52-32"><a href="#cb52-32"></a>    C</span>
+<span id="cb52-33"><a href="#cb52-33"></a><span class="kw">end</span></span>
+<span id="cb52-34"><a href="#cb52-34"></a></span>
+<span id="cb52-35"><a href="#cb52-35"></a><span class="kw">function</span> flip_tiles!(A, steps=<span class="fl">1</span>)</span>
+<span id="cb52-36"><a href="#cb52-36"></a>    <span class="kw">for</span> step <span class="kw">in</span> <span class="fl">1</span>:steps</span>
+<span id="cb52-37"><a href="#cb52-37"></a>        C = get_neighbor_counts(A)</span>
+<span id="cb52-38"><a href="#cb52-38"></a>        <span class="kw">for</span> i <span class="kw">in</span> CartesianIndices(C)</span>
+<span id="cb52-39"><a href="#cb52-39"></a>            <span class="kw">if</span> (A[i] &amp;&amp; C[i] ∉ (<span class="fl">1</span>,<span class="fl">2</span>)) || (!A[i] &amp;&amp; C[i] == <span class="fl">2</span>)</span>
+<span id="cb52-40"><a href="#cb52-40"></a>                A[i] ⊻= <span class="fl">1</span></span>
+<span id="cb52-41"><a href="#cb52-41"></a>            <span class="kw">end</span></span>
+<span id="cb52-42"><a href="#cb52-42"></a>        <span class="kw">end</span></span>
+<span id="cb52-43"><a href="#cb52-43"></a>    <span class="kw">end</span></span>
+<span id="cb52-44"><a href="#cb52-44"></a>    A</span>
+<span id="cb52-45"><a href="#cb52-45"></a><span class="kw">end</span></span>
+<span id="cb52-46"><a href="#cb52-46"></a></span>
+<span id="cb52-47"><a href="#cb52-47"></a>part2(data = readInput()) = count(flip_tiles!(init_tiles(data), <span class="fl">100</span>))</span></code></pre></div>
+<p>And another neat visualization by <a href="https://github.com/tk3369/AdventOfCode2020/" target="_blank">Tom Kwong</a>:</p>
+<figure>
+<img src="https://user-images.githubusercontent.com/1813121/103164912-71063780-47ce-11eb-839a-c0608ca36b70.gif" alt="" /><figcaption><a href="https://twitter.com/tomkwong/status/1342661344424652801" class="uri" target="_blank">https://twitter.com/tomkwong/status/1342661344424652801</a></figcaption>
+</figure>
+</section>
+<section id="day-25-combo-breaker" class="level2">
+<h2><a href="#day-25-combo-breaker">#</a> <a href="https://adventofcode.com/2020/day/25" target="_blank">Day 25: Combo Breaker</a></h2>
+<p>And finally, for the last day, it is a cryptography based puzzle.</p>
+<p>The puzzle’s key idea here is based on the <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank">Diffie-Hellman key exchange</a>.</p>
+<p>Julia also has a function called <code>powermod</code> in the standard library, which can be used for this. Here’s a solution by <a href="https://github.com/nviennot" target="_blank">Nicolas Viennot</a>:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb53-1"><a href="#cb53-1"></a>readInput() = parse.(<span class="dt">Int</span>, split(strip(read(joinpath(@__DIR__, <span class="st">&quot;./input.txt&quot;</span>), <span class="dt">String</span>)), <span class="ch">&#39;\n&#39;</span>))</span>
+<span id="cb53-2"><a href="#cb53-2"></a></span>
+<span id="cb53-3"><a href="#cb53-3"></a><span class="kw">function</span> part1(data = readInput())</span>
+<span id="cb53-4"><a href="#cb53-4"></a>    N = <span class="fl">20201227</span></span>
+<span id="cb53-5"><a href="#cb53-5"></a>    e = <span class="fl">7</span></span>
+<span id="cb53-6"><a href="#cb53-6"></a>    card_public_key, door_public_key = data</span>
+<span id="cb53-7"><a href="#cb53-7"></a>    privkey1 = findfirst(i -&gt; powermod(e, i, N) == card_public_key, <span class="fl">1</span>:N)</span>
+<span id="cb53-8"><a href="#cb53-8"></a>    solution = powermod(door_public_key, privkey1, N)</span>
+<span id="cb53-9"><a href="#cb53-9"></a><span class="kw">end</span></span></code></pre></div>
+<p>If you’ve made it all this way, part 2 of day 25 should be a cinch 😉.</p>
+</section>
+</section>
+<section id="final-words" class="level1">
+<h1><a href="#final-words">#</a> Final words</h1>
+<p>Thanks to everyone in the Julia community who participated on <a href="https://julialang.zulipchat.com" target="_blank">Zulip</a>, <a href="https://julialang.slack.com/" target="_blank">Slack</a> and <a href="https://reddit.com/r/adventofcode" target="_blank">Reddit</a>. I learnt a lot by reading your solutions and discussing with you all.</p>
+<p>Thanks to the mods on <a href="https://reddit.com/r/adventofcode" target="_blank">/r/adventofcode</a> to making it such a vibrant community to frequent.</p>
+<p>And finally, thanks to <a href="https://twitter.com/ericwastl" target="_blank">Eric Wastl</a> for making such a fun event.</p>
+<p>Happy holidays everyone!</p>
+</section>
+</section>
+<section>
+
+    <div class="kudo-container" style="display: none" data-post-id="advent-of-code-2020-retrospective">
+        <button class="kudo-button" aria-label="Give this post a kudo">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="kudo-heart" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <path class="kudo-heart-path" id="kudo-heart-path" d="M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4   L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z" />
+          </svg>
+        </button>
+        <div class="kudo-count-message">
+          <span class="kudo-count"></span> <span class="kudo-word"></span>
+        </div>
+        <div class="kudo-thanks">
+          <div class="kudo-thanks-heading">Thanks!</div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <opt-in-script src="https://utteranc.es/client.js"
+        repo="kdheepak/blog"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    <button class="comments-button">Show Comments</button>
+    </opt-in-script>
+</section>
+</article>
+<script>
+var figures =
+  Array.prototype.slice.call(document.getElementsByClassName("figure"),0)
+  .concat(
+    Array.prototype.slice.call(document.getElementsByTagName("figure"),0));
+
+for (var i = 0; i < figures.length; i++) {
+  var figure = figures[i];
+  var imgs = figure.getElementsByTagName("img");
+  if (imgs.length > 0) {
+    classes = imgs[0].classList;
+    for (var j = 0; j < classes.length; j++) {
+        if (classes[j] === "fullwidth") {
+            figure.classList.add(classes[j]);
+        }
+    }
+  }
+}
+</script>
+<footer>
+    <p>
+    <a rel="license noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="This work is licensed under a Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </p>
+</footer>
+<script data-goatcounter="https://kdheepak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/vim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/julia.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/nim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/latex.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/matlab.min.js"></script>
+<script>
+    document.querySelectorAll('pre:not([class])').forEach(function($) {
+        $.className = 'no-highlight';
+    });
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="/js/opt-in-script.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC_lk4_TkwwjzgthwVBR0JXrDRQMH2mDH8",
+    authDomain: "blog-4ac79.firebaseapp.com",
+    databaseURL: "https://blog-4ac79.firebaseio.com",
+    projectId: "blog-4ac79",
+    storageBucket: "blog-4ac79.appspot.com",
+    messagingSenderId: "57327928077",
+    appId: "1:57327928077:web:5acf8eaf01bcb850d76644",
+    measurementId: "G-YKT2PQSD10"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="/js/kudos.js"></script>
+</body>
+</html>

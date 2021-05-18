@@ -1,0 +1,350 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/styles/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dheepak Krishnamurthy's Blog</title>
+    <description>My thoughts, notes and blogs</description>
+    <link>https://blog.kdheepak.com/</link>
+    <lastBuildDate>Tue, 18 May 2021 18:33:24 GMT</lastBuildDate>
+    <pubDate>Tue, 18 May 2021 18:33:24 GMT</pubDate>
+    <language>en-us</language>
+    <copyright>Copyright 2020, Dheepak Krishnamurthy</copyright>
+    <atom:link href="https://blog.kdheepak.com/rss.xml" rel="self" type="application/rss+xml"></atom:link>
+    <generator>website</generator>
+
+<item>
+  <title>Advent of Code 2020 Retrospective</title>
+  <link>https://blog.kdheepak.com/advent-of-code-2020-retrospective.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/advent-of-code-2020-retrospective.html</guid>
+  <atom:link href="https://blog.kdheepak.com/advent-of-code-2020-retrospective.html" rel="self"></atom:link>
+  <pubDate>Fri, 25 Dec 2020 07:00:00 GMT</pubDate>
+  <description>Solutions to all 25 days in the Julia programming language.</description>
+</item>
+  
+<item>
+  <title>My Unicode cheat sheet</title>
+  <link>https://blog.kdheepak.com/my-unicode-cheat-sheet.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/my-unicode-cheat-sheet.html</guid>
+  <atom:link href="https://blog.kdheepak.com/my-unicode-cheat-sheet.html" rel="self"></atom:link>
+  <pubDate>Sat, 19 Sep 2020 08:29:49 GMT</pubDate>
+  <description>References for various things associated with unicode in Vim, Python, Julia and Rust</description>
+</item>
+  
+<item>
+  <title>Using pre-commit hooks</title>
+  <link>https://blog.kdheepak.com/using-pre-commit-hooks.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/using-pre-commit-hooks.html</guid>
+  <atom:link href="https://blog.kdheepak.com/using-pre-commit-hooks.html" rel="self"></atom:link>
+  <pubDate>Mon, 27 Jul 2020 16:58:11 GMT</pubDate>
+  <description>In this post, I will summarize making your git workflow better with pre-commit hooks</description>
+</item>
+  
+<item>
+  <title>Three built-in neovim features</title>
+  <link>https://blog.kdheepak.com/three-built-in-neovim-features.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/three-built-in-neovim-features.html</guid>
+  <atom:link href="https://blog.kdheepak.com/three-built-in-neovim-features.html" rel="self"></atom:link>
+  <pubDate>Sat, 27 Jun 2020 15:42:32 GMT</pubDate>
+  <description>I want to share a few neovim built-in features that can make you more productive.</description>
+</item>
+  
+<item>
+  <title>The egg tower puzzle</title>
+  <link>https://blog.kdheepak.com/the-egg-tower-puzzle.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/the-egg-tower-puzzle.html</guid>
+  <atom:link href="https://blog.kdheepak.com/the-egg-tower-puzzle.html" rel="self"></atom:link>
+  <pubDate>Sun, 07 Jun 2020 02:14:19 GMT</pubDate>
+  <description>Analytical solution to the two egg 100 storey tower puzzle</description>
+</item>
+  
+<item>
+  <title>Drawing in ASCII</title>
+  <link>https://blog.kdheepak.com/drawing-in-ascii.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/drawing-in-ascii.html</guid>
+  <atom:link href="https://blog.kdheepak.com/drawing-in-ascii.html" rel="self"></atom:link>
+  <pubDate>Fri, 05 Jun 2020 19:54:19 GMT</pubDate>
+  <description>Drawing ascii diagrams and rendering them to svg using svgbob, pandoc and lua filters</description>
+</item>
+  
+<item>
+  <title>Neovim + LanguageServer.jl</title>
+  <link>https://blog.kdheepak.com/neovim-languageserver-julia.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/neovim-languageserver-julia.html</guid>
+  <atom:link href="https://blog.kdheepak.com/neovim-languageserver-julia.html" rel="self"></atom:link>
+  <pubDate>Tue, 02 Jun 2020 07:28:44 GMT</pubDate>
+  <description>Showcasing Neovim and LanguageServer.jl</description>
+</item>
+  
+<item>
+  <title>Python 2 vs 3</title>
+  <link>https://blog.kdheepak.com/python-2-vs-3.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/python-2-vs-3.html</guid>
+  <atom:link href="https://blog.kdheepak.com/python-2-vs-3.html" rel="self"></atom:link>
+  <pubDate>Fri, 16 Dec 2016 21:31:07 GMT</pubDate>
+  <description>Some of my thoughts on the current state of Python 2 vs 3</description>
+</item>
+  
+<item>
+  <title>Pelican Margin Notes with Pandoc</title>
+  <link>https://blog.kdheepak.com/pelican-margin-notes-with-pandoc.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/pelican-margin-notes-with-pandoc.html</guid>
+  <atom:link href="https://blog.kdheepak.com/pelican-margin-notes-with-pandoc.html" rel="self"></atom:link>
+  <pubDate>Sun, 09 Oct 2016 23:42:12 GMT</pubDate>
+  <description>How to get margin notes to work with pandoc</description>
+</item>
+  
+<item>
+  <title>mpld3 networkx d3.js force layout</title>
+  <link>https://blog.kdheepak.com/mpld3-networkx-d3js-force-layout.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/mpld3-networkx-d3js-force-layout.html</guid>
+  <atom:link href="https://blog.kdheepak.com/mpld3-networkx-d3js-force-layout.html" rel="self"></atom:link>
+  <pubDate>Sun, 02 Oct 2016 18:41:05 GMT</pubDate>
+  <description>Notes on mpld3 force layout</description>
+</item>
+  
+<item>
+  <title>Raspberry Pi Powered LED Lamp</title>
+  <link>https://blog.kdheepak.com/raspberry-pi-powered-led-lamp.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/raspberry-pi-powered-led-lamp.html</guid>
+  <atom:link href="https://blog.kdheepak.com/raspberry-pi-powered-led-lamp.html" rel="self"></atom:link>
+  <pubDate>Mon, 28 Mar 2016 01:17:58 GMT</pubDate>
+  <description>Use your Raspberry Pi to control a desk lamp</description>
+</item>
+  
+<item>
+  <title>Neovim and Tmux</title>
+  <link>https://blog.kdheepak.com/neovim-and-tmux.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/neovim-and-tmux.html</guid>
+  <atom:link href="https://blog.kdheepak.com/neovim-and-tmux.html" rel="self"></atom:link>
+  <pubDate>Sat, 06 Feb 2016 06:54:00 GMT</pubDate>
+  <description>Set up neovim and tmux to work with osx.</description>
+</item>
+  
+<item>
+  <title>Using conda to manage packages</title>
+  <link>https://blog.kdheepak.com/using-conda-to-manage-packages.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/using-conda-to-manage-packages.html</guid>
+  <atom:link href="https://blog.kdheepak.com/using-conda-to-manage-packages.html" rel="self"></atom:link>
+  <pubDate>Fri, 25 Dec 2015 10:32:51 GMT</pubDate>
+  <description>Use conda env to manage packages</description>
+</item>
+  
+<item>
+  <title>Writing Technical Papers with Markdown and Pandoc</title>
+  <link>https://blog.kdheepak.com/writing-papers-with-markdown.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/writing-papers-with-markdown.html</guid>
+  <atom:link href="https://blog.kdheepak.com/writing-papers-with-markdown.html" rel="self"></atom:link>
+  <pubDate>Sun, 20 Dec 2015 06:00:00 GMT</pubDate>
+  <description>Use Markdown and Pandoc for technical writing</description>
+</item>
+  
+<item>
+  <title>Jupyter Notebook, Reveal.js and Github Pages</title>
+  <link>https://blog.kdheepak.com/jupyter-notebook-revealjs-and-github-pages.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/jupyter-notebook-revealjs-and-github-pages.html</guid>
+  <atom:link href="https://blog.kdheepak.com/jupyter-notebook-revealjs-and-github-pages.html" rel="self"></atom:link>
+  <pubDate>Sat, 05 Dec 2015 19:03:54 GMT</pubDate>
+  <description>Use jupyter notebooks for presentations</description>
+</item>
+  
+<item>
+  <title>Spotify and tmux</title>
+  <link>https://blog.kdheepak.com/spotify-and-tmux.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/spotify-and-tmux.html</guid>
+  <atom:link href="https://blog.kdheepak.com/spotify-and-tmux.html" rel="self"></atom:link>
+  <pubDate>Sun, 20 Sep 2015 15:26:15 GMT</pubDate>
+  <description>Show current spotify track in tmux</description>
+</item>
+  
+<item>
+  <title>Change $PATH inside vim</title>
+  <link>https://blog.kdheepak.com/change-path-inside-vim.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/change-path-inside-vim.html</guid>
+  <atom:link href="https://blog.kdheepak.com/change-path-inside-vim.html" rel="self"></atom:link>
+  <pubDate>Sat, 19 Sep 2015 15:05:36 GMT</pubDate>
+  <description>How to change $PATH from inside vim</description>
+</item>
+  
+<item>
+  <title>Uninstalling and Re-Installing Homebrew on OSX</title>
+  <link>https://blog.kdheepak.com/uninstalling-and-re-installing-homebrew-on-osx.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/uninstalling-and-re-installing-homebrew-on-osx.html</guid>
+  <atom:link href="https://blog.kdheepak.com/uninstalling-and-re-installing-homebrew-on-osx.html" rel="self"></atom:link>
+  <pubDate>Fri, 28 Aug 2015 04:52:17 GMT</pubDate>
+  <description>How to install homebrew on MacOSX</description>
+</item>
+  
+<item>
+  <title>How to add line numbers for code blocks in Pelican</title>
+  <link>https://blog.kdheepak.com/how-to-add-line-numbers-for-code-blocks-in-pelican.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/how-to-add-line-numbers-for-code-blocks-in-pelican.html</guid>
+  <atom:link href="https://blog.kdheepak.com/how-to-add-line-numbers-for-code-blocks-in-pelican.html" rel="self"></atom:link>
+  <pubDate>Tue, 18 Aug 2015 08:00:00 GMT</pubDate>
+  <description>Brief tutorial on adding the right css for getting line numbering for code blocks in pelican …</description>
+</item>
+  
+<item>
+  <title>How to install gdb on OSX</title>
+  <link>https://blog.kdheepak.com/how-to-install-gdb-on-osx.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/how-to-install-gdb-on-osx.html</guid>
+  <atom:link href="https://blog.kdheepak.com/how-to-install-gdb-on-osx.html" rel="self"></atom:link>
+  <pubDate>Mon, 27 Jul 2015 16:52:17 GMT</pubDate>
+  <description>Installing gdb and fixing the certificate issue</description>
+</item>
+  
+<item>
+  <title>Emacsclient and tmux split navigation</title>
+  <link>https://blog.kdheepak.com/emacsclient-and-tmux-split-navigation.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/emacsclient-and-tmux-split-navigation.html</guid>
+  <atom:link href="https://blog.kdheepak.com/emacsclient-and-tmux-split-navigation.html" rel="self"></atom:link>
+  <pubDate>Mon, 27 Jul 2015 04:00:00 GMT</pubDate>
+  <description>I use the following set of lisps my .emacs to get seamless navigation between emacs splits and tmux panes …</description>
+</item>
+  
+<item>
+  <title>Emacs workflow — Using Emacs in the terminal</title>
+  <link>https://blog.kdheepak.com/emacs-workflow-using-emacs-in-the-terminal.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/emacs-workflow-using-emacs-in-the-terminal.html</guid>
+  <atom:link href="https://blog.kdheepak.com/emacs-workflow-using-emacs-in-the-terminal.html" rel="self"></atom:link>
+  <pubDate>Sun, 26 Jul 2015 04:00:50 GMT</pubDate>
+  <description>A description of my emacs workflow</description>
+</item>
+  
+<item>
+  <title>Emacs Tips — Close compilation buffer</title>
+  <link>https://blog.kdheepak.com/emacs-tips-close-compilation-buffer-if-successful.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/emacs-tips-close-compilation-buffer-if-successful.html</guid>
+  <atom:link href="https://blog.kdheepak.com/emacs-tips-close-compilation-buffer-if-successful.html" rel="self"></atom:link>
+  <pubDate>Sun, 19 Jul 2015 18:43:56 GMT</pubDate>
+  <description>This post shows how to close the compilation buffer in emacs if compile was successful …</description>
+</item>
+  
+<item>
+  <title>Create Emacsclient.app using AppleScript</title>
+  <link>https://blog.kdheepak.com/create-emacsclient.app-using-applescript.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/create-emacsclient.app-using-applescript.html</guid>
+  <atom:link href="https://blog.kdheepak.com/create-emacsclient.app-using-applescript.html" rel="self"></atom:link>
+  <pubDate>Sat, 18 Jul 2015 16:00:00 GMT</pubDate>
+  <description>I’ve created an Emacsclient.app using AppleScript to aid with my Alfred workflow …</description>
+</item>
+  
+<item>
+  <title>Patched fonts madness</title>
+  <link>https://blog.kdheepak.com/patched-fonts-madness.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/patched-fonts-madness.html</guid>
+  <atom:link href="https://blog.kdheepak.com/patched-fonts-madness.html" rel="self"></atom:link>
+  <pubDate>Mon, 13 Jul 2015 01:59:22 GMT</pubDate>
+  <description>Patched fonts on MacOSX</description>
+</item>
+  
+<item>
+  <title>Better git log with git ls</title>
+  <link>https://blog.kdheepak.com/better-git-log-with-git-ls.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/better-git-log-with-git-ls.html</guid>
+  <atom:link href="https://blog.kdheepak.com/better-git-log-with-git-ls.html" rel="self"></atom:link>
+  <pubDate>Tue, 02 Jun 2015 02:45:00 GMT</pubDate>
+  <description>I’ve stopped using git log and have replaced it with this custom command …</description>
+</item>
+  
+<item>
+  <title>Vim, tmux and zsh — the productivity trio</title>
+  <link>https://blog.kdheepak.com/vim-tmux-zsh.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/vim-tmux-zsh.html</guid>
+  <atom:link href="https://blog.kdheepak.com/vim-tmux-zsh.html" rel="self"></atom:link>
+  <pubDate>Sat, 09 May 2015 04:58:18 GMT</pubDate>
+  <description>I’ve not found a greater combination of tools than vim, tmux and zsh. I’ve detailed below some of the configuration …</description>
+</item>
+  
+<item>
+  <title>How to set up a Pelican blog with Github pages</title>
+  <link>https://blog.kdheepak.com/how-to-set-up-a-pelican-blog-with-github-pages.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/how-to-set-up-a-pelican-blog-with-github-pages.html</guid>
+  <atom:link href="https://blog.kdheepak.com/how-to-set-up-a-pelican-blog-with-github-pages.html" rel="self"></atom:link>
+  <pubDate>Sun, 03 May 2015 01:00:00 GMT</pubDate>
+  <description>Here, I will show how to set up a working static blog on github pages using Pelican. Pelican is a static site generator, written in Python …</description>
+</item>
+  
+<item>
+  <title>Fast track to being productive in Vim</title>
+  <link>https://blog.kdheepak.com/fast-track-to-being-productive-in-vim.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/fast-track-to-being-productive-in-vim.html</guid>
+  <atom:link href="https://blog.kdheepak.com/fast-track-to-being-productive-in-vim.html" rel="self"></atom:link>
+  <pubDate>Sat, 02 May 2015 04:59:49 GMT</pubDate>
+  <description>What I wish I had known when I first started using vim</description>
+</item>
+  
+<item>
+  <title>Active, Reactive and Apparent Power</title>
+  <link>https://blog.kdheepak.com/active-reactive-and-apparent-power.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/active-reactive-and-apparent-power.html</guid>
+  <atom:link href="https://blog.kdheepak.com/active-reactive-and-apparent-power.html" rel="self"></atom:link>
+  <pubDate>Thu, 30 Apr 2015 01:00:00 GMT</pubDate>
+  <description>This post covers the basics of the types of Power in power systems, specifically what is active power, reactive power and apparent power. This post was generated from an iPython Notebook …</description>
+</item>
+  
+<item>
+  <title>Mac OSX Productivity Apps</title>
+  <link>https://blog.kdheepak.com/mac-osx-productivity-apps.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/mac-osx-productivity-apps.html</guid>
+  <atom:link href="https://blog.kdheepak.com/mac-osx-productivity-apps.html" rel="self"></atom:link>
+  <pubDate>Thu, 02 Apr 2015 01:00:00 GMT</pubDate>
+  <description>A number of Mac application can improve productivity. Here I’ve complied my favourite useful Mac applications …</description>
+</item>
+  
+<item>
+  <title>Mac OSX Tweaks</title>
+  <link>https://blog.kdheepak.com/mac-osx-tweaks.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/mac-osx-tweaks.html</guid>
+  <atom:link href="https://blog.kdheepak.com/mac-osx-tweaks.html" rel="self"></atom:link>
+  <pubDate>Sun, 22 Mar 2015 01:00:00 GMT</pubDate>
+  <description>OSX is more customizable than you think. Here are a bunch of tweaks that I found useful.</description>
+</item>
+  
+<item>
+  <title>Tasker and Google Maps</title>
+  <link>https://blog.kdheepak.com/tasker-and-google-maps.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/tasker-and-google-maps.html</guid>
+  <atom:link href="https://blog.kdheepak.com/tasker-and-google-maps.html" rel="self"></atom:link>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+  <description>Tasker in combination with Python with SL4A can be used to calculate information about events from Google Calendar. This is very similar to what Google Now does but more customizable …</description>
+</item>
+  
+<item>
+  <title>Robotics</title>
+  <link>https://blog.kdheepak.com/robotics.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/robotics.html</guid>
+  <atom:link href="https://blog.kdheepak.com/robotics.html" rel="self"></atom:link>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+  <description>Here are some videos from projects I worked on during my undergraduate degree …</description>
+</item>
+  
+<item>
+  <title>Geektool and Desktop Widgets in OSX</title>
+  <link>https://blog.kdheepak.com/geektool-and-desktop-widgets-in-osx.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/geektool-and-desktop-widgets-in-osx.html</guid>
+  <atom:link href="https://blog.kdheepak.com/geektool-and-desktop-widgets-in-osx.html" rel="self"></atom:link>
+  <pubDate>Sat, 13 Dec 2014 16:00:00 GMT</pubDate>
+  <description>This is a Geektool tutorial on customizing OSX desktop - Calvin &amp; Hobbes themed …</description>
+</item>
+  
+<item>
+  <title>Tasker Projects</title>
+  <link>https://blog.kdheepak.com/tasker-projects.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/tasker-projects.html</guid>
+  <atom:link href="https://blog.kdheepak.com/tasker-projects.html" rel="self"></atom:link>
+  <pubDate>Sat, 13 Dec 2014 01:00:00 GMT</pubDate>
+  <description>A collection of Tasker projects I’ve worked on …</description>
+</item>
+  
+<item>
+  <title>Home monitoring system</title>
+  <link>https://blog.kdheepak.com/home-monitoring-system.html</link>
+  <guid isPermaLink="true">https://blog.kdheepak.com/home-monitoring-system.html</guid>
+  <atom:link href="https://blog.kdheepak.com/home-monitoring-system.html" rel="self"></atom:link>
+  <pubDate>Thu, 11 Dec 2014 15:00:00 GMT</pubDate>
+  <description>I made some plots using HighCharts from my temperature monitoring system based on a Raspberry Pi …</description>
+</item>
+  
+  </channel>
+</rss>
+  

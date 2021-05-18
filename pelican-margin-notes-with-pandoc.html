@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3d6xHqlzI1rCDvtORnxS6U3zjMSkqhP939kXsP7VR5U" />
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="keywords" content="python, pelican, pandoc, margin notes, side notes">
+  <meta name="description" content="How to get margin notes to work with pandoc">
+  <meta property="og:url" content="https://blog.kdheepak.com/pelican-margin-notes-with-pandoc.html"/>
+  <meta property="og:title" content="Pelican Margin Notes with Pandoc"/>
+  <meta property="og:description" content="How to get margin notes to work with pandoc"/>
+  <meta property="og:published_time" content=""/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://blog.kdheepak.com/rss.xml"/>
+  <title>Pelican Margin Notes with Pandoc</title>
+  <style>code{white-space: pre;}</style>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/css/latex.css"/>
+  <link rel="stylesheet" href="/css/tufte-extra.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/github.css"/>
+  <link rel="stylesheet" href="/css/pandoc.css"/>
+  <link rel="stylesheet" href="/css/tufte.css"/>
+  <link rel="stylesheet" href="/css/kudos.css"/>
+  <link rel="stylesheet" href="/css/table.css"/>
+  <link rel="stylesheet" href="/css/custom.css"/>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+<header>
+<h1 class="title">
+    <a class="home" href="https://kdheepak.com">~</a> /
+        <a class="bloghome" href="/">blog</a> /
+        Pelican Margin Notes with Pandoc
+</h1>
+<p class="subtitle sourceurl">
+ <a class="sourceurl" target="_blank" href="https://github.com/kdheepak/blog/blob/b2962a1c3e5008f95b6e50937f42ae70cb9cd47a/content/28-pelican-margin-notes-with-pandoc.md">
+    Sun, Oct 09, 2016
+ </a>
+</p>
+</header>
+<section>
+<p><strong>Edit</strong>: I’ve shifted to using just pandoc without pelican. I’m also using <a href="https://github.com/jez/tufte-pandoc-css" target="_blank">Tufte CSS</a>. I’ll leave this blog post up for reference if someone is interested.</p>
+<section id="introduction" class="level1">
+<h1><a href="#introduction">#</a> Introduction</h1>
+<p>I’ve been inspired by a few other blogs to consider adding margin notes to this theme. This theme is called <a href="https://github.com/kdheepak/pelican-smoothie" target="_blank">pelican-smoothie</a> and is freely available on Github. As you may have guessed from the name, this is a theme for <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>, a static site generator powered by Python. Pelican allows you to write posts in Markdown or RestructuredText, and convert them into structured and beautiful websites. There are a few advantages of using a static site generator instead of a Content Management System (CMS) like WordPress, and I have covered it briefly in <a href="/how-to-set-up-a-pelican-blog-with-github-pages.html">this post</a>. Since Pelican is an open source project, it is inherently pretty customization. I can almost guarantee if you think of a feature that you’d like, you’ll be able to search for a plugin that does exactly that. There is in fact a collection of <a href="https://github.com/getpelican/pelican-plugins" target="_blank">pelican-plugins</a>. Their maintainer <strong>@justinmayer</strong> is also very responsive to feature requests and pull requests.</p>
+<p>And, on the rare occasion that you can’t find a plugin that does exactly what you want it to, you’ll be able to (with a little bit of research) create a plugin to do exactly just that. Their documentation is pretty good too. If you are looking at a creating a blog I highly recommend checking out Pelican<span><label for="mn-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-1" class="margin-toggle"/><span class="marginnote">Pelican is only one of the few static site generators in Python. There are others such as <a href="https://github.com/getnikola/nikola" target="_blank">Nikola</a>, <a href="https://github.com/lektor/lektor" target="_blank">Lektor</a>, <a href="https://github.com/eudicots/Cactus" target="_blank">Cactus</a>, <a href="https://github.com/hyde/hyde" target="_blank">Hyde</a> and <a href="https://www.fullstackpython.com/static-site-generator.html" target="_blank">many more</a>. The main reason I chose Pelican was because it had a wide selection of <a href="https://github.com/getpelican/pelican-themes" target="_blank">themes</a>. There are also many popular ones in other languages, but I haven’t researched them or used them enough or to have a strong opinion on them.</span></span>.</p>
+<p>That’s probably not why you are reading this post though. You are probably interested in getting margin notes working on your blog too. I’ll have to caveat the following post by saying that this is a proof of concept and by no means a final stable version that you can deploy on your site. This approach worked for me, and the reason I went down this path was because I was curious to see how far I could push my static site generation workflow.</p>
+</section>
+<section id="setup" class="level1">
+<h1><a href="#setup">#</a> Setup</h1>
+<p>Firstly, I’m not using Pelican’s built in reader for Markdown files, but instead am using Pandoc. I wrote a pretty long post on using <a href="/writing-papers-with-markdown.html">Pandoc for academic writing</a>; I think it’s safe to say that I’m a fan of Pandoc. Pelican has better built-in support for RestructuredText compared to Markdown, but plugins allow you to do pretty much everything you want with Markdown as your source file format. However the number of plugins required to get everything you want working quickly adds up.<span><label for="sn-1" class="sidenote-number margin-toggle"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">Not that’s a bad thing. I believe the way Pelican signals works will only activate a plugin if it has to, so it doesn’t slow down your deployment process.</span></span> I’ve used Pandoc for other projects before and wanted to see if I could get it working in my blogging workflow. I’ve since incorporated Pandoc and it seems to be working quite well. Getting jupyter notebooks working with Pandoc was a bit of challenge though, but I was able to get past it by writing a filter for converting Jupyter notebooks with Pandoc.</p>
+<p>And as I mentioned earlier, one of the main purposes of this implementation was because I was curious to see how far I could push this static site generation workflow. So if you are not using Pandoc in Pelican, you will not be able to use this theme with margin notes straight away<span><label for="sn-2" class="sidenote-number margin-toggle"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote">You will still be able to use this theme, either with Pandoc or Pelican’s default readers, however as you might see later in the post, I use <code>aside</code> tag elements for side notes or margin notes and I haven’t been able to find a plugin that does just that</span></span>. So, the short version is that this implementation of margin notes employs Pandoc, filters with Pandoc using the <a href="https://github.com/jgm/pandocfilters" target="_blank"><code>pandocfilters</code> package</a> and this current specific theme.</p>
+</section>
+<section id="inspiration" class="level1">
+<h1><a href="#inspiration">#</a> Inspiration</h1>
+<p>A list of blogs, posts, websites, web books have inspired this implementation. Most notably are the following articles – <a href="https://edwardtufte.github.io/tufte-css/" target="_blank">tuftle-css</a> and <a href="https://medium.com/@owenblacker/marginal-notes-on-medium-268b3f727e6d#.97mvo08w5" target="_blank">this article</a> published on Medium about Medium sidenotes. They both speak to some length on how margin notes can be used to improve the experience for a reader, especially on the web. <a href="https://practicaltypography.com/" target="_blank">Butterick’s Practical Typography</a><span><label for="mn-2" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-2" class="margin-toggle"/><span class="marginnote">I highly recommend reading Butterick’s web book. It is freely available at Practical Typography. It’s challenged me to think critically about every aspect of a presentation. I also encourage buying his book or his fonts to aid Butterick in maintaining this content and producing more like this.</span></span> is also a great example of effective use of margin notes. There are a few other articles <span class="citation" data-cites="johnjameson jgruber">[<a href="#ref-johnjameson" role="doc-biblioref">1</a>], [<a href="#ref-jgruber" role="doc-biblioref">2</a>]</span> that talk about this. The CSS for this page originally and the CSS for the margin notes had been heavily inspired by <a href="https://gameprogrammingpatterns.com/" target="_blank">gameprogrammingpatterns.com</a>.</p>
+</section>
+<section id="implementation" class="level1">
+<h1><a href="#implementation">#</a> Implementation</h1>
+<p>At the time of writing this article, Pandoc does not support creating margin notes for HTML documents. Pandoc does however support <a href="https://pandoc.org/MANUAL.html#footnotes" target="_blank">footnotes</a> in the form of footnotes and inline notes. Inline notes are different for traditional footnotes in the source document. The following is an example of footnotes in Pandoc Markdown.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2"></a>Here is a footnote reference,<span class="ot">[^1]</span> and another.<span class="ot">[^longnote]</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="ot">[^1]</span>: Here is the footnote.</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ot">[^longnote]</span>: Here&#39;s one with multiple blocks.</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="bn">    Subsequent paragraphs are indented to show that they</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="bn">    belong to the previous footnote.</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="bn">        { some.code }</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="bn">    The whole paragraph can be indented, or just the first</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="bn">    line.  In this way, multi-paragraph footnotes work like</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="bn">    multi-paragraph list items.</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>This paragraph won&#39;t be part of the note, because it</span>
+<span id="cb1-19"><a href="#cb1-19"></a>isn&#39;t indented.</span></code></pre></div>
+<p>The following is an example of inline footnotes in Pandoc Markdown.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a>Here is an inline note.^[Inlines notes are easier to write, since</span>
+<span id="cb2-2"><a href="#cb2-2"></a>you don&#39;t have to pick an identifier and move down to type the</span>
+<span id="cb2-3"><a href="#cb2-3"></a>note.]</span></code></pre></div>
+<p>As described in the example, inline notes are easier to write. Pandoc also conveniently also supports filters. They allow for additional functionality to be added by walking through the Abstract Syntax Tree, and parsing or modifying information. I chose the following syntax for implementing a <code>aside</code> tag when converting from a Markdown file to a HTML document.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a>&gt;<span class="dt"> This is the syntax^[_aside_: And this is the margin note.] in Markdown.</span></span></code></pre></div>
+<blockquote>
+<p>This is the syntax<span><label for="mn-3" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-3" class="margin-toggle"/><span class="marginnote">And this is the margin note.</span></span> in Markdown.</p>
+</blockquote>
+<p>When run through the filter, the above will be rendered as the following html.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">&lt;p&gt;</span>This is an example for the syntax<span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&#39;aside-0&#39;</span><span class="kw">&gt;&lt;/span&gt;</span> in Markdown.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&#39;div-aside-0&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="kw">&lt;aside</span><span class="ot"> id=</span><span class="st">&#39;aside-0&#39;</span><span class="kw">&gt;</span>This is a note that will appear in a tag<span class="kw">&lt;/aside&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>The location of the footnote is replaced with a <code>&lt;span&gt;</code> tag, and an <code>&lt;aside&gt;</code> tag wrapped in a <code>&lt;div&gt;</code> tag is added to the end of the paragraph. This filter will also assign <code>id</code> to the <code>&lt;span&gt;</code>, <code>&lt;aside&gt;</code> and <code>&lt;div&gt;</code> tags sequentially. Additional functionally can be added here, but for now this seems to work for my purposes.</p>
+<p>With the HTML generated with <code>&lt;aside&gt;</code> tags, it is now a question of assigning the right css. This turned out to be more tricky than I originally anticipated. The current theme uses bootstrap and the following layout to display content.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;row&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;col-sm-8&#39;</span><span class="kw">&gt;&lt;/div&gt;</span> <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;col-sm-4&#39;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>Because of the way Pelican and Jinja work, and because of how Pandoc returns the content to Pelican, the entire article content is stored in the first <code>&lt;div&gt;</code> element of width 8 units. Ideally, each paragraph would be wrapped in <code>&lt;div&gt;</code> elements of one class, with <code>&lt;aside&gt;</code> elements wrapped in a neighboring div class. With the current structure of Pelican, the only way I could do that is by injecting <code>&lt;div&gt;</code> elements all over the place using something like <a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank">beautifulsoup</a>. However I decided against it for now, and am using CSS to move the <code>&lt;aside&gt;</code> elements outside the element they are currently positioned in. Since the <code>&lt;aside&gt;</code> elements are located below the actual paragraph, I added javascript to move them up by their height. A better implementation could use the location of the <code>&lt;span&gt;</code> elements to fix the position of the notes.</p>
+</section>
+<section id="conclusions" class="level1">
+<h1><a href="#conclusions">#</a> Conclusions</h1>
+<p>I’m sure there are definitely better ways to do the same thing, but this is what worked for now. There are a few limitations in the current implementation. One noticeable flaw is that I cannot have one margin note and one footnote in the same paragraph. And I’m positive there are more. Hopefully I’ll get a chance to work on this more to improve it in the near future. All the code is on <a href="https://github.com/kdheepak" target="_blank">GitHub</a> in case you were curious and wanted to take a look at it. If you have thoughts on how this could be done better or would like to ask questions in general feel free to reach out.</p>
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"><a href="#bibliography">#</a> References</h1>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-johnjameson">
+<p>[1] J. Jameson, “Responsive Sidenotes.” [Online]. Available: <a href="https://johndjameson.com/blog/responsive-sidenotes/" target="_blank">https://johndjameson.com/blog/responsive-sidenotes/</a>.</p>
+</div>
+<div id="ref-jgruber">
+<p>[2] J. Gruber, “Notes on notes.” [Online]. Available: <a href="https://daringfireball.net/2005/08/notes_on_notes" target="_blank">https://daringfireball.net/2005/08/notes_on_notes</a>.</p>
+</div>
+</div>
+</section>
+</section>
+<section>
+
+    <div class="kudo-container" style="display: none" data-post-id="pelican-margin-notes-with-pandoc">
+        <button class="kudo-button" aria-label="Give this post a kudo">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="kudo-heart" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <path class="kudo-heart-path" id="kudo-heart-path" d="M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4   L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z" />
+          </svg>
+        </button>
+        <div class="kudo-count-message">
+          <span class="kudo-count"></span> <span class="kudo-word"></span>
+        </div>
+        <div class="kudo-thanks">
+          <div class="kudo-thanks-heading">Thanks!</div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <opt-in-script src="https://utteranc.es/client.js"
+        repo="kdheepak/blog"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    <button class="comments-button">Show Comments</button>
+    </opt-in-script>
+</section>
+</article>
+<script>
+var figures =
+  Array.prototype.slice.call(document.getElementsByClassName("figure"),0)
+  .concat(
+    Array.prototype.slice.call(document.getElementsByTagName("figure"),0));
+
+for (var i = 0; i < figures.length; i++) {
+  var figure = figures[i];
+  var imgs = figure.getElementsByTagName("img");
+  if (imgs.length > 0) {
+    classes = imgs[0].classList;
+    for (var j = 0; j < classes.length; j++) {
+        if (classes[j] === "fullwidth") {
+            figure.classList.add(classes[j]);
+        }
+    }
+  }
+}
+</script>
+<footer>
+    <p>
+    <a rel="license noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="This work is licensed under a Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </p>
+</footer>
+<script data-goatcounter="https://kdheepak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/vim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/julia.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/nim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/latex.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/matlab.min.js"></script>
+<script>
+    document.querySelectorAll('pre:not([class])').forEach(function($) {
+        $.className = 'no-highlight';
+    });
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="/js/opt-in-script.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC_lk4_TkwwjzgthwVBR0JXrDRQMH2mDH8",
+    authDomain: "blog-4ac79.firebaseapp.com",
+    databaseURL: "https://blog-4ac79.firebaseio.com",
+    projectId: "blog-4ac79",
+    storageBucket: "blog-4ac79.appspot.com",
+    messagingSenderId: "57327928077",
+    appId: "1:57327928077:web:5acf8eaf01bcb850d76644",
+    measurementId: "G-YKT2PQSD10"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="/js/kudos.js"></script>
+</body>
+</html>

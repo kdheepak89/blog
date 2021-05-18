@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://blog.kdheepak.com/advent-of-code-2020-retrospective.html</loc>
+  <lastmod>2020-12-25T07:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/my-unicode-cheat-sheet.html</loc>
+  <lastmod>2020-09-19T08:29:49+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/using-pre-commit-hooks.html</loc>
+  <lastmod>2020-07-27T16:58:11+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/three-built-in-neovim-features.html</loc>
+  <lastmod>2020-06-27T15:42:32+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/the-egg-tower-puzzle.html</loc>
+  <lastmod>2020-06-07T02:14:19+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/drawing-in-ascii.html</loc>
+  <lastmod>2020-06-05T19:54:19+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/neovim-languageserver-julia.html</loc>
+  <lastmod>2020-06-02T07:28:44+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/python-2-vs-3.html</loc>
+  <lastmod>2016-12-16T21:31:07+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/pelican-margin-notes-with-pandoc.html</loc>
+  <lastmod>2016-10-09T23:42:12+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/mpld3-networkx-d3js-force-layout.html</loc>
+  <lastmod>2016-10-02T18:41:05+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/raspberry-pi-powered-led-lamp.html</loc>
+  <lastmod>2016-03-28T01:17:58+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/neovim-and-tmux.html</loc>
+  <lastmod>2016-02-06T06:54:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/using-conda-to-manage-packages.html</loc>
+  <lastmod>2015-12-25T10:32:51+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/writing-papers-with-markdown.html</loc>
+  <lastmod>2015-12-20T06:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/jupyter-notebook-revealjs-and-github-pages.html</loc>
+  <lastmod>2015-12-05T19:03:54+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/spotify-and-tmux.html</loc>
+  <lastmod>2015-09-20T15:26:15+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/change-path-inside-vim.html</loc>
+  <lastmod>2015-09-19T15:05:36+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/uninstalling-and-re-installing-homebrew-on-osx.html</loc>
+  <lastmod>2015-08-28T04:52:17+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/how-to-add-line-numbers-for-code-blocks-in-pelican.html</loc>
+  <lastmod>2015-08-18T08:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/how-to-install-gdb-on-osx.html</loc>
+  <lastmod>2015-07-27T16:52:17+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/emacsclient-and-tmux-split-navigation.html</loc>
+  <lastmod>2015-07-27T04:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/emacs-workflow-using-emacs-in-the-terminal.html</loc>
+  <lastmod>2015-07-26T04:00:50+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/emacs-tips-close-compilation-buffer-if-successful.html</loc>
+  <lastmod>2015-07-19T18:43:56+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/create-emacsclient.app-using-applescript.html</loc>
+  <lastmod>2015-07-18T16:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/patched-fonts-madness.html</loc>
+  <lastmod>2015-07-13T01:59:22+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/better-git-log-with-git-ls.html</loc>
+  <lastmod>2015-06-02T02:45:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/vim-tmux-zsh.html</loc>
+  <lastmod>2015-05-09T04:58:18+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/how-to-set-up-a-pelican-blog-with-github-pages.html</loc>
+  <lastmod>2015-05-03T01:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/fast-track-to-being-productive-in-vim.html</loc>
+  <lastmod>2015-05-02T04:59:49+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/active-reactive-and-apparent-power.html</loc>
+  <lastmod>2015-04-30T01:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/mac-osx-productivity-apps.html</loc>
+  <lastmod>2015-04-02T01:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/mac-osx-tweaks.html</loc>
+  <lastmod>2015-03-22T01:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/tasker-and-google-maps.html</loc>
+  <lastmod>2014-12-13T16:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/robotics.html</loc>
+  <lastmod>2014-12-13T16:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/geektool-and-desktop-widgets-in-osx.html</loc>
+  <lastmod>2014-12-13T16:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/tasker-projects.html</loc>
+  <lastmod>2014-12-13T01:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/home-monitoring-system.html</loc>
+  <lastmod>2014-12-11T15:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/404.html</loc>
+  <lastmod>1970-01-01T00:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+<url>
+  <loc>https://blog.kdheepak.com/index.html</loc>
+  <lastmod>2021-05-18T18:33:24+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+    
+</urlset>
